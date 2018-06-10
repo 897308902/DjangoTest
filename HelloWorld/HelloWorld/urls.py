@@ -20,5 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index/top_(?P<id>.+)$', Hello_views.index),
     url(r'^cheng', Hello_views.cheng), 
-    url(r'^$',Hello_views.cheng)
+    url(r'^two',Hello_views.two)
 ]

@@ -11,3 +11,8 @@ def index(request,id):
 def cheng(request):
     return render_to_response('first.html')
 # Create your views here.
+
+
+def two(request):
+    
+    return render_to_response('two.html')
