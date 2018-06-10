@@ -1,0 +1,247 @@
+/*轮播图部分*/
+
+.header .topBanner {
+	width: 100%;
+	height: 460px;
+	position: relative;
+}
+
+.topBanner .bannerList {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position:relative;
+}
+
+.bannerList li {
+	width: 100%;
+	height: 100%;
+	position:absolute;
+	top:0;
+	left:0;
+	/*float: left;*/
+	/*background: url(../img/index/b-1.jpg) no-repeat center center;*/
+}
+
+.bannerList li a {
+	display:block;
+	width: 100%;
+	height: 100%;
+}
+/*顶部banner图的小圆点*/
+.topBanner ol{
+	list-style: none;
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	margin-left: -20px;
+}
+.topBanner ol li{
+	float: left;
+	width: 12px;
+	height: 12px;
+	background-color: #b5c0cb;
+	border-radius: 50%;
+	margin-right: 20px;
+	cursor: pointer;
+}
+.topBanner ol li.current{
+	background-color: #FFFFFF;
+}
+/*主体部分开始*/
+.indexmain {
+	width: 100%;
+	padding-top: 50px;
+	background: url(../../static/img/index/indexmainbg.jpg) no-repeat center bottom;
+}
+
+.indexmain .bd {
+	height: 200px;
+	padding-bottom: 35px;
+	border-bottom: 1px solid #dbe1e7;
+	position: relative;
+}
+
+.bd ul {
+	width: 1000%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.bd ul li {
+	width: 217.75px;
+	float: left;
+	margin-right: 43px;
+	color: #444866;
+}
+/*.indexmain .bd ul li:hover{
+	background-color: #38b774;
+	color: #FFFFFF;
+}*/
+
+.bd ul li:hover span{
+	color: #FFFFFF;
+	background-image: url(../../static/img/index/arrow_hover.png);
+}
+.bd ul li a {
+	text-align: center;
+	height: 200px;
+}
+
+.bd ul li a img {
+	width: 217.75px;
+	height: 128px;
+}
+
+.bd ul li a h5 {
+	font-size: 14px;
+	padding: 5px 0 8px 0;
+}
+
+.bd ul li a p {
+	padding-bottom: 10px;	
+}
+
+.bd ul li a p span{
+	display: inline-block;
+	color: #38b774;
+	font-size: 12px;
+	text-align: center;
+	padding-right: 11px;
+	background:url(../../static/img/index/arrow.png) no-repeat right center;
+}
+.indexmain .hd {
+	position: relative;
+	height: 11px;
+	/*overflow: hidden;*/
+}
+.hd ul{
+	height: 11px;
+	width: 54px;
+	position: absolute;
+	top: -6px;
+	left: 50%;
+	margin-left: -34px;
+	padding-left: 15px;
+	background-color: #FFFFFF;
+}
+.hd ul li{
+	float: left;
+	width: 11px;
+	height: 11px;
+	background-color: #b5c0cb;
+	border-radius:50% ;
+	margin-right: 15px;
+	cursor: pointer;
+}
+.hd ul li.current{
+	background-color: #38b774;
+}
+
+.indexmain .maincon{
+	margin-top: 41px;
+	padding-bottom: 57px;
+}
+.maincon .main-left{
+	width: 500px;
+	height: 310px;
+	float: left;
+	background: url(../../static/img/index/bynewsbg.jpg) no-repeat 0 -10px;
+}
+.maincon .main-right{
+	width: 500px;
+	height: 310px;
+	float: left;
+	background: url(../../static/img/index/byhrbg3.jpg) no-repeat;
+}
+/*more*/
+.maincon .more{
+	width: 100%;
+	height: 110px;
+	position: relative;
+}
+.maincon .more a{
+	display: block;
+	width: 64px;
+	height: 26px;
+	border-radius: 5px;
+	border: 1px solid #33b972;
+	color: #30bd72;
+	text-align: center;
+	font-size: 12px;
+	position: absolute;
+	top: 40px;
+	right: 216px;
+}
+.maincon .more a:hover{
+	color: #FFFFFF;
+	background-color: #33b972;
+}
+/*右边的more*/
+.maincon .main-right .more a{
+	border: 1px solid #FFFFFF;
+	color: #FFFFFF;
+}
+.main-right .more a:hover{
+	color: #30bd72;
+	background-color: #FFFFFF;
+}
+
+
+/*专场招聘*/
+.main-right .stit{
+	/*padding:40px 0 0 80px;*/
+	font-size: 12px;
+	color: #FFFFFF;
+	position: absolute;
+	top: 40px;
+	left: 80px;
+}
+.main-right .stit h2{
+	display: block;
+	font-size: 28px;
+	line-height: 34px;
+	font-weight: 700;
+	
+}
+/*招聘要求*/
+.main-right .recruit{
+	padding: 0 175px 0 20px;
+	color: #FFFFFF;
+	font-size: 14px;
+	
+}
+.main-right .recruit h3{
+	font-size: 13px;
+	
+}
+
+.main-right .recruit a ul{
+	
+}
+.recruit a ul li{
+	padding: 4px 0;
+	line-height: 29px;
+	border-bottom: 1px solid #6fdea3;
+}
+.maincon .main-left-news{
+	padding: 0 20px;
+}
+.main-left-news ul li{
+	padding: 10px 0;
+	line-height: 29px;
+	color: #444866;
+	cursor: pointer;
+	font-size: 14px;
+	border-bottom: 1px solid #dbe1e7;
+}
+.main-left-news ul li:hover{
+	color: #38b774;
+}
+.main-left-news ul li span{
+	float: right;
+	color: #afbecf;
+	font-size: 12px;
+}

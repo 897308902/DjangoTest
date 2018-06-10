@@ -1,0 +1,181 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	color: #444866;
+}
+a{
+	color: inherit;
+	text-decoration: none;
+}
+
+img{
+	vertical-align: middle;
+}
+ul{
+	list-style: none;
+}
+.area{
+	width: 1000px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+/*头部*/
+.header {
+	width: 100%;
+}
+
+.header .tops {
+	height: 58px;
+	background-color: #191d3a;
+}
+
+.header .logo {
+	float: left;
+	width: 225px;
+}
+
+.header .logo>a {
+	display: inline-block;
+	width: 157px;
+	height: 35px;
+	background: url(../img/index/logo.png) no-repeat;
+	margin: 10px 0 0 20px;
+}
+
+.header .nav li {
+	width: 85px;
+	float: left;
+	color: #818496;
+	font: 14px/58px "Microsoft YaHei", "simhei";
+	text-align: center;
+	border-left: 1px solid #252947;
+}
+
+.nav li:hover {
+	color: #e2e4ed;
+}
+
+.nav li.current {
+	color: #e2e4ed;
+}
+
+.nav li:last-child a {
+	display: inline-block;
+	color: #fff;
+	border: 1px solid #3aca7a;
+	width: 98px;
+	height: 32px;
+	margin: 12px 0 0 9px;
+	border-radius: 3px;
+	background-color: #38b774;
+	line-height: 32px;
+}
+
+.nav li:last-child a:hover {
+	background-color: #2BA364;
+}
+
+.header .changeLang {
+	float: right;
+	color: #444866;
+	font: 14px/58px "Microsoft YaHei", "simhei";
+}
+
+.changeLang span.cn {
+	margin-right: 10px;
+	color: #38b774;
+}
+
+.changeLang span:hover {
+	color: #38b774;
+}
+
+
+/*底部导航*/
+.footer{
+	width: 100%;
+	height: 235px;
+	background-color: #191d3a;
+	
+	color: #6c6e7e;
+	font-size: 12px;
+	line-height: 50px;
+}
+.footer nav{
+	padding: 20px 0 0 0;
+	
+}
+.footer p a{
+	display: inline-block;
+}
+
+.footer p a img{
+	display: inline-block;
+	width: 36px;
+	height: 50px;
+}
+
+/*返回顶部按钮*/
+.toTop{
+	display: block;
+	width: 68px;
+	height: 29px;
+	position: fixed;
+	bottom: 75px;
+	right: 15px;
+	background: url(../img/index/top.png) no-repeat 0 -40px;
+	display: none;
+	
+}
+.toTop:hover{
+	background-position: 0 0;
+}
+
+
+/*大图下方的导航*/
+.location{
+	height: 29px;
+	padding: 25px 0 15px;
+	border-bottom: 1px solid #c7d6e5;
+}
+.news_t{
+	height: 29px;
+	line-height: 29px;
+	padding-left: 30px;
+	color: #444866;
+	background: url(../img/news/location.png) no-repeat 0 -45px;
+	font-size: 20px;
+}
+.dlnews{
+	float: right;
+	height: 29px;
+	line-height: 29px;
+	font-size: 12px;
+	color: #444866;
+}
+.dlnews a{
+	vertical-align: middle;	
+}
+.dlnews .index{
+	display: inline-block;
+	width: 20px;
+	height: 16px;
+	background: url(../img/news/home.png) no-repeat;
+}
+.dlnews .us:hover{
+	color: #38b774;
+}
+.dlnews em{
+	display: inline-block;
+	width: 4px;
+	height: 8px;
+	background: url(../img/news/icon.png) no-repeat 0 -150px;
+	margin: 0 7px 0 0;
+	vertical-align: middle;
+}
+.dlnews label{
+	vertical-align: middle;
+}

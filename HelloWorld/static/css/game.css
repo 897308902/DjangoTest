@@ -1,0 +1,77 @@
+.gamebanner{
+	height: 254px;
+	background: url(../img/game/gamebanner.jpg) no-repeat center center;
+}
+.news_t{
+	background-position: 0 -92px;
+}
+
+/*左边导航*/
+.gleft{
+	float: left;
+	width: 195px;
+	padding-top: 40px;
+}
+
+.gnav li{
+	border-bottom: 1px solid #cad6e1;
+}
+.gnav a{
+	display: block;
+	height: 80px;
+	width: 143px;
+	padding-left: 52px;
+	font: 1.333em/80px Arial;
+	position: relative;
+}
+.gnav li a.current{
+	background: url(../img/index/arrow.png) no-repeat right center;
+	color: #38b774;
+}
+.gnav li a:hover{
+	color: #38b774;
+}
+.gnav i{
+	float: left;
+	display: inline-block;
+	width: 34px;
+	height: 41px;
+	position: absolute;
+	top: 23px;
+	left: 0;
+	background: url(../img/game/pad.png) no-repeat;
+}
+
+.gnav a.current .iphone,.gnav a:hover .iphone{
+	background-position: -125px 0;
+}
+.gnav .android{
+	background-position:  -4px -97px;
+}
+.gnav a.current .android,.gnav a:hover .android{
+	background-position:  -124px -97px;
+}
+
+.gnav .ipad{
+	background-position:  0 -199px;
+}
+.gnav a.current .ipad,.gnav a:hover .ipad{
+	background-position:  -121px -199px;
+}
+.gnav .pc{
+	background-position: 0 -295px;
+}
+.gnav a.current .pc, .gnav a:hover .pc{
+	background-position: -120px -295px;
+}
+.gnav .tv{
+	background-position:  0 -602px;
+}
+.gnav a.current .tv, .gnav a:hover .tv{
+	background-position:  -43px -602px;
+}
+.gright{
+	float: right;
+	width: 757px;
+	padding-top: 44px;
+}

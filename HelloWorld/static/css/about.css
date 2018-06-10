@@ -1,0 +1,249 @@
+.aboutbanner{
+	height: 254px;
+	background: url(../img/about/aboutbanner.jpg) no-repeat center center;
+}
+/*关于我们*/
+.location{
+	height: 29px;
+	padding: 25px 0 15px;
+	border-bottom: 1px solid #c7d6e5;
+}
+.news_t{
+	height: 29px;
+	line-height: 29px;
+	padding-left: 30px;
+	color: #444866;
+	background: url(../img/news/location.png) no-repeat 0 -45px;
+	font-size: 20px;
+}
+.dlnews{
+	float: right;
+	height: 29px;
+	line-height: 29px;
+	font-size: 12px;
+	color: #444866;
+}
+.dlnews a{
+	vertical-align: middle;	
+}
+.dlnews .index{
+	display: inline-block;
+	width: 20px;
+	height: 16px;
+	background: url(../img/news/home.png) no-repeat;
+}
+.dlnews .us:hover{
+	color: #38b774;
+}
+.dlnews em{
+	display: inline-block;
+	width: 4px;
+	height: 8px;
+	background: url(../img/news/icon.png) no-repeat 0 -150px;
+	margin: 0 7px;
+	vertical-align: middle;
+}
+.dlnews label{
+	vertical-align: middle;
+}
+.combox{
+	padding: 40px 0;
+}
+.combox .pleft{
+	float: left;
+	width: 230px;
+}
+.ulist li{
+	border-bottom: 1px solid #c7d6e5;
+	
+}
+.ulist li.current a{
+	background: url(../img/index/arrow.png) no-repeat right center;
+	color: #38b774;
+}
+.ulist a{
+	display: block;
+	padding: 15px 0;
+	font-size: 14px;
+}
+.ulist a:hover{
+	color: #38b774;
+}
+
+.ulist a em{
+	font-size: 12px;
+	font-style: normal;
+}
+
+.combox .pright{
+	float: right;
+	width: 732px;
+}
+
+.pright .p_about{
+	display: none;
+}
+/*第一个div*/
+.about p{
+	text-indent: 28px;
+	margin-bottom: 30px;
+	line-height: 2.4;
+	font-size: 14px;
+}
+/*第三个div*/
+.about .international h2,.partners h2{
+	text-align: center;
+}
+.international .content{
+	border-bottom: 1px solid #c7d6e5;
+	margin-bottom: 40px;
+}
+.international .content h3,.partners h3{
+	text-align: center;
+	font-weight: normal;
+	color: #c7d6e5;
+	margin-bottom: 20px;
+}
+.partners h5{
+	margin-left: 28px;
+	padding-left: 17px;
+	background: url(../img/about/dot.png) no-repeat left center;
+}
+/*第二个div*/
+.development {
+	font: 1.166em/2.6 "Microsoft YaHei";
+	padding-left: 10px;
+}
+.development dt{
+	font-size: 18px;
+    font-weight: bold;
+    padding-left: 20px;
+    background: url(../img/news/icon.png) no-repeat 0 -80px;
+}
+.development dd{
+	 font-size: 14px;
+	 padding-left: 20px;
+}
+
+.partners .p_ulist{
+	list-style: none;
+}
+.p_ulist li{
+	width: 25%;
+	float: left;
+	margin-top: 20px;
+	text-align: center;
+}
+/*企业文化*/
+.culture ul li{
+	padding-bottom: 60px;
+	margin-bottom: 60px;
+	border-bottom: 1px solid #c7d6e5;
+	overflow: hidden;
+}
+.culicon{
+	float: left;
+	width: 110px;
+	text-align: center;
+}
+.culicon i{
+	display: inline-block;
+	width: 97px;
+	height: 97px;
+	background: url(../img/about/cul_icon.png) no-repeat 0 0;
+}
+.culinfo{
+	float: right;
+	width: 575px;
+	
+}
+.culinfo p{
+	font-size: 14px;
+	line-height: 2;
+}
+.culinfo h5{
+	font-size: 24px;
+	margin-bottom: 12px;
+}
+.culinfo em{
+	font-style: normal;
+	font-weight: bold;
+	font-size: 18px;
+	color: #f39800;
+}
+/*联系我们*/
+.contact li{
+	overflow: hidden;
+	border-bottom: 1px solid #c7d6e5;
+}
+.contact h2{
+	display: inline-block;
+	margin-right: 10px;
+}
+.contact em{
+	font-style: normal;
+	color: #c7d6e5;
+	font-size: 14px;
+}
+
+.address{
+	overflow: hidden;
+	margin-top: 20px;
+	font-size: 14px;
+}
+.rightewm{
+	
+	float: right;
+	width: 176px;
+	height: 206px;
+	text-align: center;
+}
+.rightewm img{
+	width: 176px;
+	height: 176px;
+}
+.companyname{
+	float: left;
+	margin-right: 17px;
+	text-align: center;
+	width: 75px;
+	padding-top: 5px;
+}
+.companyname h5{
+	padding-top: 8px;
+	font-size: 14px;
+}
+.companyadd{
+	float: left;
+	line-height: 24px;
+	
+}
+.media-business {
+	padding: 20px 0;
+}
+.media-business .dt{
+	margin-bottom: 20px;
+}
+.media-business p{
+	float: left;
+	display: inline-block;
+	width: 50%;
+	font-size: 14px;
+	padding: 20px 0 20px 18px;
+	background: url(../img/news/icon.png) no-repeat 0 -581px;
+}
+.media-business p.emial{
+	margin-left: -36px;
+	background: url(../img/news/icon.png) no-repeat 0 -225px;
+}
+.media-business p.phone{
+	padding: 0 0 0 18px;
+	background: url(../img/news/icon.png) no-repeat 0 -197px;
+}
+.contact .lastli{
+	margin-bottom: 20px;
+	border-bottom: 0;
+}
+.lastli .dt{
+	padding: 20px 0;
+}

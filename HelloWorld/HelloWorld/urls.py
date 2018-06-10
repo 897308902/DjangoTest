@@ -18,7 +18,18 @@ from django.contrib import admin
 from Hello import views as Hello_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^index/top_(?P<id>.+)$', Hello_views.index),
+    # url(r'^index/top_(?P<id>.+)$', Hello_views.index),
     url(r'^cheng', Hello_views.cheng), 
-    url(r'^two',Hello_views.two)
+    url(r'^index',Hello_views.index),
+    url(r'^about',Hello_views.about),
+    url(r'^game',Hello_views.game),
+    url(r'^joins',Hello_views.joins),
+    url(r'^news',Hello_views.news),
+    url(r'^services',Hello_views.services),
+    url(r'^recruitment',Hello_views.recruitment),
+
+    
+
+    
+    # url(r'^recruitment',Hello_views.recruitment)
 ]
