@@ -12,11 +12,11 @@
 	<div class="box">
 		<h1>hello, {{name}}</h1>
 	 
-		<p>hello, {{user.name}}</p>
+		<p>hello, {{user.name | upper}}</p>
 		<p>hello, {{user.age}}</p>
 		<p>hello, {{user.sex}}</p>
 
-		<p>say, {{user.say}}</p>
+		<p>say, {{user.say | upper}}</p>
 
 <!-- 模板 -->
 		{% if user.age %}
