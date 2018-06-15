@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+
+        }
+
+        .box {
+            margin: 50px auto;
+            width: 300px;
+            height: 100px;
+            border: solid black 1px;
+            font-size: 14px;
+            padding: 5px;
+            position: relative;
+        }
+
+        .top {
+            height: 25px;
+            line-height: 25px;
+        }
+
+        .tou {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: blue;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .nick {
+            display: inline-block;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .con {
+
+            padding-left: 15px;
+            text-indent: 2em;
+        }
+
+        .time {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+
+        }
+    </style>
+</head>
+<body>
+<h4>{{ hello }}</h4>
+
+<div class="box">
+    <div class="top">
+        <span class="tou"></span>
+        <span class="nick">{{ nick }}</span>
+    </div>
+
+    <p class="con">{{ con }}</p>
+    <span class="time">{{ time }}</span>
+</div>
+{% include "two.html" %}
+</body>
+</html>

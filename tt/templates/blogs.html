@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Starter Template </title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+{#    <link href="starter-template.css" rel="stylesheet">#}
+    <style type="text/css">
+
+        .top {
+            line-height: 25px;
+        }
+
+        .tou {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: gray;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .nick {
+            display: inline-block;
+            height: 20px;
+            line-height: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            padding-top: 15px;
+        }
+
+        .time {
+            position: absolute;
+            bottom: -10px;
+            right: 20px;
+
+        }
+        .con{overflow: hidden;
+            text-indent: 2em;
+            height: 60px;
+
+            text-overflow: ellipsis;
+            {#text-overflow: -o-ellipsis-lastline;#}
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        ul.blog{
+            list-style: none;
+        }
+        ul.blog>li{
+            padding: 20px;
+            border-bottom: solid darkgray 1px;
+            position: relative;
+            cursor: pointer;
+        }
+        ul.blog>li:hover{
+            background: #DCDCDC;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">chengz blog</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+
+<div class="container" style="margin-top: 50px;">
+
+    <div class="starter-template ">
+        <ul class="blog" id="blog">
+
+
+            {% for blog in blog_list %}
+                <li class="myblog">
+
+                    <div class="top">
+                        <span class="tou"></span>
+                        <span class="nick"><a href="#" >{{ blog.title }}</a></span>
+                    </div>
+                    <p class="con tit" >{{ blog.body }}</p>
+
+                    <p class="time">{{ blog.timestamp }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+</div><!-- /.container -->
+
+
+<script type="text/javascript">
+
+
+    var atit = document.getElementsByClassName("tit");
+    var blog=document.getElementById("blog");
+    var myblog=document.getElementsByClassName("myblog");
+    console.log(blog.children.length);
+
+    for (var i=0;i<blog.children.length;i++){
+        myblog.index=i;
+        myblog[myblog.index].onclick=function () {
+            console.log(myblog.index);
+
+            atit[myblog.index].className="tit";
+        }
+    }
+
+</script>
+
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
