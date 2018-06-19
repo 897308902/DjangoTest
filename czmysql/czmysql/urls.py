@@ -19,4 +19,8 @@ from czapp  import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^regist', views.regists),
+    url(r'^search',views.search),
+    url(r'^dels',views.dels),
+    url(r'^updates',views.updates),
+
 ]
