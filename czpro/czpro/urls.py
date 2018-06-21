@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """czpro URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -17,7 +18,14 @@ from django.conf.urls import url
 from django.contrib import admin
 from myapp import views as Mvieww
 
+# 留意下第一个参数，可以把相同的提取到第一个参数位置
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+
+]
+
+# 简洁的方式
+urlpatterns += [
+
     url(r'^test/',Mvieww.test),
 ]
