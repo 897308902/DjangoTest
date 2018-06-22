@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from czapp  import views
+from czapp import views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^regist', views.regists),
-    url(r'^search',views.search),
-    url(r'^dels',views.dels),
-    url(r'^updates',views.updates),
+    url(r'^search', views.search),
+    url(r'^deletes', views.dels),
+    url(r'^updates', views.updates),
+    url(r'^index', views.index),
 
 ]

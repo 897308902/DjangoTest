@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% extends 'base.html' %}
+    {% block title %}欢迎使用修改系统{% endblock %}
+</head>
+<body>
+{% block content %}
+    <div class="regist">
+        {#    修改数据#}
+        <form action="/updates" method="get" class="form-horizontal">
+            <div class="form-group has-success">
+
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="ids" placeholder="输入要改的ID">
+                </div>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="upname" placeholder="输入新名字">
+                </div>
+                <div class="col-sm-2">
+                    <input type="submit" class="btn btn-primary  btn-group-sm" value="修改">
+                </div>
+            </div>
+
+
+        </form>
+
+
+        <p>{{ uname }}</p>
+
+
+    </div>
+
+
+
+{% endblock %}
+</body>
+</html>

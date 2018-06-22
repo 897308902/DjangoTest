@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% extends 'base.html' %}
+    {% block title %}欢迎使用查询系统{% endblock %}
+</head>
+<body>
+{% block content %}
+    <div class="regist">
+        {#    查询数据#}
+        <form action="/search" method="get" class="form-horizontal">
+            <div class="form-group has-success">
+
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="queryname" placeholder="输入你的名字">
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" class="btn btn-primary  btn-group-sm" value="查询">
+                </div>
+            </div>
+
+
+        </form>
+        {% for blog in con %}
+
+
+            <p>{{ blog.name }}</p>
+
+        {% endfor %}
+    </div>
+
+
+
+{% endblock %}
+</body>
+</html>
