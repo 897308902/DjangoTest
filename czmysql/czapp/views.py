@@ -79,6 +79,14 @@ def search(request):
     c = {}
     if request.GET:
         searchname = request.GET['queryname']
-        names = Employee.objects.all().filter(name=searchname)
+        names = Employee.objects.filter(name=searchname)
         c = {'con': names}
+    return HttpResponse(t.render(c))
+
+def test(request):
+    t=loader.get_template('test.html')
+
+    emp=Employee.objects.all()
+    c={"data":emp}
+
     return HttpResponse(t.render(c))

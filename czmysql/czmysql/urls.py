@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^deletes', views.dels),
     url(r'^updates', views.updates),
     url(r'^index', views.index),
+    url(r'^test',views.test),
 
 ]

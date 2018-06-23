@@ -15,3 +15,9 @@ class Employee(models.Model):
     email = models.EmailField(null=True, default="a@b.com", max_length=20)
     createtimes = models.CharField(max_length=30, null=True)
     # uptime = models.DateTimeField(auto_now=True, null=True)
+  #   class Meta:
+		# db_table='Employee'
+
+
+
+# manage.py inspectdb   先创建表，然后反向生成class
