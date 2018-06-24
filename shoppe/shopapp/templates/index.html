@@ -4,7 +4,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>{% block title %}欢迎光临{% endblock %}</title>
-    	<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
     	<link rel="stylesheet" type="text/css" href="{% static 'public/bootstrap.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />	
@@ -33,7 +32,7 @@
 					<ul>
 						<li>
 							<a href="javascript:;" id="login_link">你好，请登录</a> &nbsp; &nbsp;
-							<a href="#" class="link-regist style-red">免费注册</a>
+							<a href="regist.html" class="link-regist style-red">免费注册</a>
 						</li>
 						<li class="line"></li>
 						<li>我的订单</li>
@@ -174,7 +173,7 @@
 				<div class="items-nav">
 					<ul>
 						<li>
-							<a href="javascript:;">服装城</a>
+							<a href="sales.html" target="_blank">服装城</a>
 						</li>
 						<li>
 							<a href="javascript:;">美妆馆</a>
@@ -208,6 +207,7 @@
 			</div>
 		</div>
 		<!--轮播图部分-->
+		{% block content %}
 		<!--底部左右两边的-->
 		<div class="banner">
 			<a href="javascript:;"> </a>
@@ -373,7 +373,7 @@
 				</div>
 			</div>
 		</div>
-
+{% endblock %}
 		<!--底部-->
 		<div class="footer1 clearfix">
 			<div class="dkhs">

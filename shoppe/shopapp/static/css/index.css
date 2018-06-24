@@ -131,7 +131,7 @@
 	font-size: 14px;
 }
 .search-btn{
-	height: 35px;
+	height: 31px;
 	width: 70px;
 	color: #FFFFFF;
 	background-color: #B61D1D;
@@ -149,7 +149,7 @@
 .nav-top{
 	width: 612px;
 	height: 40px;
-	line-height: 30px;
+	line-height: 40px;
 	
 }
 .nav-top a{

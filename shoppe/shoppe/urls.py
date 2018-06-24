@@ -19,4 +19,6 @@ from shopapp import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index',views.index),
+    url(r'^sales',views.sales),
+    url(r'^regist',views.regist),
 ]
