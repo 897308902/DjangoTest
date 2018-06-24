@@ -18,12 +18,12 @@ def sales(request):
 
 def regist(request):
 	request.encoding = 'utf-8'
-	lens=0
+	timestr='00000000'
 	if request.POST:
-	 	lens = len(request.POST['usename'])
-        timestr = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
-        names = request.POST['usename'] if lens > 1 else "cz888"
-        obj= Shopp(name=names,ctime=timestr,sex=request.POST['sex'])
+		timestr = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
+
+        obj= Shopp(name=request.POST.get('usename'), phone=request.POST.get('phone'), 
+        	ctime=timestr,sex=request.POST.get('sex'))
         obj.save()
 
 
