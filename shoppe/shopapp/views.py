@@ -23,7 +23,27 @@ def regist(request):
 
     if request.POST:
         timestr = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
-        Shopp.objects.create(name=request.POST.get('usename'), phone=request.POST.get('phone'), pwd=request.POST['pwd1'],
-                email=request.POST['email'], ctime=timestr, sex=request.POST.get('sex'))
+        Shopp.objects.create(name=request.POST.get('usename'), phone=request.POST.get('phone'), ctime=timestr,
+                             pwd=request.POST['pwd1'], sex=request.POST.get('sex'), email=request.POST['email'])
 
     return render(request, 'regist.html')
+
+
+def login(request):
+    request.encoding = 'utf-8'
+    t = {}
+    if request.POST:
+        phone = request.POST.get('phone')
+        pwd = request.POST.get('pwd')
+
+        # 这样可以多条件查询
+        names = Shopp.objects.filter(phone=phone, pwd=pwd).count()
+
+        if names == 1:
+            t['hh'] = u"登录成功"
+        elif names == 0:
+            t['hh'] = u"没有该用户"
+        else:
+            t['hh'] = names
+
+    return render(request, 'login.html', t)
