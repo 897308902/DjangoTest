@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/edit" method="post">
+    {% csrf_token %}
+    {% if article %}
+        <input type="hidden" name="id" value="{{ article.id }}">
+        文章标题：<input type="text" name="tit" id="dd" value="{{ article.title }}"><br>
+        文章内容：<input type="text" name="con" id="pwd" value="{{ article.body }}"><br>
+        <input type="submit" name="提交" id="sub">
+    {% else %}
+                <input type="hidden" name="id" value="0">
+        文章标题：<input type="text" name="tit" id="dd" ><br>
+        文章内容：<input type="text" name="con" id="pwd"><br>
+        <input type="submit" name="提交" id="sub">
+    {% endif %}
+
+</form>
+<p>{{ rlt }}</p>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>{{ article.title }}</h3>
+<p>{{ article.body }}</p>
+
+
+<br><br><br>
+<a href="{% url 'upblog' article.id %}">修改博客</a>
+
+<a href="blogs.html">回到首页</a>
+</body>
+</html>

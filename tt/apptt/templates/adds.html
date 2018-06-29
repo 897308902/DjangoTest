@@ -8,8 +8,8 @@
 
 <form action="/adds" method="post">
     {% csrf_token %}
-    输入名字：<input type="text" name="tit" id="dd"><br>
-    输入密码：<input type="text" name="con" id="pwd"><br>
+    文章标题：<input type="text" name="tit" id="dd"><br>
+    文章内容：<input type="text" name="con" id="pwd"><br>
     <input type="submit" name="提交" id="sub">
 </form>
 <p>{{ rlt }}</p>

@@ -10,7 +10,7 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-{#    <link href="starter-template.css" rel="stylesheet">#}
+    {#    <link href="starter-template.css" rel="stylesheet">#}
     <style type="text/css">
 
         .top {
@@ -41,27 +41,27 @@
             right: 20px;
 
         }
-        .con{overflow: hidden;
+
+        .con {
+            overflow: hidden;
             text-indent: 2em;
             height: 60px;
 
             text-overflow: ellipsis;
-            {#text-overflow: -o-ellipsis-lastline;#}
-            display: -webkit-box;
+        {#text-overflow: -o-ellipsis-lastline;#} display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
         }
-        ul.blog{
+
+        ul.blog {
             list-style: none;
         }
-        ul.blog>li{
+
+        ul.blog > li {
             padding: 20px;
             border-bottom: solid darkgray 1px;
             position: relative;
             cursor: pointer;
-        }
-        ul.blog>li:hover{
-            background: #DCDCDC;
         }
     </style>
 
@@ -97,15 +97,14 @@
     <div class="starter-template ">
         <ul class="blog" id="blog">
 
-
             {% for blog in blog_list %}
                 <li class="myblog">
 
                     <div class="top">
                         <span class="tou"></span>
-                        <span class="nick"><a href="#" >{{ blog.title }}</a></span>
+                        <span class="nick"><a href="{% url 'blog_page' blog.id %}">{{ blog.title }}</a></span>
                     </div>
-                    <p class="con tit" >{{ blog.body }}</p>
+                    <p class="con tit">{{ blog.body }}</p>
 
                     <p class="time">{{ blog.timestamp }}</p>
                 </li>
@@ -115,26 +114,6 @@
 
 
 </div><!-- /.container -->
-
-
-<script type="text/javascript">
-
-
-    var atit = document.getElementsByClassName("tit");
-    var blog=document.getElementById("blog");
-    var myblog=document.getElementsByClassName("myblog");
-    console.log(blog.children.length);
-
-    for (var i=0;i<blog.children.length;i++){
-        myblog.index=i;
-        myblog[myblog.index].onclick=function () {
-            console.log(myblog.index);
-
-            atit[myblog.index].className="tit";
-        }
-    }
-
-</script>
 
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

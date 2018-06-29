@@ -55,18 +55,47 @@ def kk(request):
 
 
 # 创建博客的
+# 博客列表
 def blog_index(request):
     request.encoding = 'utf-8'
     blog_list = BlogsPost.objects.all()  # 获取所有数据
     return render(request, 'blogs.html', {'blog_list': blog_list})  # 返回index.html页面
 
 
+# 添加博客
 def adds(request):
     request.encoding = 'utf-8'
-    tit = 666
     if request.POST:
         tit = request.POST['tit']
         con = request.POST['con']
         BlogsPost.objects.create(title=tit, body=con)
 
     return render(request, 'adds.html')
+
+
+# 博客详情页面
+def blog_page(request, article_id):
+    article = BlogsPost.objects.get(id=article_id)
+    return render(request, "page.html", {'article': article})
+
+
+# 修改博客
+def upblog(request, article_id):
+    article = BlogsPost.objects.get(id=article_id)
+    return render(request, "upblog.html", {'article': article})
+
+
+def edit(request):
+    if request.POST:
+        newtitle = request.POST.get('tit')
+        newcon = request.POST.get('con')
+        nowid = request.POST.get('id')
+        if str(nowid) == '0':
+
+            BlogsPost.objects.create(title=newtitle, body=newcon)
+            blog_list = BlogsPost.objects.all()
+            return render(request, 'blogs.html', {'blog_list': blog_list})
+        else:
+            BlogsPost.objects.filter(id=nowid).update(title=newtitle, body=newcon)
+            article = BlogsPost.objects.get(id=nowid)
+            return render(request, "page.html", {'article': article})
