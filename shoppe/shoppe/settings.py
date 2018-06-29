@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for shoppe project.
 
@@ -37,7 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shopapp',
+
+    # 添加app
+    'shopapp.apps.ShopappConfig',
+
+    # 每增加一个app就写一个
+    'shoptwo.apps.ShoptwoConfig',
+
+    # 'shopapp',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +63,7 @@ ROOT_URLCONF = 'shoppe.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR + "shopapp/templates"],
+        'DIRS': [BASE_DIR + "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -107,16 +115,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+# 中文
+LANGUAGE_CODE = 'zh_Hans'
+# 时区改为上海的
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
-
-USE_TZ = True
+# 要改为False
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

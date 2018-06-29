@@ -59,3 +59,14 @@ def blog_index(request):
     request.encoding = 'utf-8'
     blog_list = BlogsPost.objects.all()  # 获取所有数据
     return render(request, 'blogs.html', {'blog_list': blog_list})  # 返回index.html页面
+
+
+def adds(request):
+    request.encoding = 'utf-8'
+    tit = 666
+    if request.POST:
+        tit = request.POST['tit']
+        con = request.POST['con']
+        BlogsPost.objects.create(title=tit, body=con)
+
+    return render(request, 'adds.html')

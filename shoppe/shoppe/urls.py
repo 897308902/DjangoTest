@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """shoppe URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -13,13 +14,23 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
-from shopapp import views
+from shopapp import views as aone
+from shoptwo import views as atwo
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^index',views.index),
-    url(r'^sales',views.sales),
-    url(r'^regist',views.regist),
-    url(r'^login',views.login),
+
+    url(r'^index', aone.index),
+    url(r'^sales', aone.sales),
+    url(r'^regist', aone.regist),
+    url(r'^login', aone.login),
+
+    url(r'^welcome', atwo.welcome),
+    url(r'^moments', atwo.moments_input),
+
+    # cz为url的总路劲
+    # url(r'^cz/', include('shopapp.my_url')),
+
 ]

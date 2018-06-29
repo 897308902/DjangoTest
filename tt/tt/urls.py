@@ -29,8 +29,9 @@ urlpatterns = [
     url(r'^today', views.today),
     # url(r'^login_form',views.login_form),
     url(r'^login', views.login),
-    url(r'^biao',views.biao),
-    url(r'^kk',views.kk),
-    url(r'^blogs',views.blog_index),
+    url(r'^biao', views.biao),
+    url(r'^kk', views.kk),
+    url(r'^blogs', views.blog_index),
+    url(r'^adds', views.adds),
 
 ]
