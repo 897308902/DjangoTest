@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>blog</title>
+</head>
+<body>
+<h1><a href="{% url 'blog:edit' 0 %}">新建文章</a></h1>
+{% for art in article %}
+	<a href="{% url 'blog:page' art.id %}">{{art.title}}</a>
+	<p>{{art.content}}</p>
+{% endfor %}
+</body>
+</html>
