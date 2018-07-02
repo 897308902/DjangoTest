@@ -23,23 +23,6 @@ def today(request):
     return HttpResponse(t.render(c))
 
 
-# def login_form(request):
-#     return render_to_response('logins.html')
-#
-
-def login(request):
-    request.encoding = 'utf-8'
-    t = {}
-    if 'name' in request.POST:
-        msg = request.POST['name'] + request.POST['pwd']
-        if len(msg) < 1:
-            msg = "没有输入内容"
-        t['rlt'] = msg
-
-    # return HttpResponse(msg)  # 页面就只有文本内容了
-    return render(request, 'logins.html', t)
-
-
 def biao(request):
     t = {}
     request.encoding = 'utf-8'
@@ -50,15 +33,12 @@ def biao(request):
     return render(request, 'biaodan.html', t)
 
 
-def kk(request):
-    return render_to_response("two.html")
-
-
 # 创建博客的
 # 博客列表
 def blog_index(request):
     request.encoding = 'utf-8'
     blog_list = BlogsPost.objects.all()  # 获取所有数据
+    # blog_list = BlogsPost.objects.filter(id__in = [1,2,3])  # 获取所有数据
     return render(request, 'blogs.html', {'blog_list': blog_list})  # 返回index.html页面
 
 
@@ -69,7 +49,9 @@ def adds(request):
         tit = request.POST['tit']
         con = request.POST['con']
         BlogsPost.objects.create(title=tit, body=con)
-
+    # 添加完成回到主页
+    # blog_list = BlogsPost.objects.all()
+    # return render(request, 'blogs.html', {'blog_list': blog_list})
     return render(request, 'adds.html')
 
 

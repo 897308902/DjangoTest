@@ -27,14 +27,11 @@ urlpatterns = [
     url(r'^search', search.search),
     url(r'^search-post', search2.search_post),
     url(r'^today', views.today),
-    # url(r'^login_form',views.login_form),
-    url(r'^login', views.login),
     url(r'^biao', views.biao),
-    url(r'^kk', views.kk),
 
 
     # url(r'^blogs/$', include('apptt.urls')),
-    url(r'^blogs', views.blog_index),
+    url(r'^blogs', views.blog_index, name='blogs'),
     url(r'^page/(?P<article_id>\d+)$', views.blog_page, name='blog_page'),
     url(r'^upblog/(?P<article_id>\d+)$', views.upblog, name='upblog'),
     url(r'^edit', views.edit),

@@ -10,8 +10,8 @@
     {% csrf_token %}
     {% if article %}
         <input type="hidden" name="id" value="{{ article.id }}">
-        文章标题：<input type="text" name="tit" id="dd" value="{{ article.title }}"><br>
-        文章内容：<input type="text" name="con" id="pwd" value="{{ article.body }}"><br>
+        文章标题：<input type="text" name="tit" id="dd" value="{{ article.title }}" placeholder="请输入文章的标题"><br>
+        文章内容：<input type="text" name="con" id="pwd" value="{{ article.body }}" placeholder="请输入文章的内容"><br>
         <input type="submit" name="提交" id="sub">
     {% else %}
                 <input type="hidden" name="id" value="0">
