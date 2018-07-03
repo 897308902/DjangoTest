@@ -1,11 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />
 </head>
 <body>
-
+<div class="tests"></div>
 <form action="/adds" method="post">
     {% csrf_token %}
     文章标题：<input type="text" name="tit" id="dd"><br>

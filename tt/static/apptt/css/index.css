@@ -1,0 +1,10 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.tests{
+    width: 100px;
+    /*height: 100px;*/
+    background-color: pink;
+}

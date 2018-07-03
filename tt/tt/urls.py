@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from apptt import views
+from tapptwo import views as two
 from . import search, search2
 
 # from . import login
@@ -29,13 +30,19 @@ urlpatterns = [
     url(r'^today', views.today),
     url(r'^biao', views.biao),
 
-
-    # url(r'^blogs/$', include('apptt.urls')),
+    url(r'^blogs/$', include('apptt.urls')),
     url(r'^blogs', views.blog_index, name='blogs'),
     url(r'^page/(?P<article_id>\d+)$', views.blog_page, name='blog_page'),
     url(r'^upblog/(?P<article_id>\d+)$', views.upblog, name='upblog'),
     url(r'^edit', views.edit),
-    url(r'^adds', views.adds),
+    url(r'^adds/$', views.adds),
 
+
+
+
+
+
+
+    url(r'^atwo', two.tapptwo,name='tapptwo'),
 
 ]
