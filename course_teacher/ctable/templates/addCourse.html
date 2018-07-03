@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>添加课程</title>
+</head>
+<body>
+<form action="/addCourse" method="post">
+    {% csrf_token %}
+	<label>
+		输入课名：<input type="text" name="title">
+	</label><br>
+	<label>
+		输入课时：<input type="text" name="period">	
+	</label><br>
+	<label>
+		课程描述：<input type="text" name="description">
+	</label><br>
+
+	<input type="submit" name="提交">
+</form>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>添加老师</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+
+</head>
+<body>
+<div class="container cont">
+
+    <form action="/addTeacher" method="post">
+        {% csrf_token %}
+        <label>
+            教师名字：<input type="text" name="name">
+        </label><br>
+        <label>
+            所教课程： <select name="course_id">
+            {% for cour in course %}
+                <option value="{{ cour.id }}">{{ cour.title }}</option>
+
+            {% endfor %}
+
+        </select>
+        </label><br>
+        <label>
+            教师性别：<input type="radio" name="gender" value="1">男 &nbsp;&nbsp; <input type="radio" name="gender" value="2">女
+        </label><br>
+        <label>
+            教师住址：<input type="text" name="address">
+        </label><br>
+
+        <input type="submit" name="提交">
+    </form>
+
+
+<form role="form" class="form-horizontal">
+	<div class="form-group">
+		<label for="txt" class="control-label col-sm-2">名稱：</label>
+		<div class="col-sm-10">
+<input type="text" id="txt" placeholder="請輸入隨意" class="form-control" />
+  </div>
+
+	</div>
+
+	<div class="form-group">
+		<label for="txt" class="control-label col-sm-2">名稱：</label>
+		<div class="col-sm-10">
+<input type="text" id="txt" placeholder="請輸入隨意" class="form-control" />
+  </div>
+
+	</div>
+</form>
+</div>
+</body>
+</html>

@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from ctable import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^index',views.index),
+    url(r'^addCourse', views.addCourse),
+    url(r'^addTeacher', views.addTeacher),
+    url(r'^dels', views.dels),
 ]

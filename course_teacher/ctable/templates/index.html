@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+<div class="container">
+    <table class="table table-bordered" >
+        <caption>基本的表格布局</caption>
+        <tbody>
+        <tr>
+            <th>课程</th>
+            {% for cour in course %}
+                <td>{{ cour.title }}</td>
+            {% endfor %}
+            <td><a href="addCourse.html">添加</a></td>
+
+        </tr>
+        <tr>
+            <th>教师</th>
+            {% for tea in teacher %}
+                <td>{{ tea }}</td>
+            {% endfor %}
+            <td><a href="addTeacher.html">添加</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
