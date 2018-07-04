@@ -14,6 +14,7 @@ class Course(models.Model):
     description = models.CharField(max_length=200, null=True)  # 课程描述
 
     class Meta:
+        unique_together = ('title',)
         db_table = 'course'
 
 

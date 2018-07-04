@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponseRedirect
+from django.urls import reverse
+
 from . import models
 import string
 
@@ -13,7 +15,15 @@ def addCourse(request):
         title = request.POST.get('title')
         period = request.POST.get('period')
         description = request.POST.get('description')
-        models.Course.objects.create(title=title, period=period, description=description)
+        try:
+            tit = models.Course.objects.get(title=title)
+            if tit:
+                pass
+            # else:
+            #     models.Course.objects.create(title=title, period=period, description=description)
+        except:
+            models.Course.objects.create(title=title, period=period, description=description)
+
     return render(request, 'addCourse.html')
 
 
@@ -46,13 +56,18 @@ def dels(request):
 def index(request):
     cour = models.Course.objects.all()
     c = []
-    tea = None
+    tea = models.Course
     for i in cour:
+        # form = MomentForm()
         try:
             # 如果某个课程没有教师的话，则为空
             tea = models.Teacher.objects.get(teacher_id=i.id)
+            if not tea:
+                tea.name = ""
+                break
         except:
-            tea.name = " "
+            tea.name = ""
+
         c.append(tea.name)
 
     t = {'course': cour, 'teacher': c}

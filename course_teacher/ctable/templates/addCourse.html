@@ -1,9 +1,12 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>添加课程</title>
+    <link rel="stylesheet" type="text/css"  href="{% static 'css/bootstrap.css' %}">
 </head>
 <body>
+<div class="container">
 <form action="/addCourse" method="post">
     {% csrf_token %}
 	<label>
@@ -18,5 +21,7 @@
 
 	<input type="submit" name="提交">
 </form>
+<a href="{% url 'index' %}">回到首页</a>
+    </div>
 </body>
 </html>
