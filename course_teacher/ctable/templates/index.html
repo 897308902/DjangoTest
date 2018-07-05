@@ -1,33 +1,9 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>课程表</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
-</head>
-<body>
-<div class="container">
-    <table class="table table-bordered" >
-        <caption>基本的表格布局</caption>
-        <tbody>
-        <tr>
-            <th>课程</th>
-            {% for cour in course %}
+      {% extends 'base.html' %}
+        {% block cour %}
+                        {% for cour in course %}
                 <td>{{ cour.title }}</td>
             {% endfor %}
-            <td><a href="addCourse.html">添加</a></td>
+        {% endblock %}
 
-        </tr>
-        <tr>
-            <th>教师</th>
-            {% for tea in teacher %}
-                <td>{{ tea }}</td>
-            {% endfor %}
-            <td><a href="addTeacher.html">添加</a></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-</body>
-</html>
+
+{#继承的里面不用写所有的html#}

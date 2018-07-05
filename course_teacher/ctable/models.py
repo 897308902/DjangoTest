@@ -9,20 +9,23 @@ from django.db import models
 
 class Course(models.Model):
     id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=50, null=False, unique=True)  # 课程
-    period = models.IntegerField(db_index=True)  # 课时
-    description = models.CharField(max_length=200, null=True)  # 课程描述
+    title = models.CharField("课程名称", max_length=50, null=False, unique=True)  # 课程
+    period = models.IntegerField("课程学时", db_index=True)  # 课时
+    description = models.CharField("课程描述", max_length=200, null=True)  # 课程描述
 
     class Meta:
         unique_together = ('title',)
         db_table = 'course'
 
+    def __unicode__(self):
+        return self.title
+
 
 class Teacher(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, unique=True, null=False, db_index=True)  # 名字
-    gender = models.IntegerField()  # 性别
-    address = models.CharField(max_length=50, null=True)  # 住址
+    name = models.CharField("教师名字", max_length=50, unique=True, null=False, db_index=True)  # 名字
+    gender = models.IntegerField("教师性别")  # 性别
+    address = models.CharField("教师住址", max_length=50, null=True)  # 住址
     teacher = models.ForeignKey(Course, null=True, on_delete=models.SET_NULL, related_name='course', to_field='id')
 
     class Meta:

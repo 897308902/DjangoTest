@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render,HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
-
+from django.views.decorators.cache import cache_page
 from . import models
 import string
-
+from django.forms import ModelForm
 
 # 添加数据  分开添加，课程为课程，老师为老师
 
@@ -15,14 +15,25 @@ def addCourse(request):
         title = request.POST.get('title')
         period = request.POST.get('period')
         description = request.POST.get('description')
+
         try:
+            # 判断数据库中是否存在这个课程，，如果存在则tit为Course object对象
             tit = models.Course.objects.get(title=title)
+            # 如果存在，则处理
             if tit:
+                print tit
                 pass
             # else:
             #     models.Course.objects.create(title=title, period=period, description=description)
         except:
-            models.Course.objects.create(title=title, period=period, description=description)
+
+            ok = models.Course.objects.create(title=title, period=period, description=description)
+            if ok:
+                print "添加成功,课程id=", ok.id
+
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                print 666666666666, ok
 
     return render(request, 'addCourse.html')
 
@@ -37,7 +48,13 @@ def addTeacher(request):
         # 获取课程的ID
         teacher_id = request.POST.get('course_id')
 
-        models.Teacher.objects.create(name=name, gender=gender, address=address, teacher_id=teacher_id)
+        ok = models.Teacher.objects.create(name=name, gender=gender, address=address, teacher_id=teacher_id)
+        if ok:
+            print "添加成功,id=", ok.id
+
+            return HttpResponseRedirect(reverse('index'))
+        else:
+            print 666666666666, ok
 
     return render(request, 'addTeacher.html', t)
 
@@ -49,10 +66,17 @@ def dels(request):
         titles = request.POST.get('title')
         cour = models.Course.objects.get(title=titles)
         cour.delete()
+        if cour:
+            print "删除成功,", cour
+
+            return HttpResponseRedirect(reverse('index'))
+        else:
+            print "删除失败,", cour
 
     return render(request, 'dels.html')
 
 
+# @cache_page(60 * 15)  # 秒数，这里指缓存 15 分钟，不直接写900是为了提高可读性
 def index(request):
     cour = models.Course.objects.all()
     c = []
@@ -72,3 +96,4 @@ def index(request):
 
     t = {'course': cour, 'teacher': c}
     return render(request, 'index.html', t)
+

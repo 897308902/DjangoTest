@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>删除课程</title>
+    <title>删除课程</title>
 </head>
 <body>
 <form action="/dels" method="post">
     {% csrf_token %}
-	<label>
-		输入课名：<input type="text" name="title">
-	</label><br>
+    <label>
+        输入课名：<input type="text" name="title">
+    </label><br>
 
 
-	<input type="submit" name="提交">
+    <input type="submit" name="提交">
 </form>
 </body>
 </html>
