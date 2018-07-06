@@ -1,0 +1,42 @@
+{% extends 'login/base.html' %}
+{% load static %}
+{% block title %}主页{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock %}
+{% block content %}
+    {#    {% if request.session.is_login %}#}
+    {#        <h1>你好,{{ request.session.user_name }}！欢迎回来！</h1>#}
+    {#    {% else %}#}
+    {#        <h1>你尚未登录，只能访问公开内容！</h1>#}
+    {#    {% endif %}#}
+
+    <div class="container">
+        <ul class="feedlist_id">
+            <li>
+                <h2><a href="#">标题</a></h2>
+                <div class="oneline summary">
+                    为什么有的人能学好 Python 而有的人就学不好？ 想请问大家扪心自问一些之前有自学过 Python 么？如果学过那大家思考一下为...扪心自问一些之前有自学过 Python 么？如果学过那大家思考一下为...扪心自问一些之前有自学过 Python 么？如果学过那大家思考一下为...
+                </div>
+                <div class="userbar">
+                    <div class="fl">
+                        <a class="name" href="#">用户名</a>
+                        <span class="little"></span>
+                        <a class="time">7月6日</a>
+                        <span class="little"></span>
+                        <a class="marks" href="#">分类别</a>
+                    </div>
+                    <div class="fr">
+                        <a href="#"><span>232</span> 阅读</a>
+                        <span class="little"></span>
+                        <a href="#"><span>232</span>评论</a>
+                    </div>
+
+
+                </div>
+
+            </li>
+        </ul>
+    </div>
+{% endblock %}

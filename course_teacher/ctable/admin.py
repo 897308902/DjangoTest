@@ -6,6 +6,8 @@ from django.contrib import admin
 from .models import Course, Teacher
 
 
+# 用装饰漆的方式注册
+@admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('title', 'period', 'description')
     search_fields = ('title',)
@@ -17,7 +19,9 @@ class TeacherAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Teacher, TeacherAdmin)
-admin.site.register(Course, CourseAdmin)
+
+
+# admin.site.register(Course, CourseAdmin)
 
 
 class MyAdminSite(admin.AdminSite):

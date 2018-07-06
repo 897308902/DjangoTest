@@ -36,3 +36,5 @@ class Teacher(models.Model):
 # PROTECT: 保护模式，如果采用该选项，删除的时候，会抛出ProtectedError错误。
 # SET_NULL: 置空模式，删除的时候，外键字段被设置为空，前提就是blank=True, null=True,定义该字段的时候，允许为空。
 # SET_DEFAULT: 置默认值，删除的时候，外键字段设置为默认值，所以定义外键的时候注意加上一个默认值。
+
+

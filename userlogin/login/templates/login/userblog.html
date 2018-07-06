@@ -1,0 +1,20 @@
+{% extends 'login/base.html' %}
+{% load static %}
+{% block css %}
+    <script type="text/javascript" src="{% static 'js/userblog.js' %}"></script>
+{% endblock %}
+{% block title %}
+    {% if request.session.is_login %}
+        {{ request.session.user_name }}的博客
+    {% else %}
+        我的博客
+
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1> {{ request.session.user_name }}的博客！</h1>
+
+
+{% endblock %}
+
