@@ -1,6 +1,7 @@
 {% extends 'login/base.html' %}
 {% load static %}
 {% block css %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <script type="text/javascript" src="{% static 'js/userblog.js' %}"></script>
 {% endblock %}
 {% block title %}
@@ -13,7 +14,56 @@
 {% endblock %}
 
 {% block content %}
-    <h1> {{ request.session.user_name }}的博客！</h1>
+{#    <h1> {{ request.session.user_name }}的博客！</h1>#}
+    
+
+    <div class="container">
+        <a href="{% url 'edit_blog' 0 %}">新增博客</a>
+        <form class='form-search' action="/search/" method="get">
+            {% csrf_token %}
+
+
+                <input type="text" name='title' placeholder="输入文章标题"  maxlength="15">
+                <button type="submit" class="btn">搜索</button>
+
+
+
+        </form>
+        <br>
+        <ul class="feedlist_id">
+            {% for blog in blogs %}
+
+
+                <li>
+                    <h2><a target="_blank" href="{% url 'blog_page' blog.id %}">{{ blog.title }}</a></h2>
+                    <div class="oneline summary">
+                        {{ blog.content }}
+                    </div>
+                    <div class="userbar">
+                        <div class="fl">
+
+
+                            <a class="marks" href="{% url 'edit_blog' blog.id %}">编辑</a>
+                            <span class="little"></span>
+                            <a class="time">{{ blog.utime }}</a>
+                            <span class="little"></span>
+                            <a class="marks" href="{% url 'marks' blog.marks %}">{{ blog.marks }}</a>
+
+
+                        </div>
+                        <div class="fr">
+                            <a href="#"><span>232</span> 阅读</a>
+                            <span class="little"></span>
+                            <a href="#"><span>232</span>评论</a>
+                        </div>
+
+
+                    </div>
+
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
 
 {% endblock %}

@@ -2,6 +2,9 @@ ul {
     list-style: none;
 }
 
+.fr{
+    float: right;
+}
 .oneline {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -34,14 +37,16 @@ h2 {
     word-break: break-all;
 }
 
-.feedlist_id li a:visited {
-    color: #b8b8b8;
-}
+/*.feedlist_id li a:visited {*/
+    /*color: #b8b8b8;*/
+/*}*/
 
 .feedlist_id li a:hover {
     color: #a51e1e;
 }
-
+.userbar{
+    overflow: hidden;
+}
 .userbar .fl, .userbar .fl a, .userbar .fl span {
     float: left;
 }
@@ -52,10 +57,6 @@ h2 {
     height: 2px;
     margin-left: 12px;
     margin-right: 12px;
-}
-
-.userbar .fr {
-    float: right;
 }
 
 .userbar .fr span, .userbar .fl .marks {
@@ -72,4 +73,11 @@ h2 {
 }
 .userbar a:hover{
     color: #3399ea;
+}
+
+
+
+.form-search {
+float: right;
+
 }

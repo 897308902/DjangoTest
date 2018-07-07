@@ -1,0 +1,17 @@
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+
+.blog{
+    text-indent: 2em;
+
+margin-bottom: 50px;
+
+}
+
+.userbar{
+    overflow: hidden;
+}

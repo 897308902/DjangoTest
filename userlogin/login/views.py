@@ -15,15 +15,29 @@ import hashlib
 #     if not request.user.is_authenticated():
 #         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
 
-def hash_code(s, salt='mysite'):  # 加点盐
+def hash_code(s, salt='cz9025'):  # 加点盐
     h = hashlib.sha256()
     s += salt
     h.update(s.encode())  # update方法只接收bytes类型
     return h.hexdigest()
 
 
-def index(request):
-    return render(request, 'login/index.html')
+# 首页
+# def index(request):
+#     blogs = models.Blogs.objects.all()
+#
+#     return render(request, 'login/index.html', {'blogs': blogs})
+
+#搜索结果页面
+def search(request, title):
+    title =request.GET['title']
+    titles = models.Blogs.objects.filter(title__contains=title)
+    return render(request, 'login/index.html', {'blogs': titles})
+
+# 博客详情页面
+def blog_page(request, blog_id):
+    blog = models.Blogs.objects.get(id=blog_id)
+    return render(request, 'login/blog_page.html', {'blog': blog})
 
 
 def login(request):
@@ -92,7 +106,63 @@ def logout(request):
     return redirect("/index/")
 
 
+#我的博客
 def userblog(request):
     if not request.session.get('is_login', None):
         return redirect('/login/')
-    return render(request, 'login/userblog.html')
+    # 获取当前登录的用户
+    name = request.session.get('user_name')
+
+    blogs= models.Blogs.objects.filter(uname = name)
+
+    return render(request, 'login/userblog.html',{'blogs':blogs})
+
+
+
+#编辑博客   添加博客
+def edit_blog(request,blog_id):
+    if not request.session.get('is_login', None):
+        return redirect('/login/')
+
+    if str(blog_id) == '0':
+        marks = models.Bmarks.objects.all()
+        return render(request, 'login/edit_blog.html',{'marks':marks})
+    else:
+
+        blog = models.Blogs.objects.get(id=blog_id)
+        marks = models.Bmarks.objects.all()
+        return render(request, 'login/edit_blog.html', {'blog': blog, 'marks': marks})
+
+
+
+def index(request):
+    # 获取当前登录的用户
+    name = request.session.get('user_name')
+    if request.POST:
+        blog_id=request.POST.get('blog_id')
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        tags = request.POST.get('tags')
+
+
+        if str(blog_id)=='0':
+            models.Blogs.objects.create(title=title,content=content,marks_id=tags,uname_id=name)
+            return redirect('/myblog/')
+        else:
+            article=models.Blogs.objects.get(id=blog_id)
+            article.title=title
+            article.content=content
+            article.marks_id=tags
+            article.save()
+            return redirect('/myblog/')
+
+
+    blogs=models.Blogs.objects.all()
+    return render(request, 'login/index.html', {'blogs': blogs})
+
+
+def marks(request,tags):
+    blogs=models.Blogs.objects.filter(marks_id=tags)
+
+
+    return render(request, 'login/marks.html', {'blogs': blogs})

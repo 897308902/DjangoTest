@@ -3,23 +3,18 @@
 {% block title %}主页{% endblock %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    <!-- <script type="text/javascript" src="{% static 'js/index.js' %}"></script> -->
 {% endblock %}
 {% block content %}
-    {#    {% if request.session.is_login %}#}
-    {#        <h1>你好,{{ request.session.user_name }}！欢迎回来！</h1>#}
-    {#    {% else %}#}
-    {#        <h1>你尚未登录，只能访问公开内容！</h1>#}
-    {#    {% endif %}#}
+
 
     <div class="container">
         <form class='form-search' action="/search/" method="get">
             {% csrf_token %}
 
 
-                <input type="text" name='title' placeholder="首页的收索近首页，我的页面收索近我的页面"  maxlength="15">
+                <input type="text" name='title' placeholder="输入文章标题"  maxlength="15">
                 <button type="submit" class="btn">搜索</button>
-
 
 
         </form>
