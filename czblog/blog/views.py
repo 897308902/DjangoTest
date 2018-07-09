@@ -18,6 +18,8 @@ def search(request):
 
 # 我的博客搜索
 def mysearch(request):
+    if not request.user.is_authenticated:
+        return redirect('/login/')
     name = request.user
     title = request.GET['title']
     titles = models.Blogs.objects.filter(uname=name,title__contains=title)
@@ -43,8 +45,17 @@ def userblog(request):
         title = request.POST.get('title')
         content = request.POST.get('content')
         tags = request.POST.get('tags')
+
+        
+        #非空判断title   content
+
+
+
         # 添加博客
         if str(blog_id) == '0':
+            if not title:
+                marks = models.Bmarks.objects.all()
+                return render(request,'blog/edit_blog.html',{'logs':'6666666','marks': marks})
             models.Blogs.objects.create(title=title, content=content, marks_id=tags, uname_id=name)
             return redirect('/myblog/')
         # 修改博客

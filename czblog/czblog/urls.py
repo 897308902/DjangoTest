@@ -25,8 +25,9 @@ urlpatterns = [
     # 博客页面
     url(r'blog_page/(?P<blog_id>\d+)$', views.blog_page, name='blog_page'),
     # 搜索博客(?P<title>.*?)$
-    url(r'^search/', views.search, name='indexsearch'),
-    url(r'^myblog/mysearch/', views.search, name='mysearch'),
+    url(r'^index/search/', views.search, name='indexsearch'),
+    # 搜索我的博客
+    url(r'^myblog/mysearch/', views.mysearch, name='mysearch'),
 
     # 用户博客页面
     url(r'^myblog', views.userblog, name='userblog'),
@@ -35,6 +36,7 @@ urlpatterns = [
     # 首页
     url(r'^index', views.index, name='action'),
     # 按类别分类显示
+
     url(r'^marks/(?P<tags>.*?)$', views.marks, name='marks'),
 
 
