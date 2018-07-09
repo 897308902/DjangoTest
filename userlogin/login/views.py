@@ -28,11 +28,12 @@ def hash_code(s, salt='cz9025'):  # 加点盐
 #
 #     return render(request, 'login/index.html', {'blogs': blogs})
 
-#搜索结果页面
+# 搜索结果页面
 def search(request, title):
-    title =request.GET['title']
+    title = request.GET['title']
     titles = models.Blogs.objects.filter(title__contains=title)
     return render(request, 'login/index.html', {'blogs': titles})
+
 
 # 博客详情页面
 def blog_page(request, blog_id):
@@ -106,27 +107,26 @@ def logout(request):
     return redirect("/index/")
 
 
-#我的博客
+# 我的博客
 def userblog(request):
     if not request.session.get('is_login', None):
         return redirect('/login/')
     # 获取当前登录的用户
     name = request.session.get('user_name')
 
-    blogs= models.Blogs.objects.filter(uname = name)
+    blogs = models.Blogs.objects.filter(uname=name)
 
-    return render(request, 'login/userblog.html',{'blogs':blogs})
+    return render(request, 'login/userblog.html', {'blogs': blogs})
 
 
-
-#编辑博客   添加博客
-def edit_blog(request,blog_id):
+# 编辑博客   添加博客
+def edit_blog(request, blog_id):
     if not request.session.get('is_login', None):
         return redirect('/login/')
 
     if str(blog_id) == '0':
         marks = models.Bmarks.objects.all()
-        return render(request, 'login/edit_blog.html',{'marks':marks})
+        return render(request, 'login/edit_blog.html', {'marks': marks})
     else:
 
         blog = models.Blogs.objects.get(id=blog_id)
@@ -134,54 +134,32 @@ def edit_blog(request,blog_id):
         return render(request, 'login/edit_blog.html', {'blog': blog, 'marks': marks})
 
 
-@login_required
+# @login_required
 def index(request):
     # 获取当前登录的用户
     name = request.session.get('user_name')
     if request.POST:
-        blog_id=request.POST.get('blog_id')
+        blog_id = request.POST.get('blog_id')
         title = request.POST.get('title')
         content = request.POST.get('content')
         tags = request.POST.get('tags')
 
-
-        if str(blog_id)=='0':
-            models.Blogs.objects.create(title=title,content=content,marks_id=tags,uname_id=name)
+        if str(blog_id) == '0':
+            models.Blogs.objects.create(title=title, content=content, marks_id=tags, uname_id=name)
             return redirect('/myblog/')
         else:
-            article=models.Blogs.objects.get(id=blog_id)
-            article.title=title
-            article.content=content
-            article.marks_id=tags
+            article = models.Blogs.objects.get(id=blog_id)
+            article.title = title
+            article.content = content
+            article.marks_id = tags
             article.save()
             return redirect('/myblog/')
 
-
-    blogs=models.Blogs.objects.all()
+    blogs = models.Blogs.objects.all()
     return render(request, 'login/index.html', {'blogs': blogs})
 
 
-def marks(request,tags):
-    blogs=models.Blogs.objects.filter(marks_id=tags)
-
+def marks(request, tags):
+    blogs = models.Blogs.objects.filter(marks_id=tags)
 
     return render(request, 'login/marks.html', {'blogs': blogs})
-
-
-
-
-@login_required
-def auth_view(request):
-    username=request.POST.get("usernmae")       # 获取用户名
-    password=request.POST.get("password")       # 获取用户的密码
-    
-    user=authenticate(username=username,password=password)  # 验证用户名和密码，返回用户对象
-    
-    if user:                        # 如果用户对象存在
-        login(request,user)         # 用户登陆
-        return redirect("/index/")
-   
-    else:
-        # blogs=models.Blogs.objects.all()
-        # return render(request, 'login/index.html', {'blogs': user})
-        return HttpResponse(username)

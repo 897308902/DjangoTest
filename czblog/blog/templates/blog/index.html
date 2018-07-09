@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}主页{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+
+    <div class="container">
+
+    <form action="{% url 'indexsearch' %}" method="get" class="form-horizontal">
+            <div class="form-group has-success" style="float: right">
+
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="title" placeholder="输入要搜索的博客标题" maxlength="50">
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" class="btn btn-primary  btn-group-sm" value="查询">
+                </div>
+            </div>
+
+
+        </form>
+        <a href="{% url 'set_pwd' %}">修改密码</a>
+
+        <br>
+        <ul class="feedlist_id">
+            {% for blog in blogs %}
+
+                <li>
+                    <h2><a target="_blank" href="{% url 'blog_page' blog.id %}">{{ blog.title }}</a></h2>
+                    <div class="oneline summary">
+                        {{ blog.content }}
+                    </div>
+                    <div class="userbar">
+                        <div class="fl">
+                            <a class="name" href="#">{{ blog.uname }}</a>
+                            <span class="little"></span>
+                            <a class="time">{{ blog.utime |date:"Y-m-d H:i:s"}}</a>
+                            <span class="little"></span>
+                            <a class="marks" href="{% url 'marks' blog.marks %}">{{ blog.marks }}</a>
+                        </div>
+                        <div class="fr">
+                            <a href="#"><span>232</span> 阅读</a>
+                            <span class="little"></span>
+                            <a href="#"><span>232</span>评论</a>
+                        </div>
+
+
+                    </div>
+
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

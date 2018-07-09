@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    {% block title %}
+        {% if blog.id %}
+            编辑博客
+        {% else %}
+            创建博客
+        {% endif %}
+
+    {% endblock %}
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+        <script type="text/javascript" src="{% static 'js/userblog.js' %}"></script>
+
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+    <form action="{% url 'userblog' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="blog_id" value="{{ blog.id | default:'0'}}">
+
+        <label><br>
+            文章标题：<input type="text" name="title" value="{{ blog.title }}">
+        </label><br>
+        <label>
+            文章内容：<input type="text" name="content" value="{{ blog.content }}">
+        </label><br>
+        <label>
+            文章类型：<select type="checkbox" name="tags">
+            {% for mark in marks %}
+                <option value="{{ mark.tags }}">{{ mark.tags }}</option>
+            {% endfor %}
+
+        </select>
+        </label><br>
+        <input type="submit" value="提交">
+    </form>
+{% endblock %}
+</body>
+</html>

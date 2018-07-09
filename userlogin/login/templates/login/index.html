@@ -23,6 +23,22 @@
 
 
         </form>
+
+    <form action="/search" method="get" class="form-horizontal">
+            <div class="form-group has-success">
+
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="title" placeholder="输入你的名字">
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" class="btn btn-primary  btn-group-sm" value="查询">
+                </div>
+            </div>
+
+
+        </form>
+
+
         <br>
         <ul class="feedlist_id">
             {% for blog in blogs %}
@@ -37,7 +53,7 @@
                         <div class="fl">
                             <a class="name" href="#">{{ blog.uname }}</a>
                             <span class="little"></span>
-                            <a class="time">{{ blog.utime }}</a>
+                            <a class="time">{{ blog.utime |date:"Y-m-d H:i:s"}}</a>
                             <span class="little"></span>
                             <a class="marks" href="{% url 'marks' blog.marks %}">{{ blog.marks }}</a>
                         </div>

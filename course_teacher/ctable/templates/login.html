@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的登录页面</title>
+</head>
+<body>
+<form action="{% url 'uselogin' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="username">
+    <input type="text" name="password">
+    <input type="submit" value="tijiao">
+    {{ logs }}
+
+
+</form>
+</body>
+</html>
