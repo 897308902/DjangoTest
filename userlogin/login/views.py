@@ -134,7 +134,7 @@ def edit_blog(request,blog_id):
         return render(request, 'login/edit_blog.html', {'blog': blog, 'marks': marks})
 
 
-
+@login_required
 def index(request):
     # 获取当前登录的用户
     name = request.session.get('user_name')
@@ -166,3 +166,22 @@ def marks(request,tags):
 
 
     return render(request, 'login/marks.html', {'blogs': blogs})
+
+
+
+
+@login_required
+def auth_view(request):
+    username=request.POST.get("usernmae")       # 获取用户名
+    password=request.POST.get("password")       # 获取用户的密码
+    
+    user=authenticate(username=username,password=password)  # 验证用户名和密码，返回用户对象
+    
+    if user:                        # 如果用户对象存在
+        login(request,user)         # 用户登陆
+        return redirect("/index/")
+   
+    else:
+        # blogs=models.Blogs.objects.all()
+        # return render(request, 'login/index.html', {'blogs': user})
+        return HttpResponse(username)
