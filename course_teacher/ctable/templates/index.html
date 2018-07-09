@@ -1,9 +1,25 @@
-      {% extends 'base.html' %}
-        {% block cour %}
-                        {% for cour in course %}
-                <td>{{ cour.title }}</td>
-            {% endfor %}
-        {% endblock %}
+{% extends 'base.html' %}
+{% block cour %}
+    {% for cour in course %}
+        <td>{{ cour.title }}</td>
+    {% endfor %}
+
+    <a href="{% url 'log_out' %}">退出</a>
+    <br>
+    <a href="{% url 'set_pwd' %}">修改密码</a>
+    <br>
+
+    <a href="{% url 'regist' %}">注册</a>
+
+    <br>
+
+    {% if request.user.is_authenticated %}
+        {{ request.user }}的博客
+    {% else %}
+        我的博客
+
+    {% endif %}
+{% endblock %}
 
 
 {#继承的里面不用写所有的html#}

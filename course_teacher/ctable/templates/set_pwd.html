@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的登录页面</title>
+</head>
+<body>
+<form action="{% url 'set_pwd' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="oldpassword">
+    <input type="text" name="newpassword">
+    <input type="submit" value="tijiao">
+    {{ logs }}
+</form>
+</body>
+</html>

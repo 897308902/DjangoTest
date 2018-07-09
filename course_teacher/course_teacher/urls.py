@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.contrib.auth import authenticate, login
 from ctable import views
 
 from django.contrib.auth import urls as auth_urls
@@ -31,9 +30,22 @@ urlpatterns = [
     url(r'^addTeacher', views.addTeacher, name='addTeacher'),
     url(r'^dels', views.dels, name='delCourse'),
     # url(r'^accounts/', include(auth_urls, namespace='accounts')),
-    # url(r'^accounts/', include('users.urls')),
 
-    url(r'^tests/(?P<ids>\d+)/$',views.tests,name='tests'),
+    url(r'^tests', views.tests, name='tests'),
+
+
+    # 登录
+    url(r'^login', views.uselogin, name='uselogin'),
+    # 注册
+    url(r'^reg', views.reg, name='regist'),
+
+    # 注销
+    url(r'^logout', views.log_out, name='log_out'),
+    # 修改密码
+    url(r'^setpwd', views.set_pwd, name='set_pwd'),
+
+
+
 ]
 
 # 这个name的名字可以随意取，但在其他地方使用时就要用这个

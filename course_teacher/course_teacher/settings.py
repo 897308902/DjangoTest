@@ -58,7 +58,7 @@ ROOT_URLCONF = 'course_teacher.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR + "templates")],
+        'DIRS': [BASE_DIR + "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,38 +125,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-
-
-#
-# # 用户注册相关
-# USERS_REGISTRATION_OPEN = True
-#
-# USERS_VERIFY_EMAIL = True
-#
-# USERS_AUTO_LOGIN_ON_ACTIVATION = True
-#
-# USERS_EMAIL_CONFIRMATION_TIMEOUT_DAYS = 3
-#
-# # Specifies minimum length for passwords:
-# USERS_PASSWORD_MIN_LENGTH = 5
-#
-# # Specifies maximum length for passwords:
-# USERS_PASSWORD_MAX_LENGTH = None
-#
-# # the complexity validator, checks the password strength
-# USERS_CHECK_PASSWORD_COMPLEXITY = True
-#
-# USERS_SPAM_PROTECTION = False  # important!
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#
-# EMAIL_USE_TLS = False
-# EMAIL_HOST = 'smtp.xxx.com'
-# EMAIL_PORT = 25
-# EMAIL_HOST_USER = 'xx@xx.com'
-# EMAIL_HOST_PASSWORD = 'xxx'
-# DEFAULT_FROM_EMAIL = 'xx@xx.com'
-# #  ----------------------------------------
 
 
 CACHES = {
