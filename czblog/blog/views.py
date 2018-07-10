@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from czblog import settings
 from . import models
-
+from markdown import markdown
 
 # 主页搜索
 def search(request):
@@ -39,6 +39,7 @@ def userblog(request):
         return redirect('/login/')
     # 获取登录的用户名
     name = request.user
+    contents = None
 
     if request.POST:
         blog_id = request.POST.get('blog_id')
@@ -46,7 +47,7 @@ def userblog(request):
         content = request.POST.get('content')
         tags = request.POST.get('tags')
 
-        
+
         #非空判断title   content
 
 
@@ -56,18 +57,23 @@ def userblog(request):
             if not title:
                 marks = models.Bmarks.objects.all()
                 return render(request,'blog/edit_blog.html',{'logs':'6666666','marks': marks})
-            models.Blogs.objects.create(title=title, content=content, marks_id=tags, uname_id=name)
+            # print 'add==========',markdown(content)
+            models.Blogs.objects.create(title=title, content=markdown(content), marks_id=tags, uname_id=name)
             return redirect('/myblog/')
         # 修改博客
         else:
             article = models.Blogs.objects.get(id=blog_id)
             article.title = title
-            article.content = content
+            #
+            article.content = markdown(content)
             article.marks_id = tags
             article.save()
+            # print 'edit==============',article.content
             return redirect('/myblog/')
 
-    blogs = models.Blogs.objects.filter(uname=name)
+    blogs = models.Blogs.objects.filter(uname=name).order_by('-utime')
+    b = models.Blogs.objects.get(id=6)
+    # print 'out==============', b.content
 
     return render(request, 'blog/userblog.html', {'blogs': blogs})
 
@@ -86,9 +92,19 @@ def edit_blog(request, blog_id):
         marks = models.Bmarks.objects.all()
         return render(request, 'blog/edit_blog.html', {'blog': blog, 'marks': marks})
 
+
+# 删除博客   删除有问题，删除后，地址错误，
+def del_blog(request, blog_id):
+    num = models.Blogs.objects.get(id=blog_id).delete()
+    if num:
+        return redirect('/myblog/')
+    blogs = models.Blogs.objects.all().order_by('-utime')
+    return render(request, 'blog/userblog.html', {'blogs': blogs})
+
+
 # 首页
 def index(request):
-    blogs = models.Blogs.objects.all()
+    blogs = models.Blogs.objects.all().order_by('-utime')
     return render(request, 'blog/index.html', {'blogs': blogs})
 
 

@@ -1,31 +1,33 @@
 {% extends 'blog/base.html' %}
 {% load static %}
+
 {% block title %}{{ blog.title }}{% endblock %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/blog_page.css' %}">
-{#    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>#}
+    {#    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>#}
 {% endblock %}
 {% block content %}
 
     <div class="container">
-            <h2>{{ blog.title }}</h2>
-            <br>
+        <h2>{{ blog.title }}</h2>
+        <br>
 
-            <div class="userbar">
-                <div class="fl">
-                    <span class="utime">{{ blog.utime }}</span>
-
-                </div>
-                <div class="fr"> 232  阅读 </div>
+        <div class="userbar">
+            <div class="fl">
+                <span class="utime">{{ blog.utime |date:"Y-m-d H:i:s"}}</span>
 
             </div>
-            <br>
-            <br>
-            <div class="blog">
-                {{ blog.content }}
-            </div>
-
-            <span class="">个人分类：<a class="marks" href="{% url 'marks' blog.marks %}">{{ blog.marks }}</a></span>
+            <div class="fr"> 232 阅读</div>
 
         </div>
+        <br>
+        <br>
+        <div class="blog">
+            {{ blog.content|safe }}
+        </div>
+
+
+        <span class="">个人分类：<a class="marks" href="{% url 'marks' blog.marks %}">{{ blog.marks }}</a></span>
+
+    </div>
 {% endblock %}

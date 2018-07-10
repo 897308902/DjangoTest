@@ -1,34 +1,23 @@
 # -*- coding: utf-8 -*-
-"""czblog URL Configuration
+# @Time    : 2018/7/10 18:26
+# @Author  : chengz
+# @File    : blog_urls.py
+# @Software: PyCharm
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.11/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
+
+
 from django.conf.urls import url, include
 from django.contrib import admin
 
 from blog import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+
 
     # 博客页面
     url(r'blog_page/(?P<blog_id>\d+)$', views.blog_page, name='blog_page'),
     # 搜索博客(?P<title>.*?)$
     # url(r'^index/search/', views.search, name='indexsearch'),
-
-    url(r'^index/search/', views.search, name='indexsearch'),
-
     # 搜索我的博客
     url(r'^myblog/mysearch/', views.mysearch, name='mysearch'),
 
@@ -40,9 +29,8 @@ urlpatterns = [
     url(r'^del_blog/(?P<blog_id>\d+)$', views.del_blog, name='del_blog'),
     # 首页
     url(r'^index', views.index, name='action'),
-    # url(r'^blog', include('blog.blog_urls', namespace='action') ),
-
     # 按类别分类显示
+
     url(r'^marks/(?P<tags>.*?)$', views.marks, name='marks'),
 
     # 登录

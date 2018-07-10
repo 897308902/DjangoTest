@@ -45,7 +45,8 @@ class Bmarks(models.Model):
 class Blogs(models.Model):
     id = models.AutoField(max_length=10, primary_key=True)
     title = models.CharField(max_length=128, unique=True)
-    content = models.CharField(max_length=256)
+    # content = models.CharField(max_length=256)
+    content = models.TextField()
 
     ctime = models.DateTimeField(max_length=30, auto_now_add=True, null=False)  # 创建时间
     utime = models.DateTimeField(max_length=30, auto_now=True, null=False)  # 最后修改时间

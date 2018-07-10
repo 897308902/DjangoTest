@@ -34,7 +34,7 @@
         <ul class="feedlist_id">
             {% for blog in blogs %}
 
-                <li>
+                <li id="blog{{ blog.id }}">
                     <h2><a target="_blank" href="{% url 'blog_page' blog.id %}">{{ blog.title }}</a></h2>
                     <div class="oneline summary">
                         {{ blog.content }}
@@ -45,7 +45,9 @@
 
                             <a class="marks" href="{% url 'edit_blog' blog.id %}">编辑</a>
                             <span class="little"></span>
-                            <a class="time">{{ blog.utime }}</a>
+                            <a class="marks" href="{% url 'del_blog' blog.id %}" onclick="del()">删除</a>
+                            <span class="little"></span>
+                            <a class="time">{{ blog.utime |date:"Y-m-d H:i:s"}}</a>
                             <span class="little"></span>
                             <a class="marks" href="{% url 'marks' blog.marks %}">{{ blog.marks }}</a>
 
@@ -62,6 +64,13 @@
         </ul>
     </div>
 
+    <script type="text/javascript">
+        function del() {
+            if (!confirm("确认要删除？")) {
+                window.event.returnValue = false;
+            }
+        }
+    </script>
 
 {% endblock %}
 
