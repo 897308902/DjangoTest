@@ -1,0 +1,18 @@
+.form-edit{
+
+}
+
+.form-edit input{
+outline: none;
+}
+input:focus {
+  /*outline-color: green;*/
+}
+/*input{*/
+
+/*border-color:green;*/
+/*}*/
+
+textarea.content{
+    height: 300px;
+}

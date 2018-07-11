@@ -9,12 +9,18 @@
 
 
     <div class="container">
-        <form class='form-search' action="/indexsearch/" method="get">
-            {% csrf_token %}
 
+           <form action="{% url 'blog:indexsearch' %}" method="get" class="form-horizontal"
+              style="overflow: hidden;padding: 0  10px 0 40px">
+            <div class="form-group has-success" style="float: right">
 
-                <input type="text" name='title' placeholder="输入文章标题"  maxlength="15">
-                <button type="submit" class="btn">搜索</button>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="title" placeholder="输入要搜索的博客标题" maxlength="50">
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" class="btn btn-primary  btn-group-sm" value="查询">
+                </div>
+            </div>
 
 
         </form>
@@ -24,7 +30,7 @@
 
 
                 <li>
-                    <h2><a target="_blank" href="{% url 'blog_page' blog.id %}">{{ blog.title }}</a></h2>
+                    <h2><a target="_blank" href="{% url 'blog:blog_page' blog.id %}">{{ blog.title }}</a></h2>
                     <div class="oneline summary">
                         {{ blog.content }}
                     </div>

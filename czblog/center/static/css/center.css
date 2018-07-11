@@ -1,0 +1,21 @@
+.user{
+    list-style: none;
+    width: 100%;
+    padding: 0 50px;
+}
+.user li{
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    border-bottom: solid 1px darkgray;
+    line-height: 60px;
+}
+.fr{
+    float: right;
+}
+.fl{
+    float: left;
+}
+.name{
+    margin-top: 13px;
+}

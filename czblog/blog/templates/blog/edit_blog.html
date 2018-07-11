@@ -8,41 +8,51 @@
         {% if blog.id %}
             编辑博客
         {% else %}
-            创建博客
+            添加博客
         {% endif %}
 
     {% endblock %}
     {% block css %}
-        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+        <link rel="stylesheet" href="{% static 'css/edit_blog.css' %}">
         <script type="text/javascript" src="{% static 'js/userblog.js' %}"></script>
-
     {% endblock %}
 </head>
 <body>
 {% block content %}
-    <form action="{% url 'userblog' %}" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="blog_id" value="{{ blog.id | default:'0'}}">
+    <div class="container">
 
-        <label><br>
-            文章标题：<input type="text" name="title" value="{{ blog.title }}">
-        </label><br>
-        <label>
-{#            文章内容：<input type="text" name="content" value="{{ blog.content }}">#}
-            文章内容：<textarea  name="content">{{ blog.content|safe}}</textarea>
-        </label><br>
-        <label>
-            文章类型：<select type="checkbox" name="tags">
-            {% for mark in marks %}
-                <option value="{{ mark.tags }}">{{ mark.tags }}</option>
-            {% endfor %}
+        <form class='form-edit' action="{% url 'userblog' %}" method="post">
+            {% if message %}
+                <div class="alert alert-warning">{{ message }}</div>
+            {% endif %}
 
-        </select>
-        </label><br>
-        <input type="submit" value="提交">
-    </form>
+            {% csrf_token %}
+            <input type="hidden" name="blog_id" value="{{ blog.id | default:'0'}}">
 
-    {{ logs }}
+            <div class="form-group">
+                <label for="title">文章标题：</label>
+                <input type="text" name='title' class="form-control" id="title" placeholder="title"
+                       value="{{ blog.title }}" autofocus required>
+            </div>
+            <div class="form-group">
+                <label for="content">文章内容：</label>
+                <textarea class="form-control content" name="content" id="content"
+                          required>{{ blog.content|safe }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="id_password">文章类型：</label>
+                <select type="checkbox" name="tags">
+                    {% for mark in marks %}
+                        <option value="{{ mark.tags }}">{{ mark.tags }}</option>
+                    {% endfor %}</select>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary pull-left">发布博客</button>
+
+        </form>
+    </div>
 {% endblock %}
 </body>
 </html>

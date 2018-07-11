@@ -1,17 +1,98 @@
-.fl{
+.fl {
     float: left;
 }
-.fr{
+
+.fr {
     float: right;
 }
 
-.blog{
+.blog {
     text-indent: 2em;
 
-margin-bottom: 50px;
+    margin-bottom: 50px;
 
 }
 
-.userbar{
+.userbar {
     overflow: hidden;
+}
+
+/*评论的*/
+
+.mcoms {
+    margin-top: 100px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.comms {
+    position: relative;
+    width: 600px;
+    margin-left: 80px;
+}
+
+.gologin {
+    width: 600px;
+    height: 200px;
+    position: absolute;
+}
+
+.sp {
+    position: absolute;
+    top: 92px;
+    left: 32%;
+}
+
+.pcon {
+    resize: none;
+    width: 600px;
+    height: 200px;
+    border-radius: 5px;
+    padding: 5px;
+}
+/*评论内容*/
+
+ .box {
+            /*margin: 50px auto;*/
+            width: 650px;
+            min-height: 100px;
+            /*border: solid black 1px;*/
+            font-size: 14px;
+            padding: 5px;
+            position: relative;
+        }
+.top {
+    height: 20px;
+    line-height: 20px;
+    color: dodgerblue;
+}
+
+.tou {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: gold;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.nick {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 5px;
+}
+
+.con {
+    padding-top: 10px;
+    padding-left: 20px;
+    text-indent: 2em;
+}
+
+.time {
+    float: right;
+    /*position: absolute;*/
+    /*bottom: 5px;*/
+    /*right: 5px;*/
+
 }

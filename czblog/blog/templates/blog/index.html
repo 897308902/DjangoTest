@@ -9,8 +9,11 @@
 
 
     <div class="container">
+<div class="tabs"></div>
 
-    <form action="{% url 'indexsearch' %}" method="get" class="form-horizontal">
+
+        <form action="{% url 'blog:indexsearch' %}" method="get" class="form-horizontal"
+              style="overflow: hidden;padding: 0  10px 0 40px">
             <div class="form-group has-success" style="float: right">
 
                 <div class="col-sm-9">
@@ -23,14 +26,14 @@
 
 
         </form>
-        <a href="{% url 'set_pwd' %}">修改密码</a>
+
 
         <br>
         <ul class="feedlist_id">
             {% for blog in blogs %}
 
                 <li>
-                    <h2><a target="_blank" href="{% url 'blog_page' blog.id %}">{{ blog.title }}</a></h2>
+                    <h2><a target="_blank" href="{% url 'blog:blog_page' blog.id %}">{{ blog.title }}</a></h2>
                     <div class="oneline summary">
                         {{ blog.content }}
                     </div>
@@ -40,12 +43,12 @@
                             <span class="little"></span>
                             <a class="time">{{ blog.utime |date:"Y-m-d H:i:s"}}</a>
                             <span class="little"></span>
-                            <a class="marks" href="{% url 'marks' blog.marks %}">{{ blog.marks }}</a>
+                            <a class="marks" href="{% url 'blog:marks' blog.marks %}">{{ blog.marks }}</a>
                         </div>
                         <div class="fr">
-                            <a href="#"><span>232</span> 阅读</a>
+                            <a href="#"><span>{{ blog.rcount }}</span> 阅读</a>
                             <span class="little"></span>
-                            <a href="#"><span>232</span>评论</a>
+                            <a href="#"><span>{{ blog.coms }}</span>评论</a>
                         </div>
 
 
@@ -54,5 +57,8 @@
                 </li>
             {% endfor %}
         </ul>
+<div style="float: right;width: 200px;height: 500px;background-color: black;position: absolute;top: 50px;right: 20px;">要显示在右侧</div>
     </div>
+
+
 {% endblock %}

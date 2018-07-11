@@ -6,15 +6,16 @@ from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from czblog import settings
 from . import models
 from markdown import markdown
+
 
 # 主页搜索
 def search(request):
     title = request.GET['title']
-    titles = models.Blogs.objects.filter(title__contains=title)
+    titles = models.Blogs.objects.filter(title__contains=title).order_by('-rcount')
     return render(request, 'blog/index.html', {'blogs': titles})
+
 
 # 我的博客搜索
 def mysearch(request):
@@ -22,14 +23,36 @@ def mysearch(request):
         return redirect('/login/')
     name = request.user
     title = request.GET['title']
-    titles = models.Blogs.objects.filter(uname=name,title__contains=title)
+    titles = models.Blogs.objects.filter(uname=name, title__contains=title).order_by('-rcount')
     return render(request, 'blog/userblog.html', {'blogs': titles})
 
 
 # 博客详情页面
 def blog_page(request, blog_id):
+    # if not request.user.is_authenticated:
+    #     return redirect('/login/')
+
     blog = models.Blogs.objects.get(id=blog_id)
-    return render(request, 'blog/blog_page.html', {'blog': blog})
+    # 评论
+    if request.POST:
+        # blogs = request.POST.get('blog_id')
+        comms = request.POST.get('comment')
+        uses = request.user
+        models.Comments.objects.create(uses=uses, comms=comms, cbid=blog_id, cblog=blog.title)
+        blog.coms = blog.coms+1
+        blog.save()
+        return redirect('/blog/blog_page/%s' % blog_id)
+
+    # 阅读量+1
+    blog.rcount = blog.rcount + 1
+    blog.save()
+
+
+
+    # 评论显示,按博客的id查询
+    comm = models.Comments.objects.filter(cbid=blog_id)
+
+    return render(request, 'blog/blog_page.html', {'blog': blog, 'comm': comm})
 
 
 # 我的博客
@@ -47,16 +70,13 @@ def userblog(request):
         content = request.POST.get('content')
         tags = request.POST.get('tags')
 
-
-        #非空判断title   content
-
-
+        # 非空判断title   content
 
         # 添加博客
         if str(blog_id) == '0':
             if not title:
                 marks = models.Bmarks.objects.all()
-                return render(request,'blog/edit_blog.html',{'logs':'6666666','marks': marks})
+                return render(request, 'blog/edit_blog.html', {'logs': '6666666', 'marks': marks})
             # print 'add==========',markdown(content)
             models.Blogs.objects.create(title=title, content=markdown(content), marks_id=tags, uname_id=name)
             return redirect('/myblog/')
@@ -71,7 +91,7 @@ def userblog(request):
             # print 'edit==============',article.content
             return redirect('/myblog/')
 
-    blogs = models.Blogs.objects.filter(uname=name).order_by('-utime')
+    blogs = models.Blogs.objects.filter(uname=name).order_by('-rcount')
     b = models.Blogs.objects.get(id=6)
     # print 'out==============', b.content
 
@@ -98,18 +118,19 @@ def del_blog(request, blog_id):
     num = models.Blogs.objects.get(id=blog_id).delete()
     if num:
         return redirect('/myblog/')
-    blogs = models.Blogs.objects.all().order_by('-utime')
+    blogs = models.Blogs.objects.all().order_by('-rcount')
     return render(request, 'blog/userblog.html', {'blogs': blogs})
 
 
 # 首页
 def index(request):
-    blogs = models.Blogs.objects.all().order_by('-utime')
+
+    blogs = models.Blogs.objects.all().order_by('-rcount')  #[0:10]
     return render(request, 'blog/index.html', {'blogs': blogs})
 
 
 def marks(request, tags):
-    blogs = models.Blogs.objects.filter(marks_id=tags)
+    blogs = models.Blogs.objects.filter(marks_id=tags).order_by('-rcount')
 
     return render(request, 'blog/marks.html', {'blogs': blogs})
 
@@ -138,13 +159,18 @@ def set_pwd(request):
 
 # 登录
 def uselogin(request):
+    if request.method == 'GET':
+        # 记住来源的url,如果没有则设置为首页('/')
+        request.session['login_from'] = request.META.get('HTTP_REFERER', '/')
     if request.POST:
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-            return redirect('/index/')
+            # 重定向到来源的url
+            return HttpResponseRedirect(request.session['login_from'])
+            # return redirect('/blog/')
         else:
             return render(request, 'blog/login.html', {'logs': '账号或密码错误'})
 
@@ -155,9 +181,9 @@ def uselogin(request):
 def reg(request):
     if request.method == "POST":
         username = request.POST.get("username")
-        password1 = request.POST.get("password")
+        password = request.POST.get("password")
         # password2 = request.POST.get("password2")
-        email= request.POST.get("email")
+        email = request.POST.get("email")
         # first_name=request.POST.get("first_name")
         # last_name = request.POST.get("last_name")
         # if password1 != password2:
@@ -165,17 +191,17 @@ def reg(request):
         name = User.objects.filter(username=username)
         # 如果用户存在，则name=1,不存在则name=0
         if name:
-            return render(request, "blog/register.html", {'logs': '用户已存在%s' % len(name)})
+            return render(request, "blog/register.html", {'message': '用户已存在%s' % len(name)})
         # else:
         # return render(request, "regist.html", {'logs': '用户bu存在%s' % len(name)})
         # 得到用户输入的用户名和密码创建一个新用户
-        User.objects.create_user(username=username, password=password,email=email)
+        User.objects.create_user(username=username, password=password, email=email)
 
         # 注册成功后自动登录
-        user = authenticate(username=username, password=password1)
+        user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-            return redirect("/index/")
+            return redirect("/blog/")
     return render(request, "blog/register.html")
 
 
@@ -183,4 +209,4 @@ def reg(request):
 def log_out(request):
     if request.user.is_authenticated:
         logout(request)
-    return redirect("/index/")
+    return redirect("/blog/")

@@ -16,8 +16,9 @@
 {% block content %}
 
     <div class="container">
-        <a href="{% url 'edit_blog' 0 %}">新增博客</a>
-        <form action="{% url 'mysearch' %}" method="get" class="form-horizontal">
+
+        <form action="{% url 'mysearch' %}" method="get" class="form-horizontal"
+              style="overflow: hidden;padding: 0  10px 0 40px">
             <div class="form-group has-success" style="float: right">
 
                 <div class="col-sm-9">
@@ -29,13 +30,25 @@
             </div>
 
 
+            <div class="form-group has-success" style="float: left">
+
+                <div class="col-sm-9">
+
+                    <a href="{% url 'edit_blog' 0 %}" style="color: white;text-decoration: none;"
+                       class="btn btn-success">新增博客</a>
+                </div>
+
+            </div>
+
         </form>
         <br>
         <ul class="feedlist_id">
+
+
             {% for blog in blogs %}
 
                 <li id="blog{{ blog.id }}">
-                    <h2><a target="_blank" href="{% url 'blog_page' blog.id %}">{{ blog.title }}</a></h2>
+                    <h2><a target="_blank" href="{% url 'blog:blog_page' blog.id %}">{{ blog.title }}</a></h2>
                     <div class="oneline summary">
                         {{ blog.content }}
                     </div>
@@ -53,9 +66,9 @@
 
                         </div>
                         <div class="fr">
-                            <a href="#"><span>232</span> 阅读</a>
+                            <a href="#"><span>{{ blog.rcount }}</span> 阅读</a>
                             <span class="little"></span>
-                            <a href="#"><span>232</span>评论</a>
+                            <a href="#"><span>{{ blog.coms }}</span>评论</a>
                         </div>
                     </div>
 
