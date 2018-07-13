@@ -31,12 +31,12 @@
 
             <div class="form-group">
                 <label for="title">文章标题：</label>
-                <input type="text" name='title' class="form-control" id="title" placeholder="title"
+                <input type="text" name='title' class="form-control" id="title" placeholder="输入文章的标题"
                        value="{{ blog.title }}" autofocus required>
             </div>
             <div class="form-group">
                 <label for="content">文章内容：</label>
-                <textarea class="form-control content" name="content" id="content"
+                <textarea class="form-control content" name="content" id="content" placeholder="文章的描述。。。"
                           required>{{ blog.content|safe }}</textarea>
             </div>
 
@@ -49,7 +49,7 @@
             </div>
 
 
-            <button type="submit" class="btn btn-primary pull-left">发布博客</button>
+            <button type="submit" class="btn btn-primary pull-left" id="fabu">发布博客</button>
 
         </form>
     </div>

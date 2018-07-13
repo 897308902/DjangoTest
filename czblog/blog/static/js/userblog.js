@@ -7,5 +7,14 @@ $(document).ready(function () {
     //
 	// 	$(this).addClass("active").siblings("li").removeClass("active");
 	// });
+    // 我的博客，分页
+    $('#pageBtn').click(function () {
+        var nu = $("#gotoPage").val();
+        console.log(nu);
+        if (nu<1){
+            nu=1
+        }
+        $('#pageBtn').attr('href','/myblog/?page='+nu);
 
+    });
 });

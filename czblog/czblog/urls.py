@@ -22,7 +22,7 @@ from blog import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # 用户博客页面
-    url(r'^myblog', views.userblog, name='userblog'),
+    url(r'^myblog/$', views.userblog, name='userblog'),
     # 搜索我的博客
     url(r'^myblog/mysearch/', views.mysearch, name='mysearch'),
 

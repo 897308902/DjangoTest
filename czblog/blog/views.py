@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from . import models
 from markdown import markdown
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # 主页搜索
@@ -39,7 +40,7 @@ def blog_page(request, blog_id):
         comms = request.POST.get('comment')
         uses = request.user
         models.Comments.objects.create(uses=uses, comms=comms, cbid=blog_id, cblog=blog.title)
-        blog.coms = blog.coms+1
+        blog.coms = blog.coms + 1
         blog.save()
         return redirect('/blog/blog_page/%s' % blog_id)
 
@@ -47,12 +48,35 @@ def blog_page(request, blog_id):
     blog.rcount = blog.rcount + 1
     blog.save()
 
-
-
     # 评论显示,按博客的id查询
-    comm = models.Comments.objects.filter(cbid=blog_id)
+    comm = models.Comments.objects.filter(cbid=blog_id).order_by('-ctime')
+
+    # 区分自己的和别人的博客uses
+    # name = request.user
+    # if name == blog.uname:
+    #     return render(request, 'blog/blog_page.html', {'blog': blog, 'comm': comm})
 
     return render(request, 'blog/blog_page.html', {'blog': blog, 'comm': comm})
+
+
+# 博客详情页面，评论翻页   没有做了
+def compage(request, blog_id):
+    cpage = models.Comments.objects.filter(cbid=blog_id).order_by('-ctime')
+
+    # 生成paginator对象,定义每页显示10条记录
+    paginator = Paginator(cpage, 10)
+    # 从前端获取当前的页码数,默认为1
+    page = request.GET.get('page', 1)
+    # 把当前的页码数转换成整数类型
+    currentPage = int(page)
+
+    try:
+        cpage = paginator.page(currentPage)  # 获取当前页码的记录
+    except PageNotAnInteger:
+        cpage = paginator.page(1)  # 如果用户输入的页码不是整数时,显示第1页的内容
+    except EmptyPage:
+        cpage = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
+    return render(request, '/blog/blog_page/%s' % (blog_id), locals())
 
 
 # 我的博客
@@ -92,10 +116,26 @@ def userblog(request):
             return redirect('/myblog/')
 
     blogs = models.Blogs.objects.filter(uname=name).order_by('-rcount')
+    print '=========', len(blogs)
+
     b = models.Blogs.objects.get(id=6)
     # print 'out==============', b.content
 
-    return render(request, 'blog/userblog.html', {'blogs': blogs})
+    # 生成paginator对象,定义每页显示10条记录
+    paginator = Paginator(blogs, 10)
+    # 从前端获取当前的页码数,默认为1
+    page = request.GET.get('page', 1)
+    # 把当前的页码数转换成整数类型
+    currentPage = int(page)
+
+    try:
+        blogs = paginator.page(currentPage)  # 获取当前页码的记录
+    except PageNotAnInteger:
+        blogs = paginator.page(1)  # 如果用户输入的页码不是整数时,显示第1页的内容
+    except EmptyPage:
+        blogs = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
+
+    return render(request, 'blog/userblog.html', locals())
 
 
 # 编辑博客   添加博客
@@ -124,9 +164,21 @@ def del_blog(request, blog_id):
 
 # 首页
 def index(request):
+    blogs = models.Blogs.objects.all().order_by('-rcount')  # [0:10]
+    # 生成paginator对象,定义每页显示10条记录
+    paginator = Paginator(blogs, 10)
+    # 从前端获取当前的页码数,默认为1
+    page = request.GET.get('page', 1)
+    # 把当前的页码数转换成整数类型
+    currentPage = int(page)
 
-    blogs = models.Blogs.objects.all().order_by('-rcount')  #[0:10]
-    return render(request, 'blog/index.html', {'blogs': blogs})
+    try:
+        blogs = paginator.page(currentPage)  # 获取当前页码的记录
+    except PageNotAnInteger:
+        blogs = paginator.page(1)  # 如果用户输入的页码不是整数时,显示第1页的内容
+    except EmptyPage:
+        blogs = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
+    return render(request, 'blog/index.html', locals())  # {'blogs': blogs}
 
 
 def marks(request, tags):

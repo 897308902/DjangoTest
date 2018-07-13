@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}
+    新闻大事件
+{% endblock %}
+{% block css %}
+    <script type="text/javascript" src="{% static 'js/news.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container">
+    {{ htmlcode }}
+
+    </div>
+
+{% endblock %}

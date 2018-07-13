@@ -81,3 +81,16 @@ h2 {
 float: right;
 
 }
+
+/*翻页部分*/
+.counts{
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    background-color: #fff;
+}
+.pagination{
+    margin-left: 40px;
+}

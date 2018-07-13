@@ -27,27 +27,30 @@
         </div>
 
         <span class="">个人分类：<a class="marks" href="{% url 'marks' blog.marks %}">{{ blog.marks }}</a></span>
-{#        <div style="height: 100px;"></div>#}
+        {#        <div style="height: 100px;"></div>#}
 
 
         <p class="mcoms">全部评论：</p>
         <div>
-            {% for com in comm %}
+            {% if not comm %}
+                <p style="margin-left: 200px;"> 暂无评论，快来发表你的看法吧！</p>
+            {% endif %}
+            <ul>
+                {% for com in comm %}
 
+                    <li class="box">
+                        <div class="top">
+                            <span class="tou"></span>
+                            <span class="nick"><a href="/center">{{ com.uses }}</a></span>
+                            <span class="time"> {{ com.ctime |date:"Y-m-d H:i:s" }}</span>
+                        </div>
 
-                <div class="box">
-                    <div class="top">
-                        <span class="tou"></span>
-                        <span class="nick"><a href="/center">{{ com.uses }}</a></span>
-                        <span class="time"> {{ com.ctime |date:"Y-m-d H:i:s" }}</span>
-                    </div>
+                        <p class="con">{{ com.comms }}</p>
 
-                    <p class="con">{{ com.comms }}</p>
+                    </li>
 
-                </div>
-
-
-            {% endfor %}
+                {% endfor %}
+            </ul>
 
 
         </div>
