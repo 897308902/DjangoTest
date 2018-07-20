@@ -39,7 +39,7 @@
                     </div>
                     <div class="userbar">
                         <div class="fl">
-                            <a class="name" href="#">{{ blog.uname }}</a>
+                            <a class="name" href="{% url 'center:usercenter' blog.uname %}">{{ blog.uname }}</a>
                             <span class="little"></span>
                             <a class="time">{{ blog.utime |date:"Y-m-d H:i:s"}}</a>
                             <span class="little"></span>
