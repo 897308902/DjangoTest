@@ -21,5 +21,7 @@ urlpatterns = [
     url(r'^marks/(?P<tags>.*?)$', views.marks, name='marks'),
     # 评论
     # url(r'^comments', views.comments, name='comments'),
+    # 错误页面
+    url(r'^error', views.error, name='error'),
 
 ]

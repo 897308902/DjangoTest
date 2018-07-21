@@ -28,12 +28,24 @@ def mysearch(request):
     return render(request, 'blog/userblog.html', {'blogs': titles})
 
 
+# 错误页面
+def error(request):
+    return render(request, 'blog/error.html')
+
+
 # 博客详情页面
 def blog_page(request, blog_id):
     # if not request.user.is_authenticated:
     #     return redirect('/login/')
+    # blog=None
+    try:
+        blog = models.Blogs.objects.get(id=blog_id)
+        # 阅读量+1
+        blog.rcount = blog.rcount + 1
+        blog.save()
+    except:
+        return redirect('/blog/error.html')
 
-    blog = models.Blogs.objects.get(id=blog_id)
     # 评论
     if request.POST:
         # blogs = request.POST.get('blog_id')
@@ -43,10 +55,6 @@ def blog_page(request, blog_id):
         blog.coms = blog.coms + 1
         blog.save()
         return redirect('/blog/blog_page/%s' % blog_id)
-
-    # 阅读量+1
-    blog.rcount = blog.rcount + 1
-    blog.save()
 
     # 评论显示,按博客的id查询
     comm = models.Comments.objects.filter(cbid=blog_id).order_by('-ctime')
@@ -59,7 +67,7 @@ def blog_page(request, blog_id):
     return render(request, 'blog/blog_page.html', {'blog': blog, 'comm': comm})
 
 
-# 博客详情页面，评论翻页   没有做了
+# 博客详情页面，评论翻页       没有做了
 def compage(request, blog_id):
     cpage = models.Comments.objects.filter(cbid=blog_id).order_by('-ctime')
 
@@ -114,12 +122,8 @@ def userblog(request):
             article.save()
             # print 'edit==============',article.content
             return redirect('/myblog/')
-
+    # 增加翻页
     blogs = models.Blogs.objects.filter(uname=name).order_by('-rcount')
-    print '=========', len(blogs)
-
-    b = models.Blogs.objects.get(id=6)
-    # print 'out==============', b.content
 
     # 生成paginator对象,定义每页显示10条记录
     paginator = Paginator(blogs, 10)
