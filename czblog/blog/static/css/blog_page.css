@@ -48,6 +48,7 @@ ul{
 
 .pcon {
     resize: none;
+    /*min-width: 300px;*/
     width: 600px;
     height: 200px;
     border-radius: 5px;

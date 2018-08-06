@@ -10,13 +10,13 @@
 
     <div class="container">
 
-        <form action="{% url 'blog:indexsearch' %}" method="get" style="padding-left: 40px;">
+        <form action="{% url 'blog:indexsearch' %}" method="get" >
             <div class="row ">
 
-                <div class="col-md-1 col-sm-3 pull-right">
+                <div class="col-md-1 col-sm-1.5 pull-right">
                     <input type="submit" class="btn btn-primary  btn-group-sm" value="查询">
                 </div>
-                <div class="col-md-3 col-sm-9 has-success pull-right" style="padding: 0;">
+                <div class="col-md-3 col-sm-4 has-success pull-right" style="padding: 0;">
                     <input type="text" class="form-control" name="title" placeholder="输入要搜索的博客标题" maxlength="50">
                 </div>
             </div>

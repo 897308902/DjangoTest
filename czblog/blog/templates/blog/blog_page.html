@@ -30,32 +30,31 @@
         {#        <div style="height: 100px;"></div>#}
 
 
-        <p class="mcoms">全部评论：</p>
-        <div>
-            {% if not comm %}
-                <p style="margin-left: 200px;"> 暂无评论，快来发表你的看法吧！</p>
-            {% endif %}
-            <ul>
-                {% for com in comm %}
+        <div class="row">
+            <div class="col-md-10">
+                <p class="mcoms">全部评论：</p>
+                {% if not comm %}
+                    <p style="margin-left: 200px;"> 暂无评论，快来发表你的看法吧！</p>
+                {% endif %}
+                <ul class="clearfix">
+                    {% for com in comm %}
 
-                    <li class="box">
-                        <div class="top">
-                            <span class="tou"></span>
-                            <span class="nick"><a href="/center">{{ com.uses }}</a></span>
-                            <span class="time"> {{ com.ctime |date:"Y-m-d H:i:s" }}</span>
-                        </div>
+                        <li class="col-md-10">
+                            <div class="top">
+                                <span class="tou"></span>
+                                <span class="nick"><a href="/center">{{ com.uses }}</a></span>
+                                <span class="time"> {{ com.ctime |date:"Y-m-d H:i:s" }}</span>
+                            </div>
 
-                        <p class="con">{{ com.comms }}</p>
+                            <p class="con">{{ com.comms }}</p>
 
-                    </li>
+                        </li>
 
-                {% endfor %}
-            </ul>
+                    {% endfor %}
+                </ul>
 
-
+            </div>
         </div>
-
-
         <p class="mcoms">我来评论:</p>
         <div class="comms">
 
@@ -72,12 +71,14 @@
                 {% csrf_token %}
                 <input type="hidden" name="blog_id" value="{{ blog.id }}">
 
-                <textarea class="pcon" name="comment" maxlength="300" required></textarea>
-
+                <textarea class="pcon " name="comment" maxlength="300" required></textarea>
 
                 <button type="submit" class="btn btn-primary pull-right">发表</button>
+
+
             </form>
         </div>
+
     </div>
 {% endblock %}
 
