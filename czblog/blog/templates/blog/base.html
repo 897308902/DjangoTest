@@ -10,7 +10,7 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{% static 'public/bootstrap.css' %}">
-    
+    <link rel="stylesheet" href="{% static 'public/base.css' %}">
 	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css">
@@ -39,9 +39,10 @@
 
         <div class="collapse navbar-collapse" id="my-nav">
             <ul class="nav navbar-nav" id="navs" >
-                <li><a href="/blog">主页</a></li>
-                <li><a href="/myblog" id="myblog">我的博客</a></li>
-                <li><a href="/news">大事件</a></li>
+                <li><a href="/blog" class="index">主页</a></li>
+                <li><a href="/myblog" id="myblog" class="myblog">我的博客</a></li>
+                <li><a href="/news" class="news">大事件</a></li>
+                <li><a href="#" class="news" >空空</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
 

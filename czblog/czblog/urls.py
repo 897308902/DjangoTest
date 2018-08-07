@@ -50,4 +50,7 @@ urlpatterns = [
     # 新闻模块
     url(r'^news/', include('news.news_urls', namespace='news')),
 
+    #其余的
+    # url(r'^news/', include('news.news_urls', namespace='news')),
+
 ]

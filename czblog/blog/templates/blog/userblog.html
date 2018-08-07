@@ -3,6 +3,12 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <script type="text/javascript" src="{% static 'js/userblog.js' %}"></script>
+    <style type="text/css">
+        .myblog {
+            background-color: #e7e7e7;
+        }
+
+    </style>
 {% endblock %}
 {% block title %}
     {% if request.user.is_authenticated %}
