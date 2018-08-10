@@ -53,4 +53,7 @@ urlpatterns = [
     # 商城
     url(r'^shop/', include('shop.shop_urls', namespace='shop')),
 
+    #个人简介
+    url(r'^resume/', include('resume.resume_urls', namespace='resume')),
+
 ]

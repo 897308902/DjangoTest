@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'center',
     'news',
     'shop',
+    'resume',
 ]
 
 MIDDLEWARE = [
