@@ -42,7 +42,8 @@
                         <li class="col-md-10">
                             <div class="top">
                                 <span class="tou"></span>
-                                <span class="nick"><a href="/center">{{ com.uses }}</a></span>
+{#                                {% url 'edit_blog' blog.id %}#}
+                                <span class="nick"><a href="{% url 'center:usercenter' com.uses %}">{{ com.uses }}</a></span>
                                 <span class="time"> {{ com.ctime |date:"Y-m-d H:i:s" }}</span>
                             </div>
 
