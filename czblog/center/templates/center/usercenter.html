@@ -6,36 +6,53 @@
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/center.css' %}">
+    <style>
+    .user span{
+        display: inline-block;
+        min-width: 70px;
+        text-align: justify;
+        text-align-last:justify;
+        {#margin-right: 30px;#}
+    }
+    </style>
 
 {% endblock %}
 {% block content %}
     <div class="container">
 
-        <h4 class="tag">用户信息：</h4>
+        <h4 class="tag">基本信息：</h4>
 
         <ul class="user">
             <li>
-                <div>用户名: &nbsp;&nbsp;&nbsp;{{ user.username }}
-
-                </div>
+                <div><span>用户名</span>：&nbsp;&nbsp;&nbsp;{{ user.username }}</div>
             </li>
 
             <li>
-                <div>邮箱: &nbsp;&nbsp;&nbsp;{{ user.email }}
+                <div><span>邮箱</span>：&nbsp;&nbsp;&nbsp;{{ user.email }}</div>
+            </li>
 
-                </div>
+            <li>
+                <div><span>上次登录</span>：&nbsp;&nbsp;&nbsp;{{ user.last_login |date:"Y-m-d H:i:s" }}</div>
             </li>
 
         </ul>
-  <h4 class="tag">用户标签：</h4>
+  <h4 class="tag">常用的标签：</h4>
     <ul class="tags">
-        {% for mark in marks %}
-            <li>{{ mark }}（数量）</li>
+	
+        {% for key,v in mark.items %}
+
+
+
+
+
+
+            
+            <li>{{ key }}（{{ v }}）</li>
         {% endfor %}
 
     </ul>
         <div class="blog">
-            <h4 class="tag">用户博客：</h4>
+            <h4 class="tag">发布的博客：</h4>
             <ul>
                 {% for blog in blogs %}
                     <li><a class="fl oneline" href="{% url 'blog:blog_page' blog.id %}">{{ blog.title }}</a>  <span class="fr"> {{ blog.utime|date:"Y-m-d H:i:s" }}</span></li>

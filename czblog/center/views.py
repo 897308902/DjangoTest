@@ -11,11 +11,12 @@ from django.contrib.auth.models import User
 from blog.models import Blogs
 
 
-def centers(request):
-    return render(request, 'center/center.html')
+# def centers(request,use):
+#     print "用户名::::",use
+#     return render(request, 'center/center.html')
+#
 
-
-# 查看别人的资料
+# 查看资料  还没加分页功能
 def usercenter(request, name):
     # 查用户的信息
     user = User.objects.get(username=name)
@@ -24,9 +25,14 @@ def usercenter(request, name):
     blogs = Blogs.objects.filter(uname=name).order_by('-utime')
 
     # 该用户博客标签
-    marks = []
-    for mark in blogs:
-        if not mark.marks_id in marks:
-            marks.append(mark.marks_id)
+    mark = {}
+    for mk in blogs:
+        # if not mk.marks_id in mark:
+        if not mark.has_key(mk.marks_id):
+            k=Blogs.objects.filter(uname=name,marks=mk.marks_id)
+            print "biaoqian=======",mk.marks_id,len(k),mark
+            mark[mk.marks_id]=len(k)
 
-    return render(request, 'center/usercenter.html', {'blogs': blogs, 'user': user, 'marks': marks})
+            # mark.append(mk.marks_id)
+
+    return render(request, 'center/usercenter.html', {'blogs': blogs, 'user': user, 'mark': mark})
