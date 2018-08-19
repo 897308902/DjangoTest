@@ -40,7 +40,7 @@
         <div class="collapse navbar-collapse" id="my-nav">
             <ul class="nav navbar-nav" id="navs" >
                 <li><a href="/blog" class="index">主页</a></li>
-                <li><a href="/myblog" id="myblog" class="myblog">我的博客</a></li>
+                <li><a href="{% url 'myblog' %}" id="myblog" class="myblog">我的博客</a></li>
                 <li><a href="/shop" class="shop" >平台商城</a></li>
 				<li><a href="/news" class="news">大事件</a></li>
                 <li><a href="/resume" class="resume">个人简介</a></li>
@@ -49,7 +49,7 @@
 
 
                 {% if request.user.is_authenticated %}
-                    <li><a href="/center">{{ request.user }}&nbsp; 你好，欢迎回来！</a></li>
+                    <li><a href="{% url 'center:usercenter' request.user %}">{{ request.user }}&nbsp; 你好，欢迎回来！</a></li>
                     <li><a href="{% url 'log_out' %}">退出登录</a></li>
                 {% else %}
                     <li><a href="{% url 'uselogin' %}" id="login">登录</a></li>

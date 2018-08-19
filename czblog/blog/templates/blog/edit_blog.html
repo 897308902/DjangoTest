@@ -21,7 +21,7 @@
 {% block content %}
     <div class="container">
 
-        <form class='form-edit' action="{% url 'userblog' %}" method="post">
+        <form class='form-edit' action="{% url 'myblog' %}" method="post">
             {% if message %}
                 <div class="alert alert-warning">{{ message }}</div>
             {% endif %}

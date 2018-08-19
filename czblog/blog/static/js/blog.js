@@ -14,7 +14,7 @@ $(document).ready(function () {
         if (nu<1){
             nu=1
         }
-        $('#pageBtn').attr('href','/myblog/?page='+nu);
+        $(this).attr('href','?page='+nu);
 
     });
 });

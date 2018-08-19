@@ -270,13 +270,13 @@ def uselogin(request):
         # 输入正确的账号，返回用户名，否则返回none
         user = authenticate(username=username, password=password)
         if user:
-            print 66666666666,user
+            print 66666666666, user
             login(request, user)
             # 重定向到来源的url
             return HttpResponseRedirect(request.session['login_from'])
             # return redirect('/blog/')
         else:
-            return render(request, 'blog/login.html', {'logs': '账号或密码错误！%s'%user})
+            return render(request, 'blog/login.html', {'logs': '账号或密码错误！%s' % user})
 
     return render(request, 'blog/login.html', {'logs': ' '})
 

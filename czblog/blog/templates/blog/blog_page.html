@@ -66,18 +66,20 @@
                         您暂未登录，请<a href="{% url 'uselogin' %}">登录</a>后再发表评论!
                     </span>
                 </div>
-            {% endif %}
-
-            <form action="{% url 'blog:blog_page' blog.id %}" method="post">
+            {% else %}
+<form action="{% url 'blog:blog_page' blog.id %}" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="blog_id" value="{{ blog.id }}">
 
                 <textarea class="pcon " name="comment" maxlength="300" required></textarea>
 
-                <button type="submit" class="btn btn-primary pull-right">发表</button>
+                <button type="submit" id="sub" class="btn btn-primary pull-right">发表</button>
 
 
             </form>
+            {% endif %}
+
+
         </div>
 
     </div>
