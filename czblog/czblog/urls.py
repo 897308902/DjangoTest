@@ -44,7 +44,7 @@ urlpatterns = [
     url(r'^setpwd', views.set_pwd, name='set_pwd'),
 
     # 个人资料相关的
-    url(r'^center/', include('center.center_urls', namespace='center')),
+    url(r'^account/', include('center.center_urls', namespace='center')),
     # 博客相关的
     url(r'^blog/', include('blog.blog_urls', namespace='blog')),
     # 新闻模块
@@ -53,7 +53,7 @@ urlpatterns = [
     # 商城
     url(r'^shop/', include('shop.shop_urls', namespace='shop')),
 
-    #个人简介
+    # 个人简介
     url(r'^resume/', include('resume.resume_urls', namespace='resume')),
 
 ]
