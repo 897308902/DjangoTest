@@ -24,4 +24,6 @@ urlpatterns = [
     # 错误页面
     url(r'^error', views.error, name='error'),
 
+    # 点赞
+    url(r'^(?P<blog_id>\d+)$', views.ulike, name='like'),
 ]

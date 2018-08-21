@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <script type="text/javascript" src="{% static 'js/blog.js' %}"></script>
     <style>
-     .index {
+     .myblog {
             background-color: #e7e7e7;
         }
     </style>
@@ -32,7 +32,7 @@
             {% for blog in blogs %}
 
                 <li>
-                    <h2><a target="_blank" href="{% url 'blog:blog_page' blog.id %}">{{ blog.title }}</a></h2>
+                    <h2><a target="_blank" href="{% url 'myblog:blog_page' blog.id %}">{{ blog.title }}</a></h2>
                     <div class="oneline summary">
                         {{ blog.content }}
                     </div>
@@ -42,7 +42,7 @@
                             <span class="little"></span>
                             <a class="time">{{ blog.utime }}</a>
                             <span class="little"></span>
-                            <a class="marks" href="{% url 'blog:marks' blog.marks %}">{{ blog.marks }}</a>
+                            <a class="marks" href="{% url 'myblog:mark' blog.marks %}">{{ blog.marks }}</a>
                         </div>
                         <div class="fr">
                             <span>{{ blog.rcount }}</span> 阅读

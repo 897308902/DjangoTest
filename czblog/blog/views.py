@@ -35,31 +35,6 @@ def search(request):
     return render(request, 'blog/index.html', locals())
 
 
-# 我的博客搜索
-def mysearch(request):
-    if not request.user.is_authenticated:
-        return redirect('/login/')
-    name = request.user
-    title = request.GET['title']
-    # 增加翻页
-    blogs = models.Blogs.objects.filter(uname=name, title__contains=title).order_by('-rcount')
-    # 生成paginator对象,定义每页显示10条记录
-    paginator = Paginator(blogs, 10)
-    # 从前端获取当前的页码数,默认为1
-    page = request.GET.get('page', 1)
-    # 把当前的页码数转换成整数类型
-    currentPage = int(page)
-
-    try:
-        blogs = paginator.page(currentPage)  # 获取当前页码的记录
-    except PageNotAnInteger:
-        blogs = paginator.page(1)  # 如果用户输入的页码不是整数时,显示第1页的内容
-    except EmptyPage:
-        blogs = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
-
-    return render(request, 'blog/userblog.html', locals())
-
-
 # 错误页面
 def error(request):
     return render(request, 'blog/error.html')
@@ -99,6 +74,34 @@ def blog_page(request, blog_id):
     return render(request, 'blog/blog_page.html', {'blog': blog, 'comm': comm})
 
 
+# 点赞功能
+def ulike(request, blog_id):
+    if not request.user.is_authenticated:
+        return redirect('/login/')
+    # 判断当前用户是否点赞
+    name = request.user
+    islike = models.Likes.objects.filter(like_user=name, like_id=blog_id)
+    print "dianzan::::::::", len(islike)
+    # 没有点赞时
+    if not islike:
+        blike = models.Blogs.objects.get(id=blog_id)
+        blike.like = blike.like + 1
+        print "9999999999:::::", blike.like
+        blike.save()
+        # 保存谁点赞的
+        models.Likes.objects.create(like_user=name, like_title=blike.title, like_id=blog_id)
+    # else:
+    #     yd={'dd':'已赞'}
+    #     # return redirect('/blog/blog_page/%s' % blog_id,{'yd':yd})
+    #     # 评论显示,按博客的id查询
+    #     comm = models.Comments.objects.filter(cbid=blog_id).order_by('-ctime')
+    #     blog = models.Blogs.objects.get(id=blog_id)
+    #     return render(request, 'blog/blog_page.html', {'blog': blog, 'comm': comm,'yd':yd})
+
+
+    return redirect('/blog/blog_page/%s' % blog_id)
+
+
 # 博客详情页面，评论翻页       没有做了
 def compage(request, blog_id):
     cpage = models.Comments.objects.filter(cbid=blog_id).order_by('-ctime')
@@ -117,85 +120,6 @@ def compage(request, blog_id):
     except EmptyPage:
         cpage = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
     return render(request, '/blog/blog_page/%s' % (blog_id), locals())
-
-
-# 我的博客
-def userblog(request):
-    # 如果没登录就需先登录
-    if not request.user.is_authenticated:
-        return redirect('/login/')
-    # 获取登录的用户名
-    name = request.user
-    contents = None
-
-    if request.POST:
-        blog_id = request.POST.get('blog_id')
-        title = request.POST.get('title')
-        content = request.POST.get('content')
-        tags = request.POST.get('tags')
-
-        # 非空判断title   content
-
-        # 添加博客
-        if str(blog_id) == '0':
-            if not title:
-                marks = models.Bmarks.objects.all()
-                return render(request, 'blog/edit_blog.html', {'logs': '6666666', 'marks': marks})
-            # print 'add==========',markdown(content)
-            models.Blogs.objects.create(title=title, content=markdown(content), marks_id=tags, uname_id=name)
-            return redirect('/myblog/')
-        # 修改博客
-        else:
-            article = models.Blogs.objects.get(id=blog_id)
-            article.title = title
-            #
-            article.content = markdown(content)
-            article.marks_id = tags
-            article.save()
-            # print 'edit==============',article.content
-            return redirect('/myblog/')
-    # 增加翻页
-    blogs = models.Blogs.objects.filter(uname=name).order_by('-rcount')
-
-    # 生成paginator对象,定义每页显示10条记录
-    paginator = Paginator(blogs, 10)
-    # 从前端获取当前的页码数,默认为1
-    page = request.GET.get('page', 1)
-    # 把当前的页码数转换成整数类型
-    currentPage = int(page)
-
-    try:
-        blogs = paginator.page(currentPage)  # 获取当前页码的记录
-    except PageNotAnInteger:
-        blogs = paginator.page(1)  # 如果用户输入的页码不是整数时,显示第1页的内容
-    except EmptyPage:
-        blogs = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
-
-    return render(request, 'blog/userblog.html', locals())
-
-
-# 编辑博客   添加博客
-def edit_blog(request, blog_id):
-    if not request.user.is_authenticated:
-        return redirect('/login/')
-
-    if str(blog_id) == '0':
-        marks = models.Bmarks.objects.all()
-        return render(request, 'blog/edit_blog.html', {'marks': marks})
-    else:
-
-        blog = models.Blogs.objects.get(id=blog_id)
-        marks = models.Bmarks.objects.all()
-        return render(request, 'blog/edit_blog.html', {'blog': blog, 'marks': marks})
-
-
-# 删除博客   删除有问题，删除后，地址错误，
-def del_blog(request, blog_id):
-    num = models.Blogs.objects.get(id=blog_id).delete()
-    if num:
-        return redirect('/myblog/')
-    blogs = models.Blogs.objects.all().order_by('-rcount')
-    return render(request, 'blog/userblog.html', {'blogs': blogs})
 
 
 # 首页

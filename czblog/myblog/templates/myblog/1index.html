@@ -41,18 +41,16 @@
                         </div>
                         <div class="userbar">
                             <div class="fl">
-                                <a class="marks" target="_blank" href="{% url 'center:usercenter' blog.uname %}">{{ blog.uname }}</a>
+                                <a class="name" target="_blank" href="{% url 'center:usercenter' blog.uname %}">{{ blog.uname }}</a>
                                 <span class="little"></span>
                                 <a class="time">{{ blog.utime |date:"Y-m-d H:i:s"}}</a>
                                 <span class="little"></span>
-                                <a class="marks" href="{% url 'blog:marks' blog.marks %}">{{ blog.marks }}</a>
+                                <a class="marks" href="{% url 'marks' blog.marks %}">{{ blog.marks }}</a>
                             </div>
                             <div class="fr">
                                 <span>{{ blog.rcount }}</span> 阅读
                                 <span class="little"></span>
-                                <span>{{ blog.coms }}</span> 评论
-                                <span class="little"></span>
-                                <span>{{ blog.like }}</span> 赞
+                                <span>{{ blog.coms }}</span>评论
                             </div>
 
                         </div>

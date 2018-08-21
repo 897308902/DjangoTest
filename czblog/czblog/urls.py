@@ -21,18 +21,17 @@ from blog import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # 用户博客页面
-    url(r'^myblog/$', views.userblog, name='myblog'),
+
     # 搜索我的博客
-    url(r'^myblog/mysearch/', views.mysearch, name='mysearch'),
+    # url(r'^myblog/mysearch/', views.mysearch, name='mysearch'),
 
     # 编辑博客==添加   修改
-    url(r'^edit_blog/(?P<blog_id>\d+)$', views.edit_blog, name='edit_blog'),
+    # url(r'^edit_blog/(?P<blog_id>\d+)$', views.edit_blog, name='edit_blog'),
     # 删除博客
-    url(r'^del_blog/(?P<blog_id>\d+)$', views.del_blog, name='del_blog'),
+    # url(r'^del_blog/(?P<blog_id>\d+)$', views.del_blog, name='del_blog'),
 
     # 按类别分类显示
-    url(r'^marks/(?P<tags>.*?)$', views.marks, name='marks'),
+    # url(r'^marks/(?P<tags>.*?)$', views.marks, name='marks'),
 
     # 登录
     url(r'^login', views.uselogin, name='uselogin'),
@@ -43,10 +42,15 @@ urlpatterns = [
     # 修改密码
     url(r'^setpwd', views.set_pwd, name='set_pwd'),
 
-    # 个人资料相关的
+    # 个人资料相关
     url(r'^account/', include('center.center_urls', namespace='center')),
-    # 博客相关的
+
+    # 首页博客
     url(r'^blog/', include('blog.blog_urls', namespace='blog')),
+
+    # 我的博客
+    url(r'user/', include('myblog.myblog_urls', namespace='myblog')),
+
     # 新闻模块
     url(r'^news/', include('news.news_urls', namespace='news')),
 

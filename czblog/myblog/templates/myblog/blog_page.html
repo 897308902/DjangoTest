@@ -17,7 +17,7 @@
                 <span class="utime">{{ blog.utime |date:"Y-m-d H:i:s"}}</span>
 
             </div>
-            <div class="fr text-primary"> {{ blog.rcount }} 阅读</div>
+            <div class="fr"> {{ blog.rcount }} 阅读</div>
 
         </div>
         <br>
@@ -26,16 +26,9 @@
             {{ blog.content|safe }}
         </div>
 
-
-        <span class="">个人分类：<a class="marks" href="{% url 'blog:marks' blog.marks %}">{{ blog.marks }}</a></span>
-{#        需要加个判断，不能给自己的文章点赞#}
-        {% ifequal blog.uname_id  request.user.username  %}
-            <span class="pull-right text-primary">已{{ blog.like }}个赞啦 </span>
-        {% else %}
-            <span class="pull-right">{{ blog.like }} <a href="{% url 'blog:like' blog.id %}"> {{ yd.dd|default:"点赞" }}</a> </span>
-        {% endifequal %}
-        
-{#        <span class="pull-right">{{ blog.like }} <a href="{% url 'blog:like' blog.id %}"> {{ yd.dd|default:"点赞" }}</a> </span>#}
+        <span class="">个人分类：<a class="marks" href="{% url 'myblog:mark' blog.marks %}">{{ blog.marks }}</a></span>
+        {#        <div style="height: 100px;"></div>#}
+        <span class="pull-right">{{ blog.like }} 赞 </span>
 
         <div class="row">
             <div class="col-md-10">
@@ -49,8 +42,10 @@
                         <li class="col-md-10">
                             <div class="top">
                                 <span class="tou"></span>
-{#                                {% url 'edit_blog' blog.id %}#}
-                                <span class="nick"><a href="{% url 'center:usercenter' com.uses %}">{{ com.uses }}</a></span>
+                                {#{% url 'edit_blog' blog.id %}#}
+                                <span class="nick">
+                                    <a href="{% url 'center:usercenter' com.uses %}">{{ com.uses }}</a>
+                                </span>
                                 <span class="time"> {{ com.ctime |date:"Y-m-d H:i:s" }}</span>
                             </div>
 
@@ -74,25 +69,20 @@
                     </span>
                 </div>
             {% else %}
-<form action="{% url 'blog:blog_page' blog.id %}" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="blog_id" value="{{ blog.id }}">
+                <form action="{% url 'myblog:blog_page' blog.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="blog_id" value="{{ blog.id }}">
 
-                <textarea class="pcon " name="comment" maxlength="300" required></textarea>
+                    <textarea class="pcon " name="comment" maxlength="300" required></textarea>
 
-                <button type="submit" id="sub" class="btn btn-primary pull-right">发表</button>
+                    <button type="submit" id="sub" class="btn btn-primary pull-right">发表</button>
 
-
-            </form>
+                </form>
             {% endif %}
-
 
         </div>
 
     </div>
 {% endblock %}
-
-
-
 
 

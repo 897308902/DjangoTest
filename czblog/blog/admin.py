@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.contrib import admin
-from .models import Blogs, Bmarks, Comments
+from .models import Blogs, Bmarks, Comments, Likes
 
 
 @admin.register(Blogs)
@@ -20,3 +20,10 @@ class BmarksAdmin(admin.ModelAdmin):
 class CommentsAdmin(admin.ModelAdmin):
     list_display = ('comms', 'cblog', 'uses')
     search_fields = ('comms',)
+
+
+@admin.register(Likes)
+class LikesAdmin(admin.ModelAdmin):
+    list_display = ('like_user','like_title')
+    search_fields = ('like_title',)
+

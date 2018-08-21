@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'news',
     'shop',
     'resume',
+    'myblog',
 ]
 
 MIDDLEWARE = [
@@ -128,5 +129,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'blog', 'static'),
     os.path.join(BASE_DIR, 'center', 'static'),
     os.path.join(BASE_DIR, 'news', 'static'),
+    os.path.join(BASE_DIR, 'myblog', 'static'),
 
 ]
