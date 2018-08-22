@@ -109,9 +109,9 @@
 
         {% else %}
             {#没有博客，或者搜索博客为空时显示#}
-            <div style="height: 300px;text-align: center;padding-top: 200px;">没有找到相关的博客，修改关键字再找找吧！
+            <div style="height: 300px;text-align: center;padding-top: 200px;">没有找到相关的博客，发挥你的洪荒之力吧！
                 <br>
-                <a href="{% url 'edit_blog' 0 %}">我来写写吧</a></div>
+                <a href="{% url 'myblog:medit' request.user 0 %}">我来写写</a></div>
         {% endif %}
         {#<div style="float: right;width: 200px;height: 500px;background-color: black;position: absolute;top: 50px;right: 20px;">要显示在右侧</div>#}
     </div>
