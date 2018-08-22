@@ -26,4 +26,7 @@ urlpatterns = [
 
     # 点赞
     url(r'^(?P<blog_id>\d+)$', views.ulike, name='like'),
+
+    # 删除自己的评论
+    # url(r'^(?P<blog_id>\d+)$', views.del_comms, name='delcomm'),
 ]

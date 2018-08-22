@@ -115,3 +115,8 @@ ul{
 .pagination{
     margin-left: 40px;
 }
+
+.a-del{
+    color: #c0c0c0;
+    font-size: 12px;
+}

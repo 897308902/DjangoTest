@@ -49,13 +49,19 @@
                         <li class="col-md-10">
                             <div class="top">
                                 <span class="tou"></span>
-{#                                {% url 'edit_blog' blog.id %}#}
+                                {#  {% url 'edit_blog' blog.id %}#}
                                 <span class="nick"><a href="{% url 'center:usercenter' com.uses %}">{{ com.uses }}</a></span>
-                                <span class="time"> {{ com.ctime |date:"Y-m-d H:i:s" }}</span>
+
+                                <span class="fr"> {{ com.ctime |date:"Y-m-d H:i:s" }}</span>
+
                             </div>
 
-                            <p class="con">{{ com.comms }}</p>
-
+                            <p class="con">{{ com.comms }}
+                                {% ifequal com.uses  request.user.username  %}
+                                    {#  {% url 'blog:delcomm' blog.id com.id  %}#}
+                                    <span class="fr"><a class="a-del" href="">删 除</a></span>
+                                {% endifequal %}
+                            </p>
                         </li>
 
                     {% endfor %}

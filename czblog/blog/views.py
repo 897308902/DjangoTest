@@ -90,16 +90,13 @@ def ulike(request, blog_id):
         blike.save()
         # 保存谁点赞的
         models.Likes.objects.create(like_user=name, like_title=blike.title, like_id=blog_id)
-    # else:
-    #     yd={'dd':'已赞'}
-    #     # return redirect('/blog/blog_page/%s' % blog_id,{'yd':yd})
-    #     # 评论显示,按博客的id查询
-    #     comm = models.Comments.objects.filter(cbid=blog_id).order_by('-ctime')
-    #     blog = models.Blogs.objects.get(id=blog_id)
-    #     return render(request, 'blog/blog_page.html', {'blog': blog, 'comm': comm,'yd':yd})
-
 
     return redirect('/blog/blog_page/%s' % blog_id)
+
+
+# 删除自己的评论
+def del_comms(request,blog_id,com_id):
+    return HttpResponse(777)
 
 
 # 博客详情页面，评论翻页       没有做了
