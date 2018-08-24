@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/blog_page.css' %}">
+    {#    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>#}
+{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <h2>{{ blog.title }}</h2>
+        <br>
+
+        <div class="userbar">
+            <div class="fl">
+                <span class="utime">{{ blog.utime |date:"Y-m-d"}}</span>
+
+            </div>
+            <div class="fr text-primary"> {{ blog.rcount }} 阅读</div>
+
+        </div>
+        <br>
+        <br>
+        <div class="blog">
+            {{ blog.content|safe }}
+        </div>
+
+
+        <span class="">个人分类：<a class="marks" href="{% url 'blog:marks' blog.marks %}">{{ blog.marks }}</a></span>
+{#        需要加个判断，不能给自己的文章点赞#}
+        {% ifequal blog.uname_id  request.user.username  %}
+            <span class="pull-right text-primary">已{{ blog.like }}个赞啦 </span>
+        {% else %}
+            <span class="pull-right">{{ blog.like }} <a href="{% url 'blog:like' blog.id %}"> {{ yd.dd|default:"点赞" }}</a> </span>
+        {% endifequal %}
+        
+{#        <span class="pull-right">{{ blog.like }} <a href="{% url 'blog:like' blog.id %}"> {{ yd.dd|default:"点赞" }}</a> </span>#}
+
+        <div class="row">
+            <div class="col-md-10">
+                <p class="mcoms">全部评论：</p>
+                {% if not comm %}
+                    <p style="margin-left: 200px;"> 暂无评论，快来发表你的看法吧！</p>
+                {% endif %}
+                <ul class="clearfix">
+                    {% for com in comm %}
+
+                        <li class="col-md-10">
+                            <div class="top">
+                                <span class="tou"></span>
+                                {#  {% url 'edit_blog' blog.id %}#}
+                                <span class="nick"><a href="{% url 'center:usercenter' com.uses %}">{{ com.uses }}</a></span>
+
+                                <span class="fr"> {{ com.ctime |date:"Y-m-d H:i:s" }}</span>
+
+                            </div>
+
+                            <p class="con">{{ com.comms }}
+                                {% ifequal com.uses  request.user.username  %}
+                                    {#  {% url 'blog:delcomm' blog.id com.id  %}#}
+                                    <span class="fr"><a class="a-del" href="">删 除</a></span>
+                                {% endifequal %}
+                            </p>
+                        </li>
+
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+        <p class="mcoms">我来评论:</p>
+        <div class="comms">
+
+
+            {% if not request.user.is_authenticated %}
+                <div class="gologin">
+                    <span class="sp">
+                        您暂未登录，请<a href="{% url 'uselogin' %}">登录</a>后再发表评论!
+                    </span>
+                </div>
+            {% else %}
+<form action="{% url 'blog:blog_page' blog.id %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="blog_id" value="{{ blog.id }}">
+
+                <textarea class="pcon " name="comment" maxlength="300" required></textarea>
+
+                <button type="submit" id="sub" class="btn btn-primary pull-right">发表</button>
+
+
+            </form>
+            {% endif %}
+
+
+        </div>
+
+    </div>
+{% endblock %}
+
+
+
+
+

@@ -37,7 +37,7 @@ def search(request):
 
 # 错误页面
 def error(request):
-    return render(request, 'blog/error.html')
+    return render(request, 'error.html')
 
 
 # 博客详情页面
@@ -61,7 +61,7 @@ def blog_page(request, blog_id):
         models.Comments.objects.create(uses=uses, comms=comms, cbid=blog_id, cblog=blog.title)
         blog.coms = blog.coms + 1
         blog.save()
-        return redirect('/blog/blog_page/%s' % blog_id)
+        return redirect('/blog/number/%s' % blog_id)
 
     # 评论显示,按博客的id查询
     comm = models.Comments.objects.filter(cbid=blog_id).order_by('-ctime')
@@ -71,7 +71,7 @@ def blog_page(request, blog_id):
     # if name == blog.uname:
     #     return render(request, 'blog/blog_page.html', {'blog': blog, 'comm': comm})
 
-    return render(request, 'blog/blog_page.html', {'blog': blog, 'comm': comm})
+    return render(request, 'blog_page.html', {'blog': blog, 'comm': comm})
 
 
 # 点赞功能
@@ -91,7 +91,7 @@ def ulike(request, blog_id):
         # 保存谁点赞的
         models.Likes.objects.create(like_user=name, like_title=blike.title, like_id=blog_id)
 
-    return redirect('/blog/blog_page/%s' % blog_id)
+    return redirect('/blog/number/%s' % blog_id)
 
 
 # 删除自己的评论
@@ -116,7 +116,7 @@ def compage(request, blog_id):
         cpage = paginator.page(1)  # 如果用户输入的页码不是整数时,显示第1页的内容
     except EmptyPage:
         cpage = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
-    return render(request, '/blog/blog_page/%s' % (blog_id), locals())
+    return render(request, '/blog/number/%s' % (blog_id), locals())
 
 
 # 首页
@@ -176,8 +176,8 @@ def set_pwd(request):
             return redirect("/login/")
         else:
             info = "输入的旧密码不正确"
-            return render(request, "blog/set_pwd.html", {"logs": info})
-    return render(request, "blog/set_pwd.html")
+            return render(request, "set_pwd.html", {"logs": info})
+    return render(request, "set_pwd.html")
 
 
 # 登录
@@ -197,9 +197,9 @@ def uselogin(request):
             return HttpResponseRedirect(request.session['login_from'])
             # return redirect('/blog/')
         else:
-            return render(request, 'blog/login.html', {'logs': '账号或密码错误！%s' % user})
+            return render(request, 'login.html', {'logs': '账号或密码错误！%s' % user})
 
-    return render(request, 'blog/login.html', {'logs': ' '})
+    return render(request, 'login.html', {'logs': ' '})
 
 
 # 注册
@@ -216,7 +216,7 @@ def reg(request):
         name = User.objects.filter(username=username)
         # 如果用户存在，则name=1,不存在则name=0
         if name:
-            return render(request, "blog/register.html", {'message': '用户已存在%s' % len(name)})
+            return render(request, "register.html", {'message': '用户已存在%s' % len(name)})
         # else:
         # return render(request, "regist.html", {'logs': '用户bu存在%s' % len(name)})
         # 得到用户输入的用户名和密码创建一个新用户
@@ -227,7 +227,7 @@ def reg(request):
         if user:
             login(request, user)
             return redirect("/blog/")
-    return render(request, "blog/register.html")
+    return render(request, "register.html")
 
 
 # 注销

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}出错啦{% endblock %}
+{% block css %}
+    {#    <link rel="stylesheet" href="{% static 'css/index.css' %}">#}
+    {#    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>#}
+    <meta http-equiv="Refresh" content="5;url=/blog"/>
+    <style>
+        .container {
+            margin: 100px auto;
+            width: 500px;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h3>这个页面已经遁走了...<br><br>去看其他文章吧...</h3>
+
+        <a href="/blog">立即跳转</a>
+    </div>
+
+{% endblock %}

@@ -49,7 +49,7 @@ urlpatterns = [
     url(r'^blog/', include('blog.blog_urls', namespace='blog')),
 
     # 我的博客
-    url(r'user/', include('myblog.myblog_urls', namespace='myblog')),
+    url(r'^', include('myblog.myblog_urls', namespace='myblog')),
 
     # 新闻模块
     url(r'^news/', include('news.news_urls', namespace='news')),

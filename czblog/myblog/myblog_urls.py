@@ -11,7 +11,7 @@ from . import views
 urlpatterns = [
 
     # 用户博客页面(?P<name>.*?)
-    url(r'^$', views.userblog, name='mblog'),
+    url(r'^myblog/', views.userblog, name='mblog'),
 
     # 搜索我的博客
     url(r'^search/', views.mysearch, name='msearch'),
@@ -20,12 +20,13 @@ urlpatterns = [
     url(r'^marks/(?P<tags>.*?)$', views.marks, name='mark'),
 
     # 编辑博客==添加   修改
-    url(r'^(?P<name>.*?)/edit_blog/(?P<blog_id>\d+)$', views.edit_blog, name='medit'),
+    url(r'^modify/(?P<blog_id>\d+)$', views.edit_blog, name='modify'),
+
+    # 新增博客
+    url(r'^mdeditor/$', views.add_blog, name='mdeditor'),
     # 删除博客
     url(r'^del_blog/(?P<blog_id>\d+)$', views.del_blog, name='mdel'),
 
 
-    # 博客页面
-    url(r'blog_page/(?P<blog_id>\d+)$', views.blog_page, name='blog_page'),
 
 ]

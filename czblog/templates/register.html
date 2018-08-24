@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>用户注册</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <div class="col-md-4 col-md-offset-4">
+        <form class='' action="/register/" method="post" class="form-horizontal" role="form">
+
+            {% if message %}
+                <div class="alert alert-warning">{{ message }}</div>
+            {% endif %}
+
+            {% csrf_token %}
+
+            <h2 class="text-center">欢迎注册</h2>
+            <div class="form-group">
+                <label for="id_username">Username：</label>
+                <input type="text" name='username' class="form-control" id="id_username"
+                       placeholder="Pick a username" maxlength="15" autofocus required>
+
+            </div>
+            {#            <div class="form-group">#}
+            {#                <label for="first_name">First_name：</label>#}
+            {#                <input type="text" name='first_name' class="form-control" id="first_name"#}
+            {#                       placeholder="Enter a first_name" maxlength="15"  required>#}
+            {#            </div>#}
+            {#            <div class="form-group">#}
+            {#                <label for="last_name">Last_name：</label>#}
+            {#                <input type="text" name='last_name' class="form-control" id="last_name" placeholder="Enter a last_name"#}
+            {#                       maxlength="15" required>#}
+            {#            </div>#}
+            <div class="form-group">
+                <label for="password">Password：</label>
+                <input type="password" name='password' class="form-control" id="password"
+                       placeholder="Create a password" maxlength="12" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email：</label>
+                <input type="email" name='email' class="form-control" id="email" placeholder="you@example.com"
+                       required>
+            </div>
+            {#            <div class="form-group">#}
+            {#                <label for="email">Sex：</label>#}
+            {#                <select class="form-control" name="gender">#}
+            {#                    <option value="1">man</option>#}
+            {#                    <option value="2">Famale</option>#}
+            {#                </select>#}
+            {#            </div>#}
+
+            <button type="reset" class="btn btn-default pull-left">Reset</button>
+            <button type="submit" class="btn btn-primary pull-right">Sign in</button>
+            <br>
+            <div class="tops">
+                <a href="/login">已经有账号？立即登录</a>
+
+            </div>
+
+        </form>
+
+    </div>
+</div> <!-- /container -->
+
+
+</body>
+</html>
