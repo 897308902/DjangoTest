@@ -20,12 +20,12 @@ urlpatterns = [
     url(r'^marks/(?P<tags>.*?)$', views.marks, name='mark'),
 
     # 编辑博客==添加   修改
-    url(r'^(?P<name>.*?)/edit_blog/(?P<blog_id>\d+)$', views.edit_blog, name='medit'),
+    url(r'^(?P<name>.*?)/mdeditor/(?P<blog_id>\d+)$', views.edit_blog, name='medit'),
     # 删除博客
     url(r'^del_blog/(?P<blog_id>\d+)$', views.del_blog, name='mdel'),
 
 
     # 博客页面
-    url(r'blog_page/(?P<blog_id>\d+)$', views.blog_page, name='blog_page'),
+    url(r'page/(?P<blog_id>\d+)$', views.blog_page, name='blog_page'),
 
 ]

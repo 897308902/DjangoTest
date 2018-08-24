@@ -1,0 +1,33 @@
+{#    分页#}
+<ul class="pagination" id="pager">
+    <li class="previous"><a href="?page=1">首页</a></li>
+    {#上一页按钮开始#}
+    {# 如果当前页有上一页#}
+    {% if blogs.has_previous %}
+        {#  当前页的上一页按钮正常使用#}
+        <li class="previous"><a href="?page={{ blogs.previous_page_number }}">上一页</a></li>
+    {% else %}
+        {# 当前页的不存在上一页时,上一页的按钮不可用#}
+        <li class="previous disabled"><a href="javascript:void(0);">上一页</a>
+
+        </li>
+    {% endif %}
+    {#上一页按钮结束#}
+    <li>
+        <input type="text" id="gotoPage" class="form-control pull-left" placeholder="{{ currentPage }}"
+               onkeyup="this.value=this.value.replace(/\D/g,'')"
+               style="width: 80px; display: inline-block; text-align: center;">
+        <a id="pageBtn" class="btn btn-default" href="" style="margin-left: 0;">GO</a>
+
+    </li>
+    {# 下一页按钮开始#}
+    {% if blogs.has_next %}
+        <li class="next"><a href="?page={{ blogs.next_page_number }}">下一页</a></li>
+    {% else %}
+        <li class="next disabled"><a href="javascript:void(0);">下一页</a></li>
+    {% endif %}
+    {# 下一页按钮结束#}
+    <li class="previous"><a href="?page={{ paginator.num_pages }}">尾页</a></li>
+    <li class="counts"> 共{{ paginator.num_pages }}页，当前第{{ currentPage }}页</li>
+
+</ul>

@@ -13,7 +13,7 @@ urlpatterns = [
     # 首页
     url(r'^$', views.index),
     # 博客页面
-    url(r'blog_page/(?P<blog_id>\d+)$', views.blog_page, name='blog_page'),
+    url(r'page/(?P<blog_id>\d+)$', views.blog_page, name='blog_page'),
     # 搜索博客(?P<title>.*?)$
     url(r'^search/', views.search, name='indexsearch'),
 

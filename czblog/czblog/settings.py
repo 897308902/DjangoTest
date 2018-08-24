@@ -58,7 +58,7 @@ ROOT_URLCONF = 'czblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR + "templates"],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,9 +126,9 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'blog', 'static'),
-    os.path.join(BASE_DIR, 'center', 'static'),
-    os.path.join(BASE_DIR, 'news', 'static'),
-    os.path.join(BASE_DIR, 'myblog', 'static'),
+    # os.path.join(BASE_DIR, 'blog', 'static'),
+    # os.path.join(BASE_DIR, 'center', 'static'),
+    # os.path.join(BASE_DIR, 'news', 'static'),
+    # os.path.join(BASE_DIR, 'myblog', 'static'),
 
 ]

@@ -37,7 +37,7 @@ def search(request):
 
 # 错误页面
 def error(request):
-    return render(request, 'blog/error.html')
+    return render(request, 'error.html')
 
 
 # 博客详情页面
@@ -176,8 +176,8 @@ def set_pwd(request):
             return redirect("/login/")
         else:
             info = "输入的旧密码不正确"
-            return render(request, "blog/set_pwd.html", {"logs": info})
-    return render(request, "blog/set_pwd.html")
+            return render(request, "set_pwd.html", {"logs": info})
+    return render(request, "set_pwd.html")
 
 
 # 登录
@@ -197,9 +197,9 @@ def uselogin(request):
             return HttpResponseRedirect(request.session['login_from'])
             # return redirect('/blog/')
         else:
-            return render(request, 'blog/login.html', {'logs': '账号或密码错误！%s' % user})
+            return render(request, 'login.html', {'logs': '账号或密码错误！%s' % user})
 
-    return render(request, 'blog/login.html', {'logs': ' '})
+    return render(request, 'login.html', {'logs': ' '})
 
 
 # 注册
@@ -216,7 +216,7 @@ def reg(request):
         name = User.objects.filter(username=username)
         # 如果用户存在，则name=1,不存在则name=0
         if name:
-            return render(request, "blog/register.html", {'message': '用户已存在%s' % len(name)})
+            return render(request, "register.html", {'message': '用户已存在%s' % len(name)})
         # else:
         # return render(request, "regist.html", {'logs': '用户bu存在%s' % len(name)})
         # 得到用户输入的用户名和密码创建一个新用户
@@ -227,7 +227,7 @@ def reg(request):
         if user:
             login(request, user)
             return redirect("/blog/")
-    return render(request, "blog/register.html")
+    return render(request, "register.html")
 
 
 # 注销
