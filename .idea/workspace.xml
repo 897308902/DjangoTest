@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="da14ea11-b997-4c65-9c7d-903ada968a3a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/czblog/blog/templates/blog/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/czblog/blog/templates/blog/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/czblog/center/templates/center/usercenter.html" beforeDir="false" afterPath="$PROJECT_DIR$/czblog/center/templates/center/usercenter.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,17 +31,17 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/czblog/blog/templates/blog/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="113" column="68" selection-start-line="113" selection-start-column="68" selection-end-line="113" selection-end-column="68" />
+            <state relative-caret-position="705">
+              <caret line="117" lean-forward="true" selection-start-line="117" selection-end-line="117" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="usercenter.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="usercenter.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/czblog/center/templates/center/usercenter.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
@@ -52,18 +50,49 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="userblog.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/czblog/myblog/templates/myblog/userblog.html">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/czblog/czblog/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-246">
-              <caret line="19" column="14" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+            <state relative-caret-position="301">
+              <caret line="51" column="14" selection-start-line="51" selection-start-column="10" selection-end-line="51" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="blog_urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/czblog/blog/blog_urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="147">
+              <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/czblog/myblog/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="18" column="20" lean-forward="true" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="myblog_urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/czblog/myblog/myblog_urls.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="13" column="11" lean-forward="true" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/czblog/blog/templates/blog/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="46" column="17" lean-forward="true" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -103,9 +132,9 @@
       <find>sub</find>
       <find>sp</find>
       <find>fr</find>
-      <find>userblog</find>
       <find>edit_blog</find>
       <find>medit</find>
+      <find>userblog</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -114,9 +143,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/czmysql/czmysql/urls.py" />
-        <option value="$PROJECT_DIR$/czmysql/czapp/models.py" />
-        <option value="$PROJECT_DIR$/czmysql/czapp/views.py" />
         <option value="$PROJECT_DIR$/czmysql/templates/header.html" />
         <option value="$PROJECT_DIR$/czmysql/czmysql/settings.py" />
         <option value="$PROJECT_DIR$/czmysql/czapp/static/css/test.css" />
@@ -150,10 +176,8 @@
         <option value="$PROJECT_DIR$/czblog/center/static/css/center.css" />
         <option value="$PROJECT_DIR$/czblog/blog/static/js/blog.js" />
         <option value="$PROJECT_DIR$/czblog/blog/templates/blog/error.html" />
-        <option value="$PROJECT_DIR$/czblog/blog/blog_urls.py" />
         <option value="$PROJECT_DIR$/czblog/center/views.py" />
         <option value="$PROJECT_DIR$/czblog/czblog/urls.py" />
-        <option value="$PROJECT_DIR$/czblog/blog/templates/blog/base.html" />
         <option value="$PROJECT_DIR$/czblog/blog/views.py" />
         <option value="$PROJECT_DIR$/czblog/blog/static/css/blog_page.css" />
         <option value="$PROJECT_DIR$/czblog/blog/static/css/index.css" />
@@ -165,6 +189,11 @@
         <option value="$PROJECT_DIR$/czblog/blog/templates/blog/edit_blog.html" />
         <option value="$PROJECT_DIR$/czblog/blog/templates/blog/index.html" />
         <option value="$PROJECT_DIR$/czblog/center/templates/center/usercenter.html" />
+        <option value="$PROJECT_DIR$/czblog/blog/blog_urls.py" />
+        <option value="$PROJECT_DIR$/czblog/myblog/myblog_urls.py" />
+        <option value="$PROJECT_DIR$/czblog/myblog/templates/myblog/userblog.html" />
+        <option value="$PROJECT_DIR$/czblog/myblog/views.py" />
+        <option value="$PROJECT_DIR$/czblog/blog/templates/blog/base.html" />
       </list>
     </option>
   </component>
@@ -215,29 +244,6 @@
               <item name="DjangoTest" type="462c0819:PsiDirectoryNode" />
               <item name="czblog" type="462c0819:PsiDirectoryNode" />
               <item name="blog" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DjangoTest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DjangoTest" type="462c0819:PsiDirectoryNode" />
-              <item name="czblog" type="462c0819:PsiDirectoryNode" />
-              <item name="blog" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DjangoTest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DjangoTest" type="462c0819:PsiDirectoryNode" />
-              <item name="czblog" type="462c0819:PsiDirectoryNode" />
-              <item name="blog" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DjangoTest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DjangoTest" type="462c0819:PsiDirectoryNode" />
-              <item name="czblog" type="462c0819:PsiDirectoryNode" />
-              <item name="blog" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -252,22 +258,7 @@
               <item name="DjangoTest" type="b2602c69:ProjectViewProjectNode" />
               <item name="DjangoTest" type="462c0819:PsiDirectoryNode" />
               <item name="czblog" type="462c0819:PsiDirectoryNode" />
-              <item name="center" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DjangoTest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DjangoTest" type="462c0819:PsiDirectoryNode" />
               <item name="czblog" type="462c0819:PsiDirectoryNode" />
-              <item name="center" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DjangoTest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DjangoTest" type="462c0819:PsiDirectoryNode" />
-              <item name="czblog" type="462c0819:PsiDirectoryNode" />
-              <item name="center" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="center" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="DjangoTest" type="b2602c69:ProjectViewProjectNode" />
@@ -376,7 +367,7 @@
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.21300814" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.204236" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20726173" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" weight="0.32995737" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -405,13 +396,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/userlogin/login/templates/login/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="51" column="6" lean-forward="true" selection-start-line="51" selection-start-column="6" selection-end-line="51" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/userlogin/login/templates/login/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -605,9 +589,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="638">
           <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -622,13 +603,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="10" column="62" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/czblog/blog/blog_urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -661,34 +635,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/czblog/blog/templates/blog/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="5" column="57" lean-forward="true" selection-start-line="5" selection-start-column="57" selection-end-line="5" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/czblog/blog/templates/blog/userblog.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/czblog/czblog/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="23" column="12" lean-forward="true" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/czblog/blog/templates/blog/edit_blog.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/czblog/blog/templates/blog/userblog.html" />
+    <entry file="file://$PROJECT_DIR$/czblog/blog/templates/blog/edit_blog.html" />
     <entry file="file://$PROJECT_DIR$/czblog/blog/templates/blog/blog_page.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
@@ -696,37 +644,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/czblog/center/templates/center/usercenter.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/czblog/czblog/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="51" column="14" selection-start-line="51" selection-start-column="10" selection-end-line="51" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/czblog/blog/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="122" column="20" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="20" />
+        <state relative-caret-position="-1936">
+          <caret line="122" column="19" lean-forward="true" selection-start-line="122" selection-start-column="19" selection-end-line="122" selection-end-column="19" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/czblog/blog/templates/blog/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="117" lean-forward="true" selection-start-line="117" selection-end-line="117" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/czblog/blog/blog_urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/czblog/myblog/myblog_urls.py">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="13" column="11" lean-forward="true" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/czblog/blog/templates/blog/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="46" column="17" lean-forward="true" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/czblog/myblog/templates/myblog/userblog.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-246">
-          <caret line="19" column="14" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+        <state relative-caret-position="946">
+          <caret line="43" column="26" lean-forward="true" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/czblog/blog/templates/blog/index.html">
+    <entry file="file://$PROJECT_DIR$/czblog/myblog/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="113" column="68" selection-start-line="113" selection-start-column="68" selection-end-line="113" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/czblog/center/templates/center/usercenter.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="88">
+          <caret line="18" column="20" lean-forward="true" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
         </state>
       </provider>
     </entry>
