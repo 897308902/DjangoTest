@@ -72,51 +72,57 @@ def mysearch(request):
 
 
 # 编辑博客
-def edit_blog(request, blog_id):
+def edit_blog(request):
     # return HttpResponse('edit_blog')
     if not request.user.is_authenticated:
         return redirect('/login/')
     # name = request.user
 
-    # 该博客的原标题
-    old_title = None
-    try:
-        # 判断一种被删除的情况，再编辑的同时被删除了
-        blog = Blogs.objects.get(id=blog_id)
-        old_title = blog.title
-    except:
-        # 如果这个博客被删除了，就返回一个错误页面
-        return redirect('/blog/error.html')
+    if request.GET:
+        blog_id = request.GET.get('id', 0)
+        print 'blog_id===shouci======',blog_id
+        if blog_id == 0:
+            print 'blog_id== 0 ========== ',blog_id
+            return redirect('/blog/error.html')
+        # 当博客被删除后，再点击编辑时，能获取到id值，但是再数据库查询时，就没有了
+        try:
+            blog = Blogs.objects.get(id=blog_id)
+            marks = Bmarks.objects.all()
+            return render(request, 'myblog/edit_blog.html', {'blog': blog, 'marks': marks})
+        except:
+            print '95=====not find id========='
+            return redirect('/blog/error.html')
 
     if request.POST:
         # 如果标题还是为空的话，证明该博客已经被删除了
-        if not old_title:
-            return redirect('/blog/error.html')
+        # if not old_title:
+        #     return redirect('/blog/error.html')
+        blog_id = request.POST.get('id')
         title = request.POST.get('title')
         content = request.POST.get('content')
         tags = request.POST.get('tags')
         # 如果博客存在，则判断
         try:
             tit = Blogs.objects.get(title=title)
-            # 跟原始标题相同之外的就都提示已经存在
-            if not tit.title == old_title:
+            # 跟已有的相同就提示已经存在
+            if tit.title == title:
                 return HttpResponse('已经存在该名称')
         except:
             pass
-
-        article = Blogs.objects.get(id=blog_id)
-        article.title = title
-        #
-        article.content = markdown(content)
-        article.marks_id = tags
-        article.save()
+        # 保存时，发现文章没找到则显示错误的页面
+        try:
+            article = Blogs.objects.get(id=blog_id)
+            article.title = title
+            #
+            article.content = markdown(content)
+            article.marks_id = tags
+            article.save()
+        except:
+            print 'error==========',blog_id
+            return redirect('/blog/error.html')
 
         # 添加完成重定向到我的博客
         return redirect('/myblog/')
-
-    blog = Blogs.objects.get(id=blog_id)
-    marks = Bmarks.objects.all()
-    return render(request, 'myblog/edit_blog.html', {'blog': blog, 'marks': marks})
 
 
 # 增加博客
@@ -141,6 +147,7 @@ def add_blog(request):
             if tit:
                 return HttpResponse('已经存在该名称')
         except:
+            # 要是新增的话就会走这边，所以不能加错误页面
             pass
 
         Blogs.objects.create(title=title, content=markdown(content), marks_id=tags, uname_id=name)
@@ -151,14 +158,21 @@ def add_blog(request):
     return render(request, 'myblog/add_blog.html', {'marks': marks})
 
 
-# 删除博客   删除有问题，删除后，地址错误，
-def del_blog(request, blog_id):
-    # return HttpResponse('del_blog')
-    num = Blogs.objects.get(id=blog_id).delete()
-    if num:
-        return redirect('/myblog/')
-    blogs = Blogs.objects.all().order_by('-rcount')
-    return render(request, 'myblog/userblog.html', {'blogs': blogs})
+# 删除博客  也要像编辑那样判断
+def del_blog(request):
+    if request.GET:
+        blog_id = request.GET.get('id', 0)
+        print 'blog_id===shouci======',blog_id
+        if blog_id == 0:
+            print 'blog_id== 0 ========== ',blog_id
+            return redirect('/blog/error.html')
+        # 当博客被删除后，再点删除时，就显示错误页面
+        try:
+            Blogs.objects.get(id=blog_id).delete()
+            return redirect('/myblog/')
+        except:
+            print '95=====not find id========='
+            return redirect('/blog/error.html')
 
 
 # 按标签

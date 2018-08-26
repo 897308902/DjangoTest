@@ -19,13 +19,13 @@ urlpatterns = [
     # 按类别分类显示
     url(r'^marks/(?P<tags>.*?)$', views.marks, name='mark'),
 
-    # 编辑博客==添加   修改
-    url(r'^modify/(?P<blog_id>\d+)$', views.edit_blog, name='modify'),
+    # 编辑博客
+    url(r'^modify$', views.edit_blog, name='modify'),
 
     # 新增博客
     url(r'^mdeditor/$', views.add_blog, name='mdeditor'),
     # 删除博客
-    url(r'^del_blog/(?P<blog_id>\d+)$', views.del_blog, name='mdel'),
+    url(r'^del_blog$', views.del_blog, name='mdel'),
 
 
 

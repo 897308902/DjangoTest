@@ -4,14 +4,7 @@
 <html>
 <head>
 
-    {% block title %}
-        {% if blog.id %}
-            编辑博客
-        {% else %}
-            添加博客
-        {% endif %}
-
-    {% endblock %}
+    {% block title %}编辑博客{% endblock %}
     {% block css %}
         <link rel="stylesheet" href="{% static 'css/edit_blog.css' %}">
         <script type="text/javascript" src="{% static 'js/blog.js' %}"></script>
@@ -20,20 +13,16 @@
 <body>
 {% block content %}
     <div class="container">
-
-        <form class='form-edit' action="{% url 'myblog:modify' blog.id %}" method="post">
+{#    {% url 'myblog:modify' %}#}
+        <form class='form-edit' action="{{ request.path }}" method="post">
             {% if message %}
                 <div class="alert alert-warning">{{ message }}</div>
             {% endif %}
-
             {% csrf_token %}
 
-
-{#        <div class="form-group">#}
-{##}
-{#                <input type="hidden" name='id' class="form-control" id="id" value="{{ blog.id }}" >#}
-{#            </div>#}
-
+            <div class="form-group">
+                <input type="hidden" name='id' class="form-control" id="id" value="{{ blog.id }}">
+            </div>
 
             <div class="form-group">
                 <label for="title">文章标题：</label>
@@ -43,7 +32,7 @@
             <div class="form-group">
                 <label for="content">文章内容：</label>
                 <textarea class="form-control content" name="content" id="content" placeholder="文章的描述。。。"
-                    style="resize:none;"   required>{{ blog.content|safe }}</textarea>
+                          style="resize:none;" required>{{ blog.content|safe }}</textarea>
             </div>
 
             <div class="form-group">
@@ -51,10 +40,10 @@
                 <select type="checkbox" name="tags">
 
                     {% for mark in marks %}
-                    {#  编辑时，要选中之前的标记#}
+                        {#  编辑时，要选中之前的标记#}
                         {% if mark == blog.marks %}
-                        <option selected  value="{{ mark.tags }}">{{ mark.tags }}</option>
-                           {% else %}
+                            <option selected value="{{ mark.tags }}">{{ mark.tags }}</option>
+                        {% else %}
                             <option value="{{ mark.tags }}">{{ mark.tags }}</option>
                         {% endif %}
                     {% endfor %}

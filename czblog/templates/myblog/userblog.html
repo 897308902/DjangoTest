@@ -64,9 +64,9 @@
                         <div class="userbar">
                             <div class="fl">
 
-                                <a class="marks" href="{% url 'myblog:modify' blog.id %}">编辑</a>
+                                <a class="marks" href="{% url 'myblog:modify' %}?id={{ blog.id }}">编辑</a>
                                 <span class="little"></span>
-                                <a class="marks" href="{% url 'myblog:mdel' blog.id %}" onclick="del()">删除</a>
+                                <a class="marks" href="{% url 'myblog:mdel' %}?id={{ blog.id }}" onclick="del()">删除</a>
                                 <span class="little"></span>
                                 <a class="time">{{ blog.utime |date:"Y-m-d"}}</a>
                                 <span class="little"></span>
