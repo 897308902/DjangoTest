@@ -11,8 +11,9 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <style type="text/css">
         .footer {
 
@@ -54,8 +55,9 @@
                             {{ request.user }}&nbsp; 你好，欢迎回来！<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="{% url 'myblog:mblog' %}" class="myblog">我的博客</a></li>
-                            <li><a href="{% url 'center:usercenter' request.user %}" class="myblog">个人资料</a></li>
+                            <li><a href="{% url 'myblog:mblog' %}">我的博客</a></li>
+                            <li><a href="{% url 'center:usercenter' request.user.username %}">个人资料</a></li>
+                            <li><a href="{% url 'myblog:mdeditor' %}">发表博客</a></li>
                         </ul>
                     </li>
 

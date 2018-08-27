@@ -11,7 +11,7 @@ ul{
 
 .blog {
     text-indent: 2em;
-
+    word-break: break-all;
     margin-bottom: 50px;
 
 }

@@ -11,10 +11,10 @@ from markdown import markdown
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-# 主页搜索  增加翻页
+# 主页搜索  增加翻页        搜索的结果翻页会报错
 def search(request):
-    title = request.GET['title']
-
+    title = request.GET.get('title')
+    print request.get_full_path()
     # 增加翻页
     blogs = models.Blogs.objects.filter(title__contains=title).order_by('-rcount')
 
@@ -42,6 +42,7 @@ def error(request):
 
 # 博客详情页面
 def blog_page(request, blog_id):
+    # return HttpResponse(6)
     # if not request.user.is_authenticated:
     #     return redirect('/login/')
     # blog=None
@@ -61,7 +62,7 @@ def blog_page(request, blog_id):
         models.Comments.objects.create(uses=uses, comms=comms, cbid=blog_id, cblog=blog.title)
         blog.coms = blog.coms + 1
         blog.save()
-        return redirect('/blog/number/%s' % blog_id)
+        return redirect('/blog/%s' % blog_id)
 
     # 评论显示,按博客的id查询
     comm = models.Comments.objects.filter(cbid=blog_id).order_by('-ctime')
@@ -74,12 +75,15 @@ def blog_page(request, blog_id):
     return render(request, 'blog_page.html', {'blog': blog, 'comm': comm})
 
 
-# 点赞功能
+# 点赞功能    需要再优化
 def ulike(request, blog_id):
+    # return HttpResponse(412)
     if not request.user.is_authenticated:
         return redirect('/login/')
     # 判断当前用户是否点赞
     name = request.user
+    old_url = request.get_full_path()
+    print "old_url", old_url
     islike = models.Likes.objects.filter(like_user=name, like_id=blog_id)
     print "dianzan::::::::", len(islike)
     # 没有点赞时
@@ -91,12 +95,19 @@ def ulike(request, blog_id):
         # 保存谁点赞的
         models.Likes.objects.create(like_user=name, like_title=blike.title, like_id=blog_id)
 
-    return redirect('/blog/number/%s' % blog_id)
+    return redirect('/blog/%s' % blog_id)
 
 
 # 删除自己的评论
-def del_comms(request,blog_id,com_id):
-    return HttpResponse(777)
+def del_comms(request,blog_id):
+    if not request.user.is_authenticated:
+        return redirect("/login")
+
+    name = request.user
+
+    print name, blog_id
+
+    return HttpResponse("还没想好方法，先放着")
 
 
 # 博客详情页面，评论翻页       没有做了
@@ -116,11 +127,13 @@ def compage(request, blog_id):
         cpage = paginator.page(1)  # 如果用户输入的页码不是整数时,显示第1页的内容
     except EmptyPage:
         cpage = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
-    return render(request, '/blog/number/%s' % (blog_id), locals())
+    return render(request, '/blog/%s' % blog_id, locals())
 
 
 # 首页
 def index(request):
+    old_url = request.get_full_path()
+    print "index===old_url", old_url
     blogs = models.Blogs.objects.all().order_by('-rcount')  # [0:10]
     # 生成paginator对象,定义每页显示10条记录
     paginator = Paginator(blogs, 10)

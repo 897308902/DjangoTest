@@ -65,3 +65,6 @@ a:hover {
     border-radius:8px ;
     text-align: center;
 }
+.tags li a{
+    color: black;
+}

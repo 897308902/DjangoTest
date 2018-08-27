@@ -26,11 +26,13 @@
                 <div class="form-group">
                     <label for="id_username">用户名：</label>
                     <input type="text" name='username' class="form-control" id="id_username" placeholder="Username"
+                           value="admin"
                            autofocus required>
                 </div>
                 <div class="form-group">
                     <label for="id_password">密码：</label>
                     <input type="password" name='password' class="form-control" id="id_password" placeholder="Password"
+                           value="123456"
                            required>
                 </div>
             <p style="text-align: center;color: red;">{{ logs }}</p>
@@ -39,7 +41,7 @@
 
                 <br><br><br><br><br>
 
-                <a class="" href="/register">没有账号？立即注册</a>
+                <a class="" href="{% url 'register' %}">没有账号？立即注册</a>
             </form>
 
         </div>

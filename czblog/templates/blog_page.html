@@ -32,7 +32,7 @@
         {% ifequal blog.uname_id  request.user.username  %}
             <span class="pull-right text-primary">已{{ blog.like }}个赞啦 </span>
         {% else %}
-            <span class="pull-right">{{ blog.like }} <a href="{% url 'blog:like' blog.id %}"> {{ yd.dd|default:"点赞" }}</a> </span>
+            <span class="pull-right">{{ blog.like }} <a href="{% url 'blog:ulike' blog.id %}"> 点赞</a> </span>
         {% endifequal %}
         
 {#        <span class="pull-right">{{ blog.like }} <a href="{% url 'blog:like' blog.id %}"> {{ yd.dd|default:"点赞" }}</a> </span>#}
@@ -58,8 +58,8 @@
 
                             <p class="con">{{ com.comms }}
                                 {% ifequal com.uses  request.user.username  %}
-                                    {#  {% url 'blog:delcomm' blog.id com.id  %}#}
-                                    <span class="fr"><a class="a-del" href="">删 除</a></span>
+
+                                    <span class="fr"><a class="a-del" href="{% url 'blog:delcomm' blog.id %}">删 除</a></span>
                                 {% endifequal %}
                             </p>
                         </li>
@@ -80,7 +80,7 @@
                     </span>
                 </div>
             {% else %}
-<form action="{% url 'blog:blog_page' blog.id %}" method="post">
+            <form action="{% url 'blog:blog_page' blog.id %}" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="blog_id" value="{{ blog.id }}">
 
