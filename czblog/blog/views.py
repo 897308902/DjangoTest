@@ -148,7 +148,7 @@ def index(request):
         blogs = paginator.page(1)  # 如果用户输入的页码不是整数时,显示第1页的内容
     except EmptyPage:
         blogs = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
-    return render(request, 'blog/index.html', locals())  # {'blogs': blogs}
+    return render(request, 'blog/index.html', locals())  # {'blogs': blogs} 切换这个就不能获取页数了
 
 
 # 按标签
