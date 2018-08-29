@@ -15,7 +15,11 @@ ul{
     margin-bottom: 50px;
 
 }
-
+.blog-title{
+    word-break: break-all;
+    font-size: 24px;
+    /*font-weight: bold;*/
+}
 .userbar {
     overflow: hidden;
 }
