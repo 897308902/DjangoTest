@@ -10,28 +10,10 @@ ul {
 
 .user li, .blog li {
     width: 100%;
-    height: 60px;
+    /*height: 60px;*/
     overflow: hidden;
     border-bottom: solid 1px #DCDCDC;
     line-height: 60px;
-}
-
-.fr {
-    float: right;
-}
-
-.fl {
-    float: left;
-}
-
-.name {
-    margin-top: 13px;
-}
-
-.blog {
-
-    width: 100%;
-    /*padding: 50px 50px 0 ;*/
 }
 
 .tag {
@@ -40,7 +22,6 @@ ul {
 }
 
 .oneline {
-    max-width: 800px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -48,13 +29,19 @@ ul {
 
 a:hover {
     text-decoration: none;
+
 }
 
-.tags{
+/*鼠标移动标题时变红*/
+.blog ul li a:hover {
+    color: #a51e1e;
+}
+
+.tags {
     list-style: none;
 }
 
-.tags li{
+.tags li {
     min-width: 50px;
     /*width: 50px;*/
     /*height: 30px;*/
@@ -62,9 +49,41 @@ a:hover {
     float: left;
     margin-right: 15px;
     background-color: #00B0E7;
-    border-radius:8px ;
+    border-radius: 8px;
     text-align: center;
 }
-.tags li a{
+
+.tags li a {
     color: black;
+}
+
+/*博客*/
+.blog ul li h4 a {
+    text-decoration: none;
+    color: #3d3d3d;
+    display: block;
+    line-height: 24px;
+    height: 24px;
+    word-wrap: break-word;
+    word-break: break-all;
+    font-weight: bold;
+}
+
+.blog ul span {
+    color: #6b6b6b;
+}
+
+.blog .blog-content {
+    width: 100%;
+    word-break: break-all;
+    /*line-height: 1.5;*/
+    margin: 0;
+    line-height: 21px;
+    max-height: 63px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*white-space: pre-wrap;*/
+
+    color: #999;
 }

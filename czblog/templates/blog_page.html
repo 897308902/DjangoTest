@@ -9,12 +9,12 @@
 {% block content %}
 
     <div class="container">
-        <h2>{{ blog.title }}</h2>
+        <h2 class="blog-title">{{ blog.title }}</h2>
         <br>
 
         <div class="userbar">
             <div class="fl">
-                <span class="utime">{{ blog.utime |date:"Y-m-d"}}</span>
+                <span class="utime">{{ blog.utime |date:"Y年m月d日 H:i:s"}}</span>
 
             </div>
             <div class="fr text-primary"> {{ blog.rcount }} 阅读</div>
@@ -52,7 +52,7 @@
                                 {#  {% url 'edit_blog' blog.id %}#}
                                 <span class="nick"><a href="{% url 'center:usercenter' com.uses %}">{{ com.uses }}</a></span>
 
-                                <span class="fr"> {{ com.ctime |date:"Y-m-d H:i:s" }}</span>
+                                <span class="fr"> {{ com.ctime |date:"Y年m月d日 H:i:s" }}</span>
 
                             </div>
 

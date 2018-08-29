@@ -17,7 +17,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from blog import views
+# from blog import views
+from center import views as center_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -34,13 +35,13 @@ urlpatterns = [
     # url(r'^marks/(?P<tags>.*?)$', views.marks, name='marks'),
 
     # 登录
-    url(r'^login', views.uselogin, name='uselogin'),
+    url(r'^login', center_view.uselogin, name='uselogin'),
     # 注册
-    url(r'^register', views.reg, name='register'),
+    url(r'^register', center_view.reg, name='register'),
     # 退出登录
-    url(r'^logout', views.log_out, name='log_out'),
+    url(r'^logout', center_view.log_out, name='log_out'),
     # 修改密码
-    url(r'^setpwd', views.set_pwd, name='set_pwd'),
+    url(r'^setpwd', center_view.set_pwd, name='set_pwd'),
 
     # 个人资料相关
     url(r'^account/', include('center.center_urls', namespace='center')),

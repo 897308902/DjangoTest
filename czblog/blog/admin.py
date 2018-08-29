@@ -6,7 +6,7 @@ from .models import Blogs, Bmarks, Comments, Likes
 
 @admin.register(Blogs)
 class BlogsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'content', 'uname', 'marks', 'ctime','coms')
+    list_display = ('id', 'title', 'rcount', 'coms', 'like', 'uname', 'marks', 'ctime')
     search_fields = ('title',)
 
 
@@ -24,6 +24,5 @@ class CommentsAdmin(admin.ModelAdmin):
 
 @admin.register(Likes)
 class LikesAdmin(admin.ModelAdmin):
-    list_display = ('like_user','like_title')
+    list_display = ('like_user', 'like_title')
     search_fields = ('like_title',)
-

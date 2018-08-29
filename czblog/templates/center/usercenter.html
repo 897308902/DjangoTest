@@ -62,13 +62,18 @@
     </ul>
     <div class="blog">
         <h4 class="tag">发布的博客：</h4>
-        <ul class="user">
+        <ul>
             {% if not blogs %}
                 <li>Ta还没有发布过博客哦</li>
             {% else %}
                 {% for blog in blogs %}
-                    <li><a class="fl oneline" href="{% url 'blog:blog_page' blog.id %}">{{ blog.title }}</a> <span
-                            class="fr"> {{ blog.utime|date:"Y-m-d H:i:s" }}</span></li>
+                    <li><h4><a class="oneline" href="{% url 'blog:blog_page' blog.id %}">{{ blog.title }}</a> </h4>
+                        <p class="blog-content">{{ blog.content }}</p>
+
+                        <span class="time"> {{ blog.utime|date:"Y-m-d H:i:s" }}</span> &nbsp;&nbsp;
+                        <span>阅读数：{{ blog.rcount }}</span>&nbsp;&nbsp;
+                        <span>评论数：{{ blog.coms }}</span>
+                    </li>
                 {% endfor %}
             {% endif %}
         </ul>
