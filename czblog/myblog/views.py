@@ -52,6 +52,8 @@ def mysearch(request):
         return redirect('/login/')
     name = request.user
     title = request.GET.get('title')
+    arg_urls = request.path[0:-1] + "?title=" + title
+    print arg_urls
     # 增加翻页
     blogs = Blogs.objects.filter(uname=name, title__contains=title).order_by('-rcount')
     # 生成paginator对象,定义每页显示10条记录

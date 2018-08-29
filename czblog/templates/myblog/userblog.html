@@ -86,7 +86,11 @@
                 {% endfor %}
             </ul>
 {#            分页#}
-            {% include 'paging.html' %}
+            {% if arg_urls %}
+                {% include 'arg_page.html' %}
+            {% else %}
+                {% include 'paging.html' %}
+            {% endif %}
 
 
 
