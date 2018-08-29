@@ -1,1 +1,7 @@
 测试把分支上的代码合并到master
+
+切换到com分支后：
+
+先提交 push到com
+
+然后切换回master，再次push就OK了
