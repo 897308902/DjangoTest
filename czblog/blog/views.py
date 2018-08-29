@@ -14,6 +14,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # 首页
 def index(request):
     old_url = request.get_full_path()
+    # arg_urls = request.get_full_path()
     print "index===old_url", old_url
     blogs = models.Blogs.objects.all().order_by('-rcount')  # [0:10]
     print blogs
@@ -38,7 +39,11 @@ def index(request):
 # 主页搜索  增加翻页        搜索的结果翻页会报错
 def search(request):
     title = request.GET.get('title')
-    print request.get_full_path()
+    s = request.build_absolute_uri()
+    print s
+    arg_urls=request.path[0:-1]+"?title="+title
+    print arg_urls
+
     # 增加翻页
     blogs = models.Blogs.objects.filter(title__contains=title).order_by('-rcount')
 
