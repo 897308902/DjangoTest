@@ -8,12 +8,20 @@ ul {
 
 }
 
-.user li, .blog li {
+.user li{
     width: 100%;
     /*height: 60px;*/
     overflow: hidden;
     border-bottom: solid 1px #DCDCDC;
     line-height: 60px;
+}
+
+.blog li {
+    width: 100%;
+    /*height: 60px;*/
+    overflow: hidden;
+    border-bottom: solid 1px #DCDCDC;
+  
 }
 
 .tag {
@@ -74,10 +82,12 @@ a:hover {
 }
 
 .blog .blog-content {
+
     width: 100%;
     word-break: break-all;
     /*line-height: 1.5;*/
     margin: 0;
+    margin-bottom: 10px;
     line-height: 21px;
     max-height: 63px;
 

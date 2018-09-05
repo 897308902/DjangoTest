@@ -2,7 +2,9 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
+import json
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -75,6 +77,7 @@ def blog_page(request, blog_id):
     # if not request.user.is_authenticated:
     #     return redirect('/login/')
     # blog=None
+    request.session['login_from'] = request.META.get('HTTP_REFERER', '/blog')
     try:
         blog = models.Blogs.objects.get(id=blog_id)
         # 阅读量+1
@@ -91,7 +94,13 @@ def blog_page(request, blog_id):
         models.Comments.objects.create(uses=uses, comms=comms, cbid=blog_id, cblog=blog.title)
         blog.coms = blog.coms + 1
         blog.save()
-        return redirect('/blog/%s' % blog_id)
+        print 100000000000000000000000000000000
+        ret = {"status": None, "message": None}
+        ret["status"] = "成功"
+        print("35", ret)
+        return HttpResponse(json.dumps(ret))
+        # return HttpResponseRedirect(request.session['login_from'])
+        # return redirect('/blog/%s' % blog_id)
 
     # 评论显示,按博客的id查询
     comm = models.Comments.objects.filter(cbid=blog_id).order_by('-ctime')

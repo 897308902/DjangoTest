@@ -43,7 +43,7 @@
                 {% if not comm %}
                     <p style="margin-left: 200px;"> 暂无评论，快来发表你的看法吧！</p>
                 {% endif %}
-                <ul class="clearfix">
+                <ul class="clearfix" id="blog_comms">
                     {% for com in comm %}
 
                         <li class="col-md-10">
@@ -80,7 +80,8 @@
                     </span>
                 </div>
             {% else %}
-            <form action="{% url 'blog:blog_page' blog.id %}" method="post">
+{#                action="{% url 'blog:blog_page' blog.id %}"#}
+            <form id="form1" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="blog_id" value="{{ blog.id }}">
 
@@ -94,6 +95,29 @@
 
 
         </div>
+        <script>
+            $(document).ready(function () {
+               $("#sub").click(function(){
+
+
+				$.ajax({
+
+					type:"post",
+					url:"{% url 'blog:blog_page' blog.id %}",
+                    data:$('#form1').serialize(),
+
+					dataType:"JSON",
+
+					success:function(data){
+                        {#document.write(6666666);#}
+						{#$("#blog_comms").load();#}
+
+					}
+				});
+				{#alert(666666666666);#}
+			});
+            });
+        </script>
 
     </div>
 {% endblock %}
