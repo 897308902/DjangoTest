@@ -117,8 +117,8 @@ class Likes(models.Model):
     # 点赞时间
     like_time = models.DateTimeField(max_length=30, auto_now_add=True, null=False, verbose_name="点赞时间")
 
-    # def __str__(self):
-    #     return self.like_title.encode('utf-8')
+    def __str__(self):
+        return self.like_title.encode('utf-8')
 
     class Meta:
         db_table = 'blog_like'

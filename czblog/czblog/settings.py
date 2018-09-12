@@ -132,3 +132,6 @@ STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, 'myblog', 'static'),
 
 ]
+
+
+# MEDIA_URL

@@ -25,17 +25,20 @@
             <div class="form-group">
                 <label for="title">文章标题：</label>
                 <input type="text" name='title' class="form-control" id="title" placeholder="输入文章的标题"
-                       maxlength="40" autofocus required>
+                     value="{{ title }}"  maxlength="40" autofocus required>
             </div>
             <div class="form-group">
                 <label for="content">文章内容：</label>
                 <textarea class="form-control content" name="content" id="content" placeholder="文章的描述。。。"
-                          style="resize:none;" required></textarea>
+                          style="resize:none;" required>{{ content }}</textarea>
             </div>
 
             <div class="form-group">
                 <label for="id_password">文章类型：</label>
                 <select type="checkbox" name="tags">
+                {% if tags %}
+                    <option selected value="{{ tags }}">{{ tags }}</option>
+                {% endif %}
 
                     {% for mark in marks %}
 

@@ -8,6 +8,9 @@ from .models import Blogs, Bmarks, Comments, Likes
 class BlogsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'rcount', 'coms', 'like', 'uname', 'marks', 'ctime')
     search_fields = ('title',)
+    date_hierarchy = 'ctime'
+    # ordering = ('ctime',)
+    # fields = ('title','coms')   # 在后台编辑博客时，只能修改这些字段
 
 
 @admin.register(Bmarks)
