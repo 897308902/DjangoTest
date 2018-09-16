@@ -17,6 +17,8 @@ from blog.models import Blogs
 
 # 查看资料  还没加分页功能
 def usercenter(request, name):
+    if not request.user.is_authenticated:
+        return redirect('/login/')
     # 查用户的信息
     user = User.objects.get(username=name)
 
@@ -38,20 +40,21 @@ def usercenter(request, name):
 
 # 登录
 def uselogin(request):
-    if request.method == 'GET':
-        # 记住来源的url,如果没有则设置为首页('/blog')
-        request.session['login_from'] = request.META.get('HTTP_REFERER', '/blog')
+    # if request.method == 'GET':
+    #     # 记住来源的url,如果没有则设置为首页('/blog')
+    #     request.session['login_from'] = request.META.get('HTTP_REFERER', '/blog')
+    #     print "===进入登录===",request.session['login_from']
     if request.POST:
         username = request.POST.get('username')
         password = request.POST.get('password')
         # 输入正确的账号，返回用户名，否则返回none
         user = authenticate(username=username, password=password)
         if user:
-            print 66666666666, user
+            print "===登录用户名===", user
             login(request, user)
             # 重定向到来源的url
-            return HttpResponseRedirect(request.session['login_from'])
-            # return redirect('/blog/')
+            # return HttpResponseRedirect(request.session['login_from'])
+            return redirect('/blog/')
         else:
             return render(request, 'login.html', {'logs': '账号或密码错误！%s' % user})
 
@@ -60,15 +63,21 @@ def uselogin(request):
 
 # 修改密码
 def set_pwd(request):
+    if not request.user.is_authenticated:
+        return redirect('/login/')
     if request.method == "POST":
-        oldpassword = request.POST.get("oldpassword")
-        newpassword = request.POST.get("newpassword")
+        oldpwd = request.POST.get("oldpwd")
+        newpwd1 = request.POST.get("newpwd1")
+        newpwd2 = request.POST.get("newpwd2")
+        if not newpwd1 == newpwd2:
+            info = "两次输入的密码不相同"
+            return render(request, "set_pwd.html", {"logs": info})
         # 得到当前登录的用户，判断旧密码是不是和当前的密码一样
         username = request.user  # 打印的是当前登录的用户名
         user = User.objects.get(username=username)  # 查看用户
-        ret = user.check_password(oldpassword)  # 检查密码是否正确
+        ret = user.check_password(oldpwd)  # 检查密码是否正确
         if ret:
-            user.set_password(newpassword)  # 如果正确就给设置一个新密码
+            user.set_password(newpwd1)  # 如果正确就给设置一个新密码
             user.save()  # 保存
             return redirect("/login/")
         else:

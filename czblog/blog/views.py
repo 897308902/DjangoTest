@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib import auth
 from django.contrib.auth.models import User
 import json
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
@@ -17,9 +18,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def index(request):
     old_url = request.get_full_path()
     # arg_urls = request.get_full_path()
-    print "index===old_url", old_url
+    print "===index=url===", old_url
     blogs = models.Blogs.objects.all().order_by('-rcount')  # [0:10]
-    print blogs
+    # print blogs
     # 生成paginator对象,定义每页显示10条记录
     paginator = Paginator(blogs, 10)
     # 从前端获取当前的页码数,默认为1
@@ -74,8 +75,8 @@ def error(request):
 # 博客详情页面
 def blog_page(request, blog_id):
     # return HttpResponse(6)
-    # if not request.user.is_authenticated:
-    #     return redirect('/login/')
+    if not request.user.is_authenticated:
+        return redirect('/login/')
     # blog=None
     request.session['login_from'] = request.META.get('HTTP_REFERER', '/blog')
     try:
@@ -84,7 +85,7 @@ def blog_page(request, blog_id):
         blog.rcount = blog.rcount + 1
         blog.save()
     except:
-        return redirect('/blog/error.html')
+        return render(request, 'error.html')
 
     # 评论
     if request.POST:
@@ -94,12 +95,10 @@ def blog_page(request, blog_id):
         models.Comments.objects.create(uses=uses, comms=comms, cbid=blog_id, cblog=blog.title)
         blog.coms = blog.coms + 1
         blog.save()
-        print 100000000000000000000000000000000
-        ret = {"status": None, "message": None}
-        ret["status"] = "成功"
-        print("35", ret)
-        return HttpResponse(json.dumps(ret))
-        # return HttpResponseRedirect(request.session['login_from'])
+
+        print "=================提交评论成功================="
+        # 这个只能用重定向，不然刷新页面还会提交
+        return redirect(request.path)
         # return redirect('/blog/%s' % blog_id)
 
     # 评论显示,按博客的id查询
@@ -115,25 +114,32 @@ def blog_page(request, blog_id):
 
 # 点赞功能    需要再优化
 def ulike(request, blog_id):
-    # return HttpResponse(412)
+    # return HttpResponse("ulike")
+    # 判断当前用户是否点赞
     if not request.user.is_authenticated:
         return redirect('/login/')
-    # 判断当前用户是否点赞
+
     name = request.user
-    old_url = request.get_full_path()
-    print "old_url", old_url
+    # old_url = request.get_full_path()
+    # print "old_url", old_url
     islike = models.Likes.objects.filter(like_user=name, like_id=blog_id)
-    print "dianzan::::::::", len(islike)
+    print "dianzan::::::::", islike
     # 没有点赞时
     if not islike:
         blike = models.Blogs.objects.get(id=blog_id)
         blike.like = blike.like + 1
-        print "9999999999:::::", blike.like
+
         blike.save()
         # 保存谁点赞的
         models.Likes.objects.create(like_user=name, like_title=blike.title, like_id=blog_id)
+        print "点赞成功:::::", blike.like
 
-    return redirect('/blog/%s' % blog_id)
+    try:
+        blog = models.Blogs.objects.get(id=blog_id)
+        comm = models.Comments.objects.filter(cbid=blog_id).order_by('-ctime')
+        return render(request, 'blog_page.html', {'blog': blog, 'comm': comm})
+    except:
+        return render(request, 'error.html')
 
 
 # 删除自己的评论
@@ -184,6 +190,5 @@ def marks(request, tags):
         blogs = paginator.page(1)  # 如果用户输入的页码不是整数时,显示第1页的内容
     except EmptyPage:
         blogs = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
-
     return render(request, 'blog/marks.html', locals())
 

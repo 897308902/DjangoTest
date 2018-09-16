@@ -56,8 +56,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="{% url 'myblog:mblog' %}">我的博客</a></li>
-                            <li><a href="{% url 'center:usercenter' request.user.username %}">个人资料</a></li>
                             <li><a href="{% url 'myblog:mdeditor' %}">发表博客</a></li>
+                            <li><a href="{% url 'center:usercenter' request.user.username %}">个人资料</a></li>
+                            <li><a href="{% url 'set_pwd' %}">修改密码</a></li>
+
                         </ul>
                     </li>
 
