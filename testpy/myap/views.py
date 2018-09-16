@@ -7,9 +7,15 @@ from django.shortcuts import render
 # Create your views here.
 
 def hello(request):
-    return render(request,'myap/index.html')
+    # return HttpResponse('1')
+
+    return render(request, 'myap/index.html',{'a':666})
 
 
 def word(request):
-    li = [1, 2, 3]
-    return render(request, 'index.html', {'lis': li})
+    # 在这里进行数据库写操作
+    return HttpResponse(1)
+
+
+def te(request):
+    return HttpResponse('cz')

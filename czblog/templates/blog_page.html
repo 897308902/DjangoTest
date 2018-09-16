@@ -28,14 +28,41 @@
 
 
         <span class="">个人分类：<a class="marks" href="{% url 'blog:marks' blog.marks %}">{{ blog.marks }}</a></span>
-{#        需要加个判断，不能给自己的文章点赞#}
-        {% ifequal blog.uname_id  request.user.username  %}
+        {#        需要加个判断，不能给自己的文章点赞#}
+        {% ifequal blog.uname_id request.user.username %}
             <span class="pull-right text-primary">已{{ blog.like }}个赞啦 </span>
-        {% else %}
-            <span class="pull-right">{{ blog.like }} <a href="{% url 'blog:ulike' blog.id %}"> 点赞</a> </span>
+            {% else %}
+            <a class="pull-right" id="likes" href="javascript:"> 点赞</a><span id="zan" class="pull-right">{{ blog.like }} </span>
+
+            <script>
+                $(function () {
+                    $('#likes').click(function () {
+                        $.ajax({
+                            type: "get",
+                            url: "{% url 'blog:ulike' blog.id %}",
+
+                            async:true,
+                            success: function (data) {
+                                //1没有点赞，2点过赞
+
+                                if (data == '1') {
+                                    $('#zan').text(parseInt({{ blog.like }})+1);
+
+                                }
+                                if (data == '2') {
+                                    {#$("#likes").innerText="已赞";#}
+                                    alert("您已经点过赞了");
+                                }
+
+
+                            }
+                        });
+                    });
+                });
+            </script>
         {% endifequal %}
-        
-{#        <span class="pull-right">{{ blog.like }} <a href="{% url 'blog:like' blog.id %}"> {{ yd.dd|default:"点赞" }}</a> </span>#}
+
+        {#        <span class="pull-right">{{ blog.like }} <a href="{% url 'blog:like' blog.id %}"> {{ yd.dd|default:"点赞" }}</a> </span>#}
 
         <div class="row">
             <div class="col-md-10">
@@ -50,16 +77,18 @@
                             <div class="top">
                                 <span class="tou"></span>
                                 {#  {% url 'edit_blog' blog.id %}#}
-                                <span class="nick"><a href="{% url 'center:usercenter' com.uses %}">{{ com.uses }}</a></span>
+                                <span class="nick"><a
+                                        href="{% url 'center:usercenter' com.uses %}">{{ com.uses }}</a></span>
 
                                 <span class="fr"> {{ com.ctime |date:"Y年m月d日 H:i:s" }}</span>
 
                             </div>
 
                             <p class="con">{{ com.comms }}
-                                {% ifequal com.uses  request.user.username  %}
+                                {% ifequal com.uses request.user.username %}
 
-                                    <span class="fr"><a class="a-del" href="{% url 'blog:delcomm' blog.id %}">删 除</a></span>
+                                    <span class="fr"><a class="a-del"
+                                                        href="{% url 'blog:delcomm' blog.id %}">删 除</a></span>
                                 {% endifequal %}
                             </p>
                         </li>
@@ -80,42 +109,42 @@
                     </span>
                 </div>
             {% else %}
-{#                action="{% url 'blog:blog_page' blog.id %}"#}
-            <form id="form1" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="blog_id" value="{{ blog.id }}">
+                {#                action="{% url 'blog:blog_page' blog.id %}"#}
+                <form id="form1" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="blog_id" value="{{ blog.id }}">
 
-                <textarea class="pcon " name="comment" maxlength="300" required></textarea>
+                    <textarea class="pcon " name="comment" maxlength="300" required></textarea>
 
-                <button type="submit" id="sub" class="btn btn-primary pull-right">发表</button>
+                    <button type="submit" id="sub" class="btn btn-primary pull-right">发表</button>
 
 
-            </form>
+                </form>
             {% endif %}
 
 
         </div>
         <script>
             $(document).ready(function () {
-               $("#sub").click(function(){
+                $("#sub").click(function () {
 
 
-				$.ajax({
+                    $.ajax({
 
-					type:"post",
-					url:"{% url 'blog:blog_page' blog.id %}",
-                    data:$('#form1').serialize(),
+                        type: "post",
+                        url: "{% url 'blog:blog_page' blog.id %}",
+                        data: $('#form1').serialize(),
 
-					dataType:"JSON",
+                        dataType: "JSON",
 
-					success:function(data){
-                        {#document.write(6666666);#}
-						{#$("#blog_comms").load();#}
+                        success: function (data) {
+                            {#document.write(6666666);#}
+                            {#$("#blog_comms").load();#}
 
-					}
-				});
-				{#alert(666666666666);#}
-			});
+                        }
+                    });
+                    {#alert(666666666666);#}
+                });
             });
         </script>
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        .header{
+        .header {
             width: 500px;
             height: 200px;
             background-color: pink;
@@ -14,5 +14,35 @@
 <body>
 {% include 'header.html' %}
 <div>myap下的模板文件index.html</div>
+<a href="{% url 'word' %}">跳转到word</a>
+<div id="cz"></div>
+<a href="#" id="ww">{{ a }}</a>
+
+<script>
+    window.onload = function () {
+        var cz = document.getElementById("cz");
+        var ww = document.getElementById("ww");
+        ww.onclick = function () {
+            var xhr = new XMLHttpRequest();
+            xhr.open('get', {% url 'word' %}, true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        if (xhr.responseText == '1') {
+                            {#alert(66666666);#}
+                            ww.innerText ={{ a }};
+                            cz.innerText = "123456789";
+                            {#window.location.href="{% url 'te' %}";#}
+                        }
+
+
+                    }
+                }
+            }
+        };
+
+    };
+</script>
 </body>
 </html>

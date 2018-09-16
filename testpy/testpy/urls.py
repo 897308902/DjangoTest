@@ -20,6 +20,7 @@ from myap import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^hello/$', views.hello),
-    url(r'^word/$', views.word),
+    url(r'^hello/$', views.hello, name='hello'),
+    url(r'^word/$', views.word, name='word'),
+    url(r'^te/$', views.word, name='te'),
 ]

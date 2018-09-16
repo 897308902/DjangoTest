@@ -44,7 +44,7 @@ def search(request):
     title = request.GET.get('title')
     s = request.build_absolute_uri()
     print s
-    arg_urls=request.path[0:-1]+"?title="+title
+    arg_urls = request.path[0:-1] + "?title=" + title
     print arg_urls
 
     # 增加翻页
@@ -112,16 +112,14 @@ def blog_page(request, blog_id):
     return render(request, 'blog_page.html', {'blog': blog, 'comm': comm})
 
 
-# 点赞功能    需要再优化
+# 点赞功能
 def ulike(request, blog_id):
-    # return HttpResponse("ulike")
+    # if request.GET:
     # 判断当前用户是否点赞
     if not request.user.is_authenticated:
         return redirect('/login/')
 
     name = request.user
-    # old_url = request.get_full_path()
-    # print "old_url", old_url
     islike = models.Likes.objects.filter(like_user=name, like_id=blog_id)
     print "dianzan::::::::", islike
     # 没有点赞时
@@ -133,13 +131,9 @@ def ulike(request, blog_id):
         # 保存谁点赞的
         models.Likes.objects.create(like_user=name, like_title=blike.title, like_id=blog_id)
         print "点赞成功:::::", blike.like
-
-    try:
-        blog = models.Blogs.objects.get(id=blog_id)
-        comm = models.Comments.objects.filter(cbid=blog_id).order_by('-ctime')
-        return render(request, 'blog_page.html', {'blog': blog, 'comm': comm})
-    except:
-        return render(request, 'error.html')
+        return HttpResponse(1)
+    else:
+        return HttpResponse(2)
 
 
 # 删除自己的评论
@@ -191,4 +185,3 @@ def marks(request, tags):
     except EmptyPage:
         blogs = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
     return render(request, 'blog/marks.html', locals())
-
