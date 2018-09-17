@@ -137,15 +137,12 @@ def ulike(request, blog_id):
 
 
 # 删除自己的评论
-def del_comms(request, blog_id):
-    if not request.user.is_authenticated:
-        return redirect("/login")
+def del_comms(request):
+    delId = request.GET.get("id")
+    print "delid===", delId
+    models.Comments.objects.filter(id=delId).delete()
 
-    name = request.user
-
-    print name, blog_id
-
-    return HttpResponse("还没想好方法，先放着")
+    return HttpResponse(1)
 
 
 # 博客详情页面，评论翻页       没有做了

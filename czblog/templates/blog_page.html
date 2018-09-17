@@ -32,7 +32,8 @@
         {% ifequal blog.uname_id request.user.username %}
             <span class="pull-right text-primary">已{{ blog.like }}个赞啦 </span>
             {% else %}
-            <a class="pull-right" id="likes" href="javascript:"> 点赞</a><span id="zan" class="pull-right">{{ blog.like }} </span>
+            <a class="pull-right" id="likes" href="javascript:void(0);"> 点赞</a>
+            <span id="zan" class="pull-right">{{ blog.like }} </span>
 
             <script>
                 $(function () {
@@ -41,28 +42,24 @@
                             type: "get",
                             url: "{% url 'blog:ulike' blog.id %}",
 
-                            async:true,
+                            async: true,
                             success: function (data) {
                                 //1没有点赞，2点过赞
 
                                 if (data == '1') {
-                                    $('#zan').text(parseInt({{ blog.like }})+1);
+                                    $('#zan').text(parseInt({{ blog.like }}) + 1);
 
                                 }
                                 if (data == '2') {
                                     {#$("#likes").innerText="已赞";#}
                                     alert("您已经点过赞了");
                                 }
-
-
                             }
                         });
                     });
                 });
             </script>
         {% endifequal %}
-
-        {#        <span class="pull-right">{{ blog.like }} <a href="{% url 'blog:like' blog.id %}"> {{ yd.dd|default:"点赞" }}</a> </span>#}
 
         <div class="row">
             <div class="col-md-10">
@@ -87,8 +84,11 @@
                             <p class="con">{{ com.comms }}
                                 {% ifequal com.uses request.user.username %}
 
-                                    <span class="fr"><a class="a-del"
-                                                        href="{% url 'blog:delcomm' blog.id %}">删 除</a></span>
+                                    <span class="fr">
+                                        <a class="a-del" onclick="delComm({{ com.id }})"
+                                           href="javascript:">删 除</a>
+
+                                    </span>
                                 {% endifequal %}
                             </p>
                         </li>
@@ -98,6 +98,35 @@
 
             </div>
         </div>
+        <script type="text/javascript">
+            {#删除自己的评论#}
+            $(function () {
+                delComm = function (id) {
+                    $.ajax({
+                        type: "get",
+                        url: "{% url 'blog:delcomm' %}",
+                        data: {"id": id},
+                        async: true,
+                        success: function (data) {
+                            //1没有点赞，2点过赞
+
+                            if (data == '1') {
+                                alert("删除成功");
+                                window.location.reload();
+
+                                {#$("#blog_comms").load("{{ request.get_host}}{{ request.path}}#blog_comms");#}
+                                console.log("{{ request.get_host}}{{ request.path}}#blog_comms")
+
+                            }
+                            if (data == '2') {
+
+                                alert("删除失败");
+                            }
+                        }
+                    });
+                }
+            });
+        </script>
         <p class="mcoms">我来评论:</p>
         <div class="comms">
 
@@ -109,8 +138,8 @@
                     </span>
                 </div>
             {% else %}
-                {#                action="{% url 'blog:blog_page' blog.id %}"#}
-                <form id="form1" method="post">
+
+                <form id="form1" action="{% url 'blog:blog_page' blog.id %}" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="blog_id" value="{{ blog.id }}">
 
@@ -118,40 +147,10 @@
 
                     <button type="submit" id="sub" class="btn btn-primary pull-right">发表</button>
 
-
                 </form>
             {% endif %}
 
-
         </div>
-        <script>
-            $(document).ready(function () {
-                $("#sub").click(function () {
-
-
-                    $.ajax({
-
-                        type: "post",
-                        url: "{% url 'blog:blog_page' blog.id %}",
-                        data: $('#form1').serialize(),
-
-                        dataType: "JSON",
-
-                        success: function (data) {
-                            {#document.write(6666666);#}
-                            {#$("#blog_comms").load();#}
-
-                        }
-                    });
-                    {#alert(666666666666);#}
-                });
-            });
-        </script>
 
     </div>
 {% endblock %}
-
-
-
-
-
