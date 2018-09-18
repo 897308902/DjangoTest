@@ -70,7 +70,7 @@
                 <ul class="clearfix" id="blog_comms">
                     {% for com in comm %}
 
-                        <li class="col-md-10">
+                        <li id="com-{{ com.id }}" class="col-md-10">
                             <div class="top">
                                 <span class="tou"></span>
                                 {#  {% url 'edit_blog' blog.id %}#}
@@ -104,7 +104,7 @@
                 delComm = function (id) {
                     $.ajax({
                         type: "get",
-                        url: "{% url 'blog:delcomm' %}",
+                        url: "{% url 'blog:delcomm' blog.id %}",
                         data: {"id": id},
                         async: true,
                         success: function (data) {
@@ -112,7 +112,8 @@
 
                             if (data == '1') {
                                 alert("删除成功");
-                                window.location.reload();
+                                {#window.location.reload();#}
+                                $("#com-"+id).remove();
 
                                 {#$("#blog_comms").load("{{ request.get_host}}{{ request.path}}#blog_comms");#}
                                 console.log("{{ request.get_host}}{{ request.path}}#blog_comms")

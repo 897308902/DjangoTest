@@ -30,5 +30,5 @@ urlpatterns = [
     url(r'^page/(?P<blog_id>\d+)$', views.ulike, name='ulike'),
 
     # 删除自己的评论
-    url(r'^del/', views.del_comms, name='delcomm'),
+    url(r'^del/(?P<blog_id>\d+)$', views.del_comms, name='delcomm'),
 ]

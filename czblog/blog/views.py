@@ -87,15 +87,18 @@ def blog_page(request, blog_id):
     except:
         return render(request, 'error.html')
 
+
     # 评论
     if request.POST:
         # blogs = request.POST.get('blog_id')
         comms = request.POST.get('comment')
         uses = request.user
         models.Comments.objects.create(uses=uses, comms=comms, cbid=blog_id, cblog=blog.title)
-        blog.coms = blog.coms + 1
+        #
+        count = models.Comments.objects.filter(cbid=blog_id)
+        print "某个博客的评论数据===", len(count)
+        blog.coms = len(count)
         blog.save()
-
         print "=================提交评论成功================="
         # 这个只能用重定向，不然刷新页面还会提交
         return redirect(request.path)
@@ -136,11 +139,17 @@ def ulike(request, blog_id):
         return HttpResponse(2)
 
 
-# 删除自己的评论
-def del_comms(request):
+# 删除自己的评论   查询语句需再优化
+def del_comms(request,blog_id):
     delId = request.GET.get("id")
     print "delid===", delId
     models.Comments.objects.filter(id=delId).delete()
+    #
+    blog = models.Blogs.objects.get(id=blog_id)
+    count = models.Comments.objects.filter(cbid=blog_id)
+    print "某个博客的评论数据===", len(count)
+    blog.coms = len(count)
+    blog.save()
 
     return HttpResponse(1)
 
