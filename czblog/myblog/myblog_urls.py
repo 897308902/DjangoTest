@@ -17,7 +17,7 @@ urlpatterns = [
     url(r'^search/', views.mysearch, name='msearch'),
 
     # 按类别分类显示
-    url(r'^marks/(?P<tags>.*?)$', views.marks, name='mark'),
+    url(r'^(?P<name>.*?)/mark/(?P<tags>.*?)$', views.marks, name='mark'),
 
     # 编辑博客
     url(r'^modify$', views.edit_blog, name='modify'),

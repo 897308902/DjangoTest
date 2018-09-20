@@ -70,7 +70,7 @@
                                 <span class="little"></span>
                                 <a class="time">{{ blog.utime |date:"Y-m-d"}}</a>
                                 <span class="little"></span>
-                                <a class="marks" href="{% url 'myblog:mark' blog.marks %}">{{ blog.marks }}</a>
+                                <a class="marks" href="{% url 'myblog:mark' blog.uname blog.marks %}">{{ blog.marks }}</a>
 
                             </div>
                             <div class="fr">

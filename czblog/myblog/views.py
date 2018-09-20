@@ -173,11 +173,11 @@ def del_blog(request):
 
 
 # 按标签
-def marks(request, tags):
+def marks(request, name, tags):
     # return HttpResponse('marks')
     if not request.user.is_authenticated:
         return redirect('/login/')
-    name = request.user
+    # name = request.user
     blogs = Blogs.objects.filter(uname=name, marks_id=tags).order_by('-rcount')
     # 生成paginator对象,定义每页显示10条记录
     paginator = Paginator(blogs, 10)

@@ -19,7 +19,7 @@ from blog.models import Blogs
 def usercenter(request, name):
     if not request.user.is_authenticated:
         return redirect('/login/')
-    # 查用户的信息
+    # 查用户的信息,需要把用户的信息带过去
     user = User.objects.get(username=name)
 
     # 查询出该用户的博客
@@ -34,7 +34,7 @@ def usercenter(request, name):
             mark[mk.marks_id] = len(k)
             # print "biaoqian=======", mk.marks_id, len(k), mark
 
-    # return  HttpResponse()
+    print "mark===",mark
     return render(request, 'center/usercenter.html', {'blogs': blogs, 'user': user, 'mark': mark})
 
 
