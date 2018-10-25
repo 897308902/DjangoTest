@@ -11,7 +11,7 @@ from . import views
 urlpatterns = [
 
     # 首页
-    url(r'^$', views.index,name='index'),
+    url(r'^$', views.index, name='index'),
     # 博客页面
     url(r'^(?P<blog_id>\d+)$', views.blog_page, name='blog_page'),
     # 搜索博客(?P<title>.*?)$

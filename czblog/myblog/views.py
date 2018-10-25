@@ -4,8 +4,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
+
 # from . import models
 from markdown import markdown
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -50,7 +49,7 @@ def mysearch(request):
     name = request.user
     title = request.GET.get('title')
     arg_urls = request.path[0:-1] + "?title=" + title
-    print arg_urls
+    print (arg_urls)
     # 增加翻页
     blogs = Blogs.objects.filter(uname=name, title__contains=title).order_by('-rcount')
     # 生成paginator对象,定义每页显示10条记录
@@ -79,9 +78,9 @@ def edit_blog(request):
         oldtitle = ''
         blog_id = request.GET.get('id', 0)
 
-        print '===进入编辑页面的博客id为====', blog_id
+        print ('===进入编辑页面的博客id为====', blog_id)
         if blog_id == 0:
-            print '===没获取到博客id ========== ', blog_id
+            print ('===没获取到博客id ========== ', blog_id)
             return render(request, 'error.html')
         # 当博客被删除后，再点击编辑时，能获取到id值，但是再数据库查询时，就没有了
         try:
@@ -91,11 +90,11 @@ def edit_blog(request):
             marks = Bmarks.objects.all()
             return render(request, 'myblog/edit_blog.html', {'blog': blog, 'marks': marks})
         except:
-            print '===进入编辑博客页面出错==='
+            print ('===进入编辑博客页面出错===')
             return render(request, 'error.html')
 
     if request.POST:
-        print "该博客的原标题为===", oldtitle
+        print ("该博客的原标题为===", oldtitle)
         # 如果原标题为空
         if not oldtitle:
             return render(request, 'error.html')
@@ -118,9 +117,9 @@ def edit_blog(request):
             article.content = markdown(content)
             article.marks_id = tags
             article.save()
-            print "===博客修改成功==="
+            print ("===博客修改成功===")
         except:
-            print '===提交编辑博客出错===', blog_id
+            print ('===提交编辑博客出错===', blog_id)
             return render(request, 'error.html')
         return redirect('/myblog/')
 
@@ -158,9 +157,9 @@ def add_blog(request):
 def del_blog(request):
     if request.GET:
         blog_id = request.GET.get('id', 0)
-        print 'del_blog===要删除博客的id======', blog_id
+        print ('del_blog===要删除博客的id======', blog_id)
         if blog_id == 0:
-            print 'del_blog=== 为0则没有找到该博客 ========= ', blog_id
+            print ('del_blog=== 为0则没有找到该博客 ========= ', blog_id)
             return render(request, 'error.html')
         # 当博客被删除后，再点删除时，就显示错误页面
         try:
@@ -168,7 +167,7 @@ def del_blog(request):
             Comments.objects.filter(cbid=blog_id).delete()
             return redirect('/myblog/')
         except:
-            print 'del_blog==没有找到博客'
+            print ('del_blog==没有找到博客')
             return render(request, 'error.html')
 
 

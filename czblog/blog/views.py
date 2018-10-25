@@ -18,7 +18,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def index(request):
     old_url = request.get_full_path()
     # arg_urls = request.get_full_path()
-    print "===index=url===", old_url
+    print ("===index=url===", old_url)
     blogs = models.Blogs.objects.all().order_by('-rcount')  # [0:10]
     # print blogs
     # 生成paginator对象,定义每页显示10条记录
@@ -43,9 +43,9 @@ def index(request):
 def search(request):
     title = request.GET.get('title')
     s = request.build_absolute_uri()
-    print s
+    print (s)
     arg_urls = request.path[0:-1] + "?title=" + title
-    print arg_urls
+    print (arg_urls)
 
     # 增加翻页
     blogs = models.Blogs.objects.filter(title__contains=title).order_by('-rcount')
@@ -96,10 +96,10 @@ def blog_page(request, blog_id):
         models.Comments.objects.create(uses=uses, comms=comms, cbid=blog_id, cblog=blog.title)
         #
         count = models.Comments.objects.filter(cbid=blog_id)
-        print "某个博客的评论数据===", len(count)
+        print ("某个博客的评论数据===", len(count))
         blog.coms = len(count)
         blog.save()
-        print "=================提交评论成功================="
+        print ("=================提交评论成功=================")
         # 这个只能用重定向，不然刷新页面还会提交
         return redirect(request.path)
         # return redirect('/blog/%s' % blog_id)
@@ -124,7 +124,7 @@ def ulike(request, blog_id):
 
     name = request.user
     islike = models.Likes.objects.filter(like_user=name, like_id=blog_id)
-    print "dianzan::::::::", islike
+    print ("dianzan::::::::", islike)
     # 没有点赞时
     if not islike:
         blike = models.Blogs.objects.get(id=blog_id)
@@ -133,7 +133,7 @@ def ulike(request, blog_id):
         blike.save()
         # 保存谁点赞的
         models.Likes.objects.create(like_user=name, like_title=blike.title, like_id=blog_id)
-        print "点赞成功:::::", blike.like
+        print ("点赞成功:::::", blike.like)
         return HttpResponse(1)
     else:
         return HttpResponse(2)
@@ -142,12 +142,12 @@ def ulike(request, blog_id):
 # 删除自己的评论   查询语句需再优化
 def del_comms(request,blog_id):
     delId = request.GET.get("id")
-    print "delid===", delId
+    print ("delid===", delId)
     models.Comments.objects.filter(id=delId).delete()
     #
     blog = models.Blogs.objects.get(id=blog_id)
     count = models.Comments.objects.filter(cbid=blog_id)
-    print "某个博客的评论数据===", len(count)
+    print ("某个博客的评论数据===", len(count))
     blog.coms = len(count)
     blog.save()
 

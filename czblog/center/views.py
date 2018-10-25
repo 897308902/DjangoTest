@@ -34,7 +34,7 @@ def usercenter(request, name):
             mark[mk.marks_id] = len(k)
             # print "biaoqian=======", mk.marks_id, len(k), mark
 
-    print "mark===",mark
+    print ("mark===",mark)
     return render(request, 'center/usercenter.html', {'blogs': blogs, 'user': user, 'mark': mark})
 
 
@@ -50,7 +50,7 @@ def uselogin(request):
         # 输入正确的账号，返回用户名，否则返回none
         user = authenticate(username=username, password=password)
         if user:
-            print "===登录用户名===", user
+            print ("===登录用户名===", user)
             login(request, user)
             # 重定向到来源的url
             # return HttpResponseRedirect(request.session['login_from'])
