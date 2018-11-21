@@ -1,18 +1,30 @@
-{% extends 'blog/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
-{% block title %}
-    新闻大事件
-{% endblock %}
+{% block title %} 新闻大事件{% endblock %}
 {% block css %}
     <script type="text/javascript" src="{% static 'js/news.js' %}"></script>
+    <style type="text/css">
+            .news {
+                background-color: #e7e7e7;
+            }
+
+
+    </style>
 {% endblock %}
 
 
 {% block content %}
 
-    <div class="container">
-    {{ htmlcode }}
+<div class="container">
+    <ul>
+        {% for ti in htmlcode %}
 
-    </div>
+            <li><a href="">{{ti}}</a>
+            <!--<img src="{{ti.img}}" alt="" style="width:300px,height=200px;">-->
+            </li>
+        {% endfor %}
+    </ul>
+
+</div>
 
 {% endblock %}
