@@ -2,15 +2,14 @@
 {% load static %}
 {% block title %} 新闻大事件{% endblock %}
 {% block css %}
-<script type="text/javascript" src="{% static 'js/news.js' %}"></script>
-<link rel="stylesheet" href="{% static 'css/base.css' %}">
-<style type="text/css">
-    .news {
-        background-color: #e7e7e7;
-    }
+    <script type="text/javascript" src="{% static 'js/news.js' %}"></script>
+    <style type="text/css">
+            .news {
+                background-color: #e7e7e7;
+            }
 
 
-</style>
+    </style>
 {% endblock %}
 
 
@@ -20,9 +19,9 @@
     <ul>
         {% for ti in htmlcode %}
 
-        <li><a target="_blank" href="{{ti.urls}}">{{ti.tt}}</a>
+            <li><a target="_blank" href="{{ti.urls}}">{{ti.tt}}</a>
             <!--<img src="{{ti.img}}" alt="" style="width:300px,height=200px;">-->
-        </li>
+            </li>
         {% endfor %}
     </ul>
 

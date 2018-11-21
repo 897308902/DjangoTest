@@ -19,7 +19,7 @@ def index(request):
     response = requests.get('https://www.thepaper.cn/channel_25950')
     html = etree.HTML(response.text)
     all_title = []
-    # mynews = {}
+    #
 
     #
     artical = html.xpath('//div[@id="masonryContent"]/div')
@@ -28,67 +28,40 @@ def index(request):
 
     print '============>>>>'
     for tit in artical:
+        mynews = {}
 
         title = tit.xpath('./h2/a/text()')
         href = tit.xpath('./h2/a/@href')
         if title:
+            uri = 'https://www.thepaper.cn/'
 
             # print title[0].encode('utf8'), 'https://www.thepaper.cn/' + href[0]
+            # if href:
+
             # 新闻详情
-            response = requests.get('https://www.thepaper.cn/' + href[0])
+            response = requests.get(uri + href[0])
             html = etree.HTML(response.text)
-            news_title = html.xpath('//h1[@class="news_title"]/text()')[0]
-            all_title.append(news_title)
-            # print news_title, '\n'
+            news_title = html.xpath('//h1[@class="news_title"]/text()')
+            if news_title:
+                mynews['urls'] = uri + href[0]
+                # print href[0]
+                # print news_title[0].encode('utf8')
+                mynews['tt'] = news_title[0]
 
             img = html.xpath('//div[@class="news_txt"]/div[1]/img/@src')
             # if img:
-                # all_title
-                # mynews['img'] = img[0]
-            #     print img[0]
+            #     mynews['img'] = img[0]
             news_content = html.xpath('//div[@class="news_txt"]/text()')
             # for cons in news_content:
             #     print cons
-            # print '\n'
-            # mynews['tt'] = news_title
 
-            # all_title.append(mynews)
-            print all_title
+            all_title.append(mynews)
         else:
-            print u"没有爬到数据，别看了"
+            print u"没有爬到数据"
 
     return render(request, 'news/news.html', {'htmlcode': all_title})
     # return HttpResponse(all_title)
 
 
-def crawl():
-    data = {}
-    # 澎湃  时事
-    response = requests.get('https://www.thepaper.cn/channel_25950')
-    html = etree.HTML(response.text)
-    #
-    artical = html.xpath('//div[@id="masonryContent"]/div')
-    # print artical
-    print len(artical)
-
-    print '============>>>>'
-    for tit in artical:
-
-        title = tit.xpath('./h2/a/text()')
-        href = tit.xpath('./h2/a/@href')
-        if title:
-            # print title[0].encode('utf8'), 'https://www.thepaper.cn/' + href[0]
-            # 新闻详情
-            response = requests.get('https://www.thepaper.cn/' + href[0])
-            html = etree.HTML(response.text)
-            news_title = html.xpath('//h1[@class="news_title"]/text()')[0].encode('utf-8')
-            print news_title, '\n'
-            img = html.xpath('//div[@class="news_txt"]/div[1]/img/@src')
-            if img:
-                print img[0]
-            news_content = html.xpath('//div[@class="news_txt"]/text()')
-            for cons in news_content:
-                print cons
-            print '\n'
-        else:
-            print u"没有爬到数据，别看了"
+def details():
+    pass

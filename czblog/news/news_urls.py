@@ -12,5 +12,7 @@ urlpatterns = [
 
     # 首页
     url(r'^$', views.index, name='index'),
+    url(r'^details/', views.index, name='details'),
+
 
 ]
