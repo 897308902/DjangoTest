@@ -12,48 +12,39 @@ import urllib
 from lxml import etree
 import re
 import requests
+import time
 
 
 # Create your views here.
 def index(request):
-    response = requests.get('https://www.thepaper.cn/channel_25950')
-    html = etree.HTML(response.text)
     all_title = []
-    #
+    list_time = str(time.time()).split('.')
+    if int(list_time[1]) < 100:
+        list_time[1] = '100'
+    last_time = list_time[0] + list_time[1]
+    # print last_time, type(last_time)
+    uri = 'https://www.thepaper.cn/'
+    params = 'load_index.jsp?&pageidx=2&lastTime=' + last_time
+    url = uri + params
+    # print url
+    response = requests.get(url)
+    # print response.status_code  # 响应的状态码
+    # print response.content   # 返回字节信息
+    # print response.text  # 返回文本内容
 
-    #
-    artical = html.xpath('//div[@id="masonryContent"]/div')
-    # print artical
-    print len(artical)
+    html = etree.HTML(response.text)
 
-    print '============>>>>'
-    for tit in artical:
+    a_tesult = html.xpath('//h2/a')
+    for a in a_tesult:
         mynews = {}
-
-        title = tit.xpath('./h2/a/text()')
-        href = tit.xpath('./h2/a/@href')
-        if title:
-            uri = 'https://www.thepaper.cn/'
-
-            # print title[0].encode('utf8'), 'https://www.thepaper.cn/' + href[0]
-            # if href:
-
-            # 新闻详情
-            response = requests.get(uri + href[0])
-            html = etree.HTML(response.text)
-            news_title = html.xpath('//h1[@class="news_title"]/text()')
-            if news_title:
-                mynews['urls'] = uri + href[0]
-                # print href[0]
-                # print news_title[0].encode('utf8')
-                mynews['tt'] = news_title[0]
-
-            img = html.xpath('//div[@class="news_txt"]/div[1]/img/@src')
-            # if img:
-            #     mynews['img'] = img[0]
-            news_content = html.xpath('//div[@class="news_txt"]/text()')
-            # for cons in news_content:
-            #     print cons
+        a_text_title = a.xpath('./text()')
+        if len(a_text_title):
+            a_img = a.xpath('./../../div[1]/a/img/@src')
+            # print '===>>>>>',a_img
+            a_href = a.xpath('./@href')
+            mynews['urls'] = uri + a_href[0]
+            mynews['tt'] = a_text_title[0].encode('utf8')
+            mynews['img'] = a_img[0]
 
             all_title.append(mynews)
         else:

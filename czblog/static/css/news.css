@@ -1,0 +1,15 @@
+ul.newul {
+list-style: none;
+overflow: hidden;
+}
+ul.newul li{
+width:450px;
+margin-top:15px;
+
+float:left;
+}
+
+ul.newul li img{
+display: block;
+width:300px;
+height:184px;}
