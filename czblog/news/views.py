@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from . import models
 import urllib
+from concurrent.futures import ThreadPoolExecutor
 from lxml import etree
 import re
 import requests
@@ -16,7 +17,7 @@ import time
 
 
 # Create your views here.
-def index(request):
+def qindex121(request):
     all_title = []
     list_time = str(time.time()).split('.')
     if int(list_time[1]) < 100:
@@ -54,5 +55,97 @@ def index(request):
     # return HttpResponse(all_title)
 
 
-def details():
-    pass
+def index(request):
+    p = ThreadPoolExecutor(30)  # 创建1个程池中，容纳线程个数为30个；
+    sina_title = []
+    paper_title=[]
+    baidu_title=[]
+    car_title=[]
+
+
+    def get_index(url):
+        u"""通用请求"""
+        respose = requests.get(url)
+        if respose.status_code == 200:
+            print u"编码方式==>>>", respose.encoding
+            return respose.text
+
+    def sina_news(res):
+        u"""新浪"""
+        res = res.result()  # 进程执行完毕后，得到1个对象
+        html = etree.HTML(res)
+        # 最新新闻
+        result = html.xpath('//div[@class="zgjq"]//ul//a')
+        print len(result)
+        for li in result:
+            mynews = {}
+            titlt = li.xpath('./text()')
+            if len(titlt):
+                # print titlt[0].encode('ISO-8859-1'),
+                # print li.xpath('./@href')
+                mynews['tt']=titlt[0].encode('ISO-8859-1')
+                mynews['urls']=li.xpath('./@href')[0]
+                sina_title.append(mynews)
+
+    def paper_news(res):
+        u"""澎湃"""
+        res = res.result()
+        html = etree.HTML(res)
+        uri = 'https://www.thepaper.cn/'
+        a_tesult = html.xpath('//h2/a')
+        for a in a_tesult:
+            mynews = {}
+            a_img = a.xpath('./../../div[1]/a/img/@src')
+            atext = a.xpath('./text()')
+            ahref = a.xpath('./@href')
+            # print atext[0], uri + ahref[0], a_img
+            mynews['tt'] = atext[0]
+            mynews['urls'] = uri + ahref[0]
+            mynews['img'] = a_img[0]
+            paper_title.append(mynews)
+
+    def baidu_news(res):
+        u"""百度"""
+        res = res.result()
+        html = etree.HTML(res)
+        result = html.xpath('//ul[contains(@class,"ulist")]//a')
+        # print len(result)
+        # global title
+        for li in result:
+            mynews={}
+            # print li.xpath('./text()')[0],
+            # print li.xpath('./@href')
+            mynews['tt'] = li.xpath('./text()')[0]
+            mynews['urls'] = li.xpath('./@href')[0]
+            baidu_title.append(mynews)
+
+    def car_news(res):
+        u"""环球汽车"""
+        res = res.result()
+        html = etree.HTML(res)
+
+        result = html.xpath('//ul[@class="iconBoxT14"]//a')
+        # print len(result)
+        for li in result:
+            mynews = {}
+            # print li.xpath('./text()')[0].encode('ISO-8859-1'),
+            # print li.xpath('./@href')
+            mynews['tt'] = li.xpath('./text()')[0].encode('ISO-8859-1')
+            mynews['urls'] = li.xpath('./@href')[0]
+            car_title.append(mynews)
+
+    # 新浪军情
+    p.submit(get_index, 'https://mil.news.sina.com.cn/').add_done_callback(sina_news)
+    # 国内新闻
+    p.submit(get_index, 'https://news.baidu.com/guonei').add_done_callback(baidu_news)
+    # 环球汽车
+    p.submit(get_index, 'http://auto.huanqiu.com/').add_done_callback(car_news)
+    list_time = str(time.time()).split('.')
+    if int(list_time[1]) < 100:
+        list_time[1] = '100'
+    last_time = list_time[0] + list_time[1]
+    # 时事
+    p.submit(get_index,'https://www.thepaper.cn/load_index.jsp?&pageidx=2&lastTime=' + last_time).add_done_callback(
+        paper_news)
+    time.sleep(10)
+    return render(request, 'news/news.html', {'sina_title': sina_title,'paper_title':paper_title,'baidu_title':baidu_title,'car_title':car_title})

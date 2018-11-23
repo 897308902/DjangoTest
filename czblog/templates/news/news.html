@@ -17,9 +17,9 @@
 {% block content %}
 
     <div class="container">
-    <h2>时事新闻</h2>
+        <h2>时事新闻</h2>
         <ul class="newul">
-            {% for ti in htmlcode %}
+            {% for ti in paper_title %}
 
                 <li>
                     <img src="http:{{ ti.img }}" alt="123">
@@ -30,8 +30,43 @@
                 </li>
             {% endfor %}
         </ul>
-    <h2>西藏新闻</h2>
+        <h2>新浪新闻</h2>
+        <ul class="newul">
+            {% for ti in sina_title %}
 
+                <li>
+                    <h2>
+                        <a target="_blank" href="{{ ti.urls }}">{{ ti.tt }}</a>
+                    </h2>
+
+                </li>
+            {% endfor %}
+        </ul>
+        <h2>百度新闻</h2>
+        <ul class="newul">
+            {% for ti in baidu_title %}
+
+                <li>
+                    <h2>
+                        <a target="_blank" href="{{ ti.urls }}">{{ ti.tt }}</a>
+                    </h2>
+
+                </li>
+            {% endfor %}
+        </ul>
+        <h2>环球汽车</h2>
+        <ul class="newul">
+            {% for ti in car_title %}
+
+                <li>
+                    <h2>
+                        <a target="_blank" href="{{ ti.urls }}">{{ ti.tt }}</a>
+                    </h2>
+
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 
 {% endblock %}
+
