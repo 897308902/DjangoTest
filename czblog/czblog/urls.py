@@ -61,4 +61,7 @@ urlpatterns = [
     # 个人简介
     url(r'^resume/', include('resume.resume_urls', namespace='resume')),
 
+    # CSDN内容
+    url(r'^csdn/', include('csdn.csdn_urls', namespace='csdn')),
+
 ]

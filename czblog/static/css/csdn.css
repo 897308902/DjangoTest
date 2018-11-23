@@ -1,0 +1,27 @@
+ul.newul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+ul.newul li {
+    margin: 15px 0;
+}
+
+ul.newul li h2 {
+    line-height: 26px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0;
+    /*color: #333333;*/
+}
+
+ul.newul li a {
+    color: #666666;
+}
+
+ul.newul li a:hover {
+    color: #0A7EC3;
+}
+h4{
+    /*font-weight: bold;*/
+}

@@ -8,7 +8,7 @@ ul.newul li {
     width: 260px;
     margin-top: 20px;
     margin-right: 60px;
-
+    min-height: 62px;
     float: left;
 }
 

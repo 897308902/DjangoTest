@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# @Time    : 2018/7/10 18:26
-# @Author  : chengz
-# @File    : blog_urls.py
+# @Time    : 2018/11/23 22:17
+# @Author  : cz9025
+# @File    : csdn_urls.py
 # @Software: PyCharm
-
 
 from django.conf.urls import url
 from . import views
