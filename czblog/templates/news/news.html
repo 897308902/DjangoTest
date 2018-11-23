@@ -2,32 +2,36 @@
 {% load static %}
 {% block title %} 新闻大事件{% endblock %}
 {% block css %}
-<script type="text/javascript" src="{% static 'js/news.js' %}"></script>
-<link rel="stylesheet" href="{% static 'css/news.css' %}">
-<style type="text/css">
-    .news {
-        background-color: #e7e7e7;
-    }
+    <script type="text/javascript" src="{% static 'js/news.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/news.css' %}">
+    <style type="text/css">
+        .news {
+            background-color: #e7e7e7;
+        }
 
 
-</style>
+    </style>
 {% endblock %}
 
 
 {% block content %}
 
-<div class="container">
-    <ul class="newul">
-        {% for ti in htmlcode %}
+    <div class="container">
+    <h2>时事新闻</h2>
+        <ul class="newul">
+            {% for ti in htmlcode %}
 
-        <li>
-            <img src="{{ti.img}}" alt="">
-            <a target="_blank" href="{{ti.urls}}">{{ti.tt}}</a>
-            <!--<img src="{{ti.img}}" alt="" style="width:300px,height=200px;">-->
-        </li>
-        {% endfor %}
-    </ul>
+                <li>
+                    <img src="http:{{ ti.img }}" alt="123">
+                    <h2>
+                        <a target="_blank" href="{{ ti.urls }}">{{ ti.tt }}</a>
+                    </h2>
 
-</div>
+                </li>
+            {% endfor %}
+        </ul>
+    <h2>西藏新闻</h2>
+
+    </div>
 
 {% endblock %}
