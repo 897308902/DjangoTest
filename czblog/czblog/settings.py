@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'shop',
     'resume',
     'myblog',
+    'interface',
 ]
 
 MIDDLEWARE = [

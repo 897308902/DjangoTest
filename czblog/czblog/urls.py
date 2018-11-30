@@ -61,4 +61,7 @@ urlpatterns = [
     # 个人简介
     url(r'^resume/', include('resume.resume_urls', namespace='resume')),
 
+    # 接口
+    url(r'^interface/', include('interface.interface_urls', namespace='interface')),
+
 ]
