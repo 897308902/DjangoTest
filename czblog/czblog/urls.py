@@ -64,4 +64,8 @@ urlpatterns = [
     # 接口
     url(r'^interface/', include('interface.interface_urls', namespace='interface')),
 
+    # CSDN内容
+    url(r'^csdn/', include('csdn.csdn_urls', namespace='csdn')),
+
+
 ]

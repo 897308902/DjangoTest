@@ -8,7 +8,6 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from . import models
-import urllib
 from concurrent.futures import ThreadPoolExecutor
 from lxml import etree
 import re
@@ -56,12 +55,10 @@ def qindex121(request):
 
 
 def index(request):
-    p = ThreadPoolExecutor(30)  # 创建1个程池中，容纳线程个数为30个；
     sina_title = []
-    paper_title=[]
-    baidu_title=[]
-    car_title=[]
-
+    paper_title = []
+    baidu_title = []
+    car_title = []
 
     def get_index(url):
         u"""通用请求"""
@@ -83,8 +80,8 @@ def index(request):
             if len(titlt):
                 # print titlt[0].encode('ISO-8859-1'),
                 # print li.xpath('./@href')
-                mynews['tt']=titlt[0].encode('ISO-8859-1')
-                mynews['urls']=li.xpath('./@href')[0]
+                mynews['tt'] = titlt[0].encode('ISO-8859-1')
+                mynews['urls'] = li.xpath('./@href')[0]
                 sina_title.append(mynews)
 
     def paper_news(res):
@@ -112,7 +109,7 @@ def index(request):
         # print len(result)
         # global title
         for li in result:
-            mynews={}
+            mynews = {}
             # print li.xpath('./text()')[0],
             # print li.xpath('./@href')
             mynews['tt'] = li.xpath('./text()')[0]
@@ -126,26 +123,30 @@ def index(request):
 
         result = html.xpath('//ul[@class="iconBoxT14"]//a')
         # print len(result)
-        for li in result:
+        for a in result:
             mynews = {}
-            # print li.xpath('./text()')[0].encode('ISO-8859-1'),
-            # print li.xpath('./@href')
-            mynews['tt'] = li.xpath('./text()')[0].encode('ISO-8859-1')
-            mynews['urls'] = li.xpath('./@href')[0]
-            car_title.append(mynews)
+            a_text = a.xpath('./text()')[0].encode('ISO-8859-1')
+            if len(a_text):
+                mynews['tt'] = a_text
+                # print a_text
+                mynews['urls'] = a.xpath('./@href')[0]
+                car_title.append(mynews)
 
-    # 新浪军情
-    p.submit(get_index, 'https://mil.news.sina.com.cn/').add_done_callback(sina_news)
-    # 国内新闻
-    p.submit(get_index, 'https://news.baidu.com/guonei').add_done_callback(baidu_news)
-    # 环球汽车
-    p.submit(get_index, 'http://auto.huanqiu.com/').add_done_callback(car_news)
-    list_time = str(time.time()).split('.')
-    if int(list_time[1]) < 100:
-        list_time[1] = '100'
-    last_time = list_time[0] + list_time[1]
-    # 时事
-    p.submit(get_index,'https://www.thepaper.cn/load_index.jsp?&pageidx=2&lastTime=' + last_time).add_done_callback(
-        paper_news)
-    time.sleep(10)
-    return render(request, 'news/news.html', {'sina_title': sina_title,'paper_title':paper_title,'baidu_title':baidu_title,'car_title':car_title})
+    with ThreadPoolExecutor(max_workers=4) as p:
+        # 新浪军情
+        p.submit(get_index, 'https://mil.news.sina.com.cn/').add_done_callback(sina_news)
+        # 国内新闻
+        p.submit(get_index, 'https://news.baidu.com/guonei').add_done_callback(baidu_news)
+        # 环球汽车
+        p.submit(get_index, 'http://auto.huanqiu.com/').add_done_callback(car_news)
+        list_time = str(time.time()).split('.')
+        if int(list_time[1]) < 100:
+            list_time[1] = '100'
+        last_time = list_time[0] + list_time[1]
+        # 时事
+        p.submit(get_index,
+                 'https://www.thepaper.cn/load_index.jsp?&pageidx=2&lastTime=' + last_time).add_done_callback(
+            paper_news)
+    return render(request, 'news/news.html',
+                  {'sina_title': sina_title, 'paper_title': paper_title, 'baidu_title': baidu_title,
+                   'car_title': car_title})
