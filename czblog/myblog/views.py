@@ -22,7 +22,7 @@ def userblog(request):
     name = request.user
 
     # 增加翻页
-    blogs = Blogs.objects.filter(uname=name).order_by('-rcount')
+    blogs = Blogs.objects.filter(uname=name).order_by('-ctime')
 
     # 生成paginator对象,定义每页显示10条记录
     paginator = Paginator(blogs, 10)
@@ -51,7 +51,7 @@ def mysearch(request):
     arg_urls = request.path[0:-1] + "?title=" + title
     print (arg_urls)
     # 增加翻页
-    blogs = Blogs.objects.filter(uname=name, title__contains=title).order_by('-rcount')
+    blogs = Blogs.objects.filter(uname=name, title__contains=title).order_by('-ctime')
     # 生成paginator对象,定义每页显示10条记录
     paginator = Paginator(blogs, 10)
     # 从前端获取当前的页码数,默认为1
@@ -177,7 +177,7 @@ def marks(request, name, tags):
     if not request.user.is_authenticated:
         return redirect('/login/')
     # name = request.user
-    blogs = Blogs.objects.filter(uname=name, marks_id=tags).order_by('-rcount')
+    blogs = Blogs.objects.filter(uname=name, marks_id=tags).order_by('-ctime')
     # 生成paginator对象,定义每页显示10条记录
     paginator = Paginator(blogs, 10)
     # 从前端获取当前的页码数,默认为1

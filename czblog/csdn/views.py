@@ -14,6 +14,9 @@ def index(request):
     interface_title = []
     jmeter_title = []
 
+    # 左边是栏目，右边是详情
+    # 点击左边的栏目发起一个get请求，带一个参数过去
+    # 参考博雅  关于我们的页面
     def get_index(url):
         response = requests.get(url)
         if response.status_code == 200:
