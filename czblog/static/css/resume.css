@@ -1,0 +1,278 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    vertical-align: middle;
+}
+
+ul {
+    list-style: none;
+}
+
+/*li{
+	float: left;
+}*/
+.area {
+    width: 1000px;
+    margin: 0 auto 0 auto;
+    overflow: hidden;
+}
+
+/*头部*/
+.top {
+    height: 150px;
+}
+
+/*位置*/
+.crumb {
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    font-size: 14px;
+}
+
+.crumb a {
+    font-weight: 700;
+    border-bottom: deepskyblue solid 1px;
+}
+
+.crumb a:hover {
+    color: deepskyblue;
+}
+
+.header {
+    overflow: hidden;
+    width: 100%;
+    height: 72px;
+    position: relative;
+    border-bottom: solid black 1px;
+    border-top: solid black 1px;
+    margin-top: 40px;
+}
+
+.header ul.uright {
+    float: right;
+}
+
+.header ul.uright li {
+    float: left;
+    padding-right: 70px;
+}
+
+.header ul.uleft li {
+    float: left;
+    padding-left: 70px;
+}
+
+.header ul.uleft a, .header ul.uright a {
+    display: inline-block;
+    width: 90px;
+    line-height: 72px;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: Montserrat, sans-serif;
+    text-align: center;
+    letter-spacing: 1px;
+
+}
+
+.header ul.uleft a:hover, .header ul.uright a:hover, .title-area h1 a:hover, .aboutme:hover {
+    color: deepskyblue;
+}
+
+.title-area {
+    position: absolute;
+    top: 75px;
+    left: 50%;
+    margin-left: -75px;
+    width: 150px;
+    height: 150px;
+    background-size: 150px 150px;
+    background-color: white;
+    background-image: url(../img/logo-circle.png);
+}
+
+.title-area h1 a {
+    display: inline-block;
+
+    width: 150px;
+    text-align: center;
+    line-height: 106px;
+    color: white;
+    font-family: Montserrat, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/*中间部分*/
+.contanit {
+    padding-top: 28px;
+
+}
+
+/*中间左边部分*/
+.contanit .cleft {
+    float: left;
+    width: 600px;
+    overflow: hidden;
+    position: relative;
+}
+
+.cleft > div {
+    display: none;
+}
+
+.cleft .show {
+    display: block;
+}
+
+.cleft ul {
+
+    width: 1000%;
+    height: 450px;
+
+}
+
+.cleft ul li {
+    float: left;
+}
+
+.cleft ul li img {
+    width: 600px;
+    height: 450px;
+}
+
+.cleft .entry-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: #000000;
+    line-height: 1;
+}
+
+/*中间右侧部分*/
+.contanit .cright {
+    float: right;
+    width: 300px;
+    margin-top: 50px;
+    /*background-color: pink;*/
+    /*height: 500px;*/
+    position: relative;
+}
+
+/*右侧上面部分*/
+.cr-top {
+    position: relative;
+    padding: 40px;
+    width: 298px;
+    height: 301px;
+    border: 1px solid black;
+}
+
+/*第一个黑块*/
+.widget {
+
+    position: absolute;
+    top: -36px;
+    left: 41px;
+    width: 218px;
+    height: 52px;
+    background-color: black;
+    line-height: 52px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+
+    font-family: Montserrat, sans-serif;
+
+}
+
+.cr-top a {
+
+}
+
+.cr-top a img {
+    position: absolute;
+    top: 53px;
+    left: 40px;
+    width: 218px;
+    height: 218px;
+}
+
+.aboutme {
+    position: absolute;
+    bottom: 25px;
+    left: 40px;
+    border-bottom: solid deepskyblue 1px;
+}
+
+/*右侧第二个框*/
+.cr-bottom {
+    position: relative;
+    width: 298px;
+    height: 111px;
+    border: solid black 1px;
+    margin-top: 60px;
+}
+
+ol {
+    list-style: none;
+}
+
+.cleft ul.clul {
+    width: 1000%;
+    height: 450px;
+
+}
+
+.cleft ul.clul li {
+    float: left;
+}
+
+.cleft ul.clul li img {
+    width: 600px;
+    height: 450px;
+}
+
+.cleft .entry-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: #000000;
+    line-height: 1;
+}
+
+/*小圆点*/
+.cleft ol {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+}
+
+.cleft ol li {
+    float: left;
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    background-color: pink;
+    margin: 0 8px;
+    font-size: 12px;
+    font-family: "微软雅黑";
+    text-align: center;
+    line-height: 18px;
+    cursor: pointer;
+}
+
+.cleft ol li.current {
+    background-color: deepskyblue;
+}

@@ -1,19 +1,100 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 {% load static %}
 {% block title %}个人简介{% endblock %}
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
-    <style type="text/css">
-        .resume {
-            background-color: #e7e7e7;
-        }
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/resume.css' %}"/>
 
-    </style>
+<script type="text/javascript" src="{% static 'js/resume.js' %}"></script>
+
+<style type="text/css">
+    .resume {
+        background-color: #e7e7e7;
+    }
+
+</style>
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-    my resume
+<div class="container">
+    <!--头部-->
+    <div class="area top" id="nav">
+        <div class="header">
+            <ul class="uleft">
+
+                <li><a href="javascript:void(0);">ABOUT</a></li>
+                <li><a href="javascript:void(0);">MY WORK</a></li>
+            </ul>
+
+            <ul class="uright">
+                <li><a href="javascript:void(0);">NEWS</a></li>
+
+                <li><a href="javascript:void(0);">CONTACT</a></li>
+            </ul>
+        </div>
+
+        <div class="title-area">
+            <h1>
+                <a href="javascript:void(0);">MY RESUME</a>
+            </h1>
+        </div>
     </div>
+
+    <div class="contanit area">
+        <div class="cleft" id="cons">
+            <!--about-->
+            <div>
+                <div class="crumb">You are here:  About</div>
+            </div>
+
+            <!--my work-->
+            <div>
+                <div class="crumb">You are here:  My Work</div>
+            </div>
+
+            <!--news-->
+            <div>
+                <div class="crumb">You are here: News</div>
+            </div>
+
+            <!--CONTACT-->
+            <div>
+                <div class="crumb">You are here:  Contact</div>
+            </div>
+            <!--my resume-->
+            <div class="show">
+                <h1 class="entry-title"> WELCOME TO MY WORLD...</h1>
+
+                <ul>
+                    <li><img src="{% static 'img/timg1.jpg' %}"/></li>
+                    <li><img src="{% static 'img/timg2.jpg' %}"/></li>
+                    <li><img src="{% static 'img/timg3.jpg' %}"/></li>
+                    <li><img src="{% static 'img/timg4.jpg' %}"/></li>
+                    <li><img src="{% static 'img/timg5.jpg' %}"/></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="cright">
+            <div class="cr-top">
+                <h4 class="widget">HELLO!</h4>
+                <a href="javascript:void(0);"><img src="{% static 'img/me.png' %}"/></a>
+            </div>
+            <div class="cr-bottom">
+                <h4 class="widget">Github!</h4>
+                <p><a class="aboutme" href="https://github.com/">My GitHub</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+
+            $("#nav a").each(function (i, e) {
+                $(e).click(function () {
+                    $('#cons>div').eq(i).addClass("show").siblings().removeClass('show');
+                })
+            });
+        });
+    </script>
+</div>
 {% endblock %}

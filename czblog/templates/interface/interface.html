@@ -2,74 +2,85 @@
 {% load static %}
 {% block title %} 接口测试 {% endblock %}
 {% block css %}
-    <script type="text/javascript" src="{% static 'js/news.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/news.css' %}">
-    <style type="text/css">
-        .interface {
-            background-color: #e7e7e7;
-        }
+<script type="text/javascript" src="{% static 'js/news.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/news.css' %}">
+<style type="text/css">
+    .interface {
+        background-color: #e7e7e7;
+    }
 
 
-    </style>
+</style>
 {% endblock %}
 
 
 {% block content %}
 
-    <div class="container">
+<div class="container">
+
+    <form class="form-inline">
+        {% csrf_token %}
+        <div class="row ">
 
 
-        <div class="row ">
-            {% csrf_token %}
-            <div class="col-md-4 col-sm-4 has-success" style="padding: 0;">
-                请求地址：
-                <input type="text" class="form-control" name="urls" placeholder="urls" id="urls">
-            </div>
-        </div>
-        <div class="row ">
-            <div class="col-md-4 col-sm-4 has-success" style="padding: 0;">
-                输入参数：
-                <input type="text" class="form-control" name="title" placeholder="params" id="title">
+            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                <label for="url">URL </label>
+                <input type="text" class="form-control" id="url" placeholder="url" style="width: 90%;">
             </div>
         </div>
 
-        <div class="col-md-1 col-sm-1.5">
-            <button class="btn btn-primary  btn-group-sm" value="查询" onclick="delComm()">查询</button>
+
+        <div class="row ">
+            <div class="form-group">
+                <label for="k1">k</label>
+                <input type="text" class="form-control" id="k1" placeholder="k">
+            </div>
+            <div class="form-group">
+                <label for="v1">v</label>
+                <input type="text" class="form-control" id="v1" placeholder="v">
+            </div>
+            <div class="form-group">
+
+                <input type="button" class="form-control btn btn-default" id="v2" value="添加">
+            </div>
         </div>
 
-
-        <div id="txt"></div>
-    </div>
-
-    <script type="text/javascript">
-
-        $(function () {
-
-            delComm = function () {
-                $.ajax({
-                    type: "post",
-                    url: "{% url 'interface:get' %}",
-                    data: {
-                        csrfmiddlewaretoken: $("input:first").val(),
-                        urls: $('#urls').val(),
-                        title: $('#title').val()
-
-                    },
-                    async: true,
-                    success: function (data) {
-
-                        data = JSON.parse(data);
-
-                        if (data['status'] == 10000) {
-                            $('#txt').html(data['data']);
-                        }
+        <button type="submit" class="btn btn-default">Send</button>
+    </form>
 
 
+    <div id="txt"></div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+
+        delComm = function () {
+            $.ajax({
+                type: "post",
+                url: "{% url 'interface:get' %}",
+                data: {
+                    csrfmiddlewaretoken: $("input:first").val(),
+                    urls: $('#urls').val(),
+                    title: $('#title').val()
+
+                },
+                async: true,
+                success: function (data) {
+
+                    data = JSON.parse(data);
+
+                    if (data['status'] == 10000) {
+                        $('#txt').html(data['data']);
                     }
-                });
-            }
-        });
-    </script>
+
+
+                }
+            });
+        }
+    });
+</script>
 
 {% endblock %}
 
