@@ -6,6 +6,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
+# 这个是在自带的认证表上添加字段
 class User(AbstractUser):
     nick_name = models.CharField(max_length=50, verbose_name='昵称', default='')
     birthday = models.DateField(null=True, blank=True, verbose_name='生日')
@@ -16,11 +17,13 @@ class User(AbstractUser):
     head_img = models.CharField(max_length=255, verbose_name='用户头像')
 
     class Meta:
+        db_table = 'user_info'
         verbose_name = '用户信息'
         verbose_name_plural = verbose_name
 
     def __str__(self):
         return self.username
+
 
 #
 # class User(models.Model):
@@ -84,7 +87,7 @@ class Blogs(models.Model):
 
     marks = models.ForeignKey(Bmarks, null=True, on_delete=models.SET_DEFAULT, related_name='blog_marks',
                               to_field='tags', default="未分类", verbose_name="分类")
-    uname = models.ForeignKey(User, null=True, on_delete=models.SET_DEFAULT, related_name='auth_user',
+    uname = models.ForeignKey(User, null=True, on_delete=models.SET_DEFAULT,
                               to_field='username', default='匿名', verbose_name="用户名")
 
     def __str__(self):
