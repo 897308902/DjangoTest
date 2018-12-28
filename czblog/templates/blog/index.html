@@ -36,8 +36,11 @@
 
                     <li>
                         <h2><a target="_blank" href="{% url 'blog:blog_page' blog.id %}">{{ blog.title }}</a></h2>
-                        <div class="oneline summary">
-                            {{ blog.content }}
+                        <div class="oneline" >
+                            <a href="{% url 'blog:blog_page' blog.id %}" style="font-size: 14px;" class="summary">
+                                {{ blog.content }}
+                            </a>
+
                         </div>
                         <div class="userbar">
                             <div class="fl">

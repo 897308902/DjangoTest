@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.shortcuts import render, HttpResponseRedirect, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from . import models
-from markdown import markdown
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+# 改版后使用修改过的用户表，如果用自带的，记得注释这里
+from blog.models import User
 
 # Create your views here.
 

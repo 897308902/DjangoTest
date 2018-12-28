@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
-
-# from . import models
 from markdown import markdown
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 # 我的博客
 from blog.models import Bmarks, Blogs, Comments
@@ -75,51 +72,46 @@ def edit_blog(request):
     if not request.user.is_authenticated:
         return redirect('/login/')
     if request.GET:
-        oldtitle = ''
+        print '=======get requests======='
         blog_id = request.GET.get('id', 0)
-
-        print ('===进入编辑页面的博客id为====', blog_id)
+        print '===this blog id is ====', blog_id
         if blog_id == 0:
-            print ('===没获取到博客id ========== ', blog_id)
+            print '=======no get blog id ========= ', blog_id
             return render(request, 'error.html')
         # 当博客被删除后，再点击编辑时，能获取到id值，但是再数据库查询时，就没有了
         try:
             blog = Blogs.objects.get(id=blog_id)
-            global oldtitle
-            oldtitle = blog.title
             marks = Bmarks.objects.all()
             return render(request, 'myblog/edit_blog.html', {'blog': blog, 'marks': marks})
-        except:
-            print ('===进入编辑博客页面出错===')
+        except Exception, e:
+            print '===enter blog error===', e
             return render(request, 'error.html')
 
     if request.POST:
-        print ("该博客的原标题为===", oldtitle)
-        # 如果原标题为空
-        if not oldtitle:
-            return render(request, 'error.html')
-        blog_id = request.POST.get('id')
-        title = request.POST.get('title')
-        content = request.POST.get('content')
+        print '==========post requests=========='
+        blog_id = request.POST.get('id', 0)
+        title = request.POST.get('title', 0)
+        content = request.POST.get('content', 0)
         tags = request.POST.get('tags')
+        # print '===>>>>>>>', markdown(content)
 
         # 如果博客存在，则判断
-        if Blogs.objects.filter(title=title) and oldtitle != title:
-            marks = Bmarks.objects.all()
-            message = '该博客标题已存在，修改标题重新发布吧！'
-            return render(request, 'myblog/add_blog.html',
-                          {'message': message, 'marks': marks, 'title': title, 'tags': tags, 'content': content})
+        # if Blogs.objects.filter(title=title) and oldtitle != title:
+        #     marks = Bmarks.objects.all()
+        #     message = '该博客标题已存在，修改标题重新发布吧！'
+        #     return render(request, 'myblog/add_blog.html',
+        #                   {'message': message, 'marks': marks, 'title': title, 'tags': tags, 'content': content})
         # 保存时，发现文章没找到则显示错误的页面
         try:
+            print '====post blog id=>>>>', blog_id
             article = Blogs.objects.get(id=blog_id)
             article.title = title
-            #
             article.content = markdown(content)
             article.marks_id = tags
             article.save()
-            print ("===博客修改成功===")
-        except:
-            print ('===提交编辑博客出错===', blog_id)
+
+        except Exception, e:
+            print '===submit blog error===>>>>', e
             return render(request, 'error.html')
         return redirect('/myblog/')
 

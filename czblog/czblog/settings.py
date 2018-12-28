@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for czblog project.
 
@@ -82,9 +83,9 @@ WSGI_APPLICATION = 'czblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'czblog',
+        'NAME': 'save_data',
         'USER': 'root',
-        'PASSWORD': '123456',
+        'PASSWORD': 'Cheng-pl,0okm',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -136,5 +137,8 @@ STATICFILES_DIRS = [
 
 ]
 
+AUTH_USER_MODEL = 'blog.User'
 
+# AUTH 方法（支持邮箱登录）
+# AUTHENTICATION_BACKENDS = ('users.views.CustomBackend',)
 # MEDIA_URL

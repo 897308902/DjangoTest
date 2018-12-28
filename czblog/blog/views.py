@@ -1,24 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.contrib import auth
-from django.contrib.auth.models import User
-import json
-from django.shortcuts import render, HttpResponseRedirect, HttpResponse
-from django.http import JsonResponse
-from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
-from . import models
-from markdown import markdown
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse
+from django.shortcuts import redirect
+import models
 
 
 # 首页
 def index(request):
     old_url = request.get_full_path()
     # arg_urls = request.get_full_path()
-    print ("===index=url===", old_url)
+    print "===index=get_full_path===", old_url
     blogs = models.Blogs.objects.all().order_by('-ctime')  # [0:10]
     # print blogs
     # 生成paginator对象,定义每页显示10条记录
@@ -27,7 +19,6 @@ def index(request):
     page = request.GET.get('page', 1)
     # 把当前的页码数转换成整数类型
     currentPage = int(page)
-
     try:
         blogs = paginator.page(currentPage)  # 获取当前页码的记录
     except PageNotAnInteger:
@@ -103,8 +94,8 @@ def blog_page(request, blog_id):
         # 这个只能用重定向，不然刷新页面还会提交
         print 'pinglun===url=>>>>', request.path
         # return redirect(request.path)
-        # return redirect('/blog/%s' % blog_id)
-        return redirect('/blog/')
+        return redirect('/blog/%s' % blog_id)
+        # return redirect('/blog/')
 
     # 评论显示,按博客的id查询
     comm = models.Comments.objects.filter(cbid=blog_id).order_by('-ctime')

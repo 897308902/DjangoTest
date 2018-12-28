@@ -53,13 +53,14 @@
         {% if blogs %}
             <ul class="feedlist_id">
 
-
                 {% for blog in blogs %}
 
                     <li id="blog{{ blog.id }}">
                         <h2><a target="_blank" href="{% url 'blog:blog_page' blog.id %}">{{ blog.title }}</a></h2>
-                        <div class="oneline summary">
-                            {{ blog.content }}
+                        <div class="oneline">
+                            <a href="{% url 'blog:blog_page' blog.id %}" class="summary">
+                                {{ blog.content }}
+                            </a>
                         </div>
                         <div class="userbar">
                             <div class="fl">
@@ -68,7 +69,7 @@
                                 <span class="little"></span>
                                 <a class="marks" href="{% url 'myblog:mdel' %}?id={{ blog.id }}" onclick="del()">删除</a>
                                 <span class="little"></span>
-                                <a class="time">{{ blog.utime |date:"Y-m-d"}}</a>
+                                <a class="time">{{ blog.utime |date:"Y年m月d日  H:i:s"}}</a>
                                 <span class="little"></span>
                                 <a class="marks" href="{% url 'myblog:mark' blog.uname blog.marks %}">{{ blog.marks }}</a>
 
