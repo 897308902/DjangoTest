@@ -10,7 +10,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     nick_name = models.CharField(max_length=50, verbose_name='昵称', default='')
     birthday = models.DateField(null=True, blank=True, verbose_name='生日')
-    gender = models.CharField(max_length=6, choices=(('male', '男'), ('female', '女')), default='female',
+    gender = models.CharField(max_length=6, choices=(('1', '男'), ('0', '女')), default='female',
                               verbose_name='性别')
     address = models.CharField(max_length=100, default='', verbose_name='地址')
     mobile = models.CharField(max_length=11, null=True, blank=True, verbose_name='手机号')

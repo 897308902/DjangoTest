@@ -17,10 +17,23 @@ from blog.models import Blogs
 
 # 查看资料  还没加分页功能
 def usercenter(request, name):
+    print "usercenter start=====>>>>>>>>>>"
     if not request.user.is_authenticated:
         return redirect('/login/')
     # 查用户的信息,需要把用户的信息带过去
     user = User.objects.get(username=name)
+
+    # 修改资料请求
+    if request.POST:
+        user.nick_name = request.POST.get('nick', '匿名')
+        user.birthday = request.POST.get('birthday', '1979-01-01')
+        user.address = request.POST.get('address')
+        user.mobile = request.POST.get('mobile')
+        # 性别要处理
+        user.gender = request.POST.get('gender')
+        # 头像
+        # user.head_img=request.POST.get('head_img')
+        user.save()
 
     # 查询出该用户的博客
     blogs = Blogs.objects.filter(uname=name).order_by('-utime')
@@ -34,7 +47,8 @@ def usercenter(request, name):
             mark[mk.marks_id] = len(k)
             # print "biaoqian=======", mk.marks_id, len(k), mark
 
-    print ("mark===",mark)
+    print "mark===", mark
+    print "<<<<<<<<<<=====usercenter end"
     return render(request, 'center/usercenter.html', {'blogs': blogs, 'user': user, 'mark': mark})
 
 

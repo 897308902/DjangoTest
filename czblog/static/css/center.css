@@ -8,7 +8,7 @@ ul {
 
 }
 
-.user li{
+.user li {
     width: 100%;
     /*height: 60px;*/
     overflow: hidden;
@@ -21,7 +21,7 @@ ul {
     /*height: 60px;*/
     overflow: hidden;
     border-bottom: solid 1px #DCDCDC;
-  
+
 }
 
 .tag {
@@ -96,4 +96,65 @@ a:hover {
     /*white-space: pre-wrap;*/
 
     color: #999;
+}
+
+.container .info {
+    padding: 3px 5px;
+    float: right;
+    font-size: 14px;
+    color: black;
+    margin-right: 100px;
+    background-color: #00B0E7;
+}
+
+.container .info:hover {
+    background-color: #1976D2;
+}
+
+.other-info {
+    position: absolute;
+    margin: auto;
+    width: 600px;
+    height: 400px;
+    background-color: #40adde;
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 3px #40adde solid;
+}
+
+.other-info .top-close {
+    text-align: center;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+}
+.other-info .top-close .cls{
+    cursor: pointer;
+    float: right;
+    width: 60px;
+    height: 30px;
+}
+
+.other-info .info-con{
+    width: 100%;
+    height: 364px;
+    background-color: #eee;
+}
+
+.info-con .ulist{
+    list-style: none;
+    padding: 10px;
+}
+.info-con .ulist li{
+    line-height: 25px;
+    margin: 10px;
+}
+
+.info-con .ulist li>span{
+    display: inline-block;
+    min-width: 70px;
+    text-align-last: justify;
 }
